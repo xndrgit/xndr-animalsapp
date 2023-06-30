@@ -19,9 +19,10 @@
                     </div>
                 </div>
                 <div class="chat-list">
-                    <div class="box">
+                    <div class="box active">
                         <div class="box-image">
-                            <img class="img-fluid cover" src="https://preview.redd.it/bcyq3rjk2w071.png?auto=webp&s=97c9b873f1b41a7b9ff31331fd92f2e3fafed92f">
+                            <img class="img-fluid cover"
+                                 src="https://preview.redd.it/bcyq3rjk2w071.png?auto=webp&s=97c9b873f1b41a7b9ff31331fd92f2e3fafed92f">
                         </div>
                         <div class="details">
                             <div class="details-top">
@@ -29,7 +30,7 @@
                                 <p class="time">10:50</p>
                             </div>
                             <div class="details-down">
-                                <p class="last">New haha skam asdas d as  as das das das das e </p>
+                                <p class="last">New haha skam asdas d as as das das das das e </p>
                             </div>
                         </div>
                     </div>
@@ -202,9 +203,9 @@ export default {
             flex: 30%;
             background: #fff;
 
-            .header{
+            .header {
                 height: 60px;
-                background: #ffdcdc;
+                background: rgba(255, 153, 153, 0.2);
 
                 display: flex;
                 align-items: center;
@@ -212,7 +213,7 @@ export default {
 
                 padding: 0 10px;
 
-                .user-image{
+                .user-image {
                     position: relative;
 
                     height: 40px;
@@ -276,23 +277,30 @@ export default {
                     }
                 }
             }
-            .chat-list{
+            .chat-list {
                 height: calc(100% - 110px);
                 background: white;
                 overflow-y: auto;
-                .box{
+
+                .active {
+                    background: rgba(255, 153, 153, 0.2);
+                }
+
+                .box {
                     position: relative;
                     width: 100%;
 
                     display: flex;
 
                     padding: 10px;
-                    border-bottom: 1px solid rgba(0,0,0,0.06);
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
                     cursor: pointer;
 
                     height: 80px;
 
                     transition: 1s ;
+
+
                     .box-image{
                         display: flex;
                         justify-content: center;
