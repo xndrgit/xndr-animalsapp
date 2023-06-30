@@ -228,7 +228,7 @@ var staticRenderFns = [function () {
   }, [_c("div", {
     staticClass: "container-left"
   }, [_c("div", {
-    staticClass: "header"
+    staticClass: "header-left"
   }, [_c("div", {
     staticClass: "user-image"
   }, [_c("img", {
@@ -468,9 +468,114 @@ var staticRenderFns = [function () {
     staticClass: "details-down"
   }, [_c("p", {
     staticClass: "last"
-  }, [_vm._v("New haha skam asdas d as  as das das das das e ")])])])])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("New haha skam asdas d as as das das das das e ")])])])])])]), _vm._v(" "), _c("div", {
     staticClass: "container-right"
-  })])]);
+  }, [_c("div", {
+    staticClass: "header-right"
+  }, [_c("div", {
+    staticClass: "user-image"
+  }, [_c("img", {
+    staticClass: "cover",
+    attrs: {
+      src: "/assets/miles.jpg"
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "nav-icons"
+  }, [_c("i", {
+    staticClass: "ml-2 fa-solid fa-search"
+  }), _vm._v(" "), _c("i", {
+    staticClass: "ml-2 fa-solid fa-gear"
+  })])]), _vm._v(" "), _c("div", {
+    staticClass: "chat-box"
+  }, [_c("div", {
+    staticClass: "message justify-content-end"
+  }, [_c("div", {
+    staticClass: "my-message"
+  }, [_c("p", {
+    staticClass: "txt-message-normal"
+  }, [_vm._v("Hi "), _c("br"), _vm._v(" "), _c("span", {
+    staticClass: "my-time"
+  }, [_vm._v("19:23")])])])]), _vm._v(" "), _c("div", {
+    staticClass: "message justify-content-start"
+  }, [_c("div", {
+    staticClass: "friend-message"
+  }, [_c("p", {
+    staticClass: "txt-message-normal"
+  }, [_vm._v("Wa sapspap ap sp a ddup "), _c("br"), _vm._v(" "), _c("span", {
+    staticClass: "friend-time"
+  }, [_vm._v("19:24")])])])]), _vm._v(" "), _c("div", {
+    staticClass: "message justify-content-end"
+  }, [_c("div", {
+    staticClass: "my-message"
+  }, [_c("p", {
+    staticClass: "txt-message-normal"
+  }, [_vm._v("Hi "), _c("br"), _vm._v(" "), _c("span", {
+    staticClass: "my-time"
+  }, [_vm._v("19:23")])])])]), _vm._v(" "), _c("div", {
+    staticClass: "message justify-content-start"
+  }, [_c("div", {
+    staticClass: "friend-message"
+  }, [_c("p", {
+    staticClass: "txt-message-normal"
+  }, [_vm._v("Waasdlmas kasd sak sdpa dpasd a da spdpad a spd as dap dap s\n                            dpasp da psdp asdp asp da sd as apddup "), _c("br"), _vm._v(" "), _c("span", {
+    staticClass: "friend-time"
+  }, [_vm._v("19:24")])])])]), _vm._v(" "), _c("div", {
+    staticClass: "message justify-content-end"
+  }, [_c("div", {
+    staticClass: "my-message"
+  }, [_c("p", {
+    staticClass: "txt-message-normal"
+  }, [_vm._v("Hddaa spa spapsap sp sp sap sap ap sp asp a aps as pa sp ap sp\n                            ai "), _c("br"), _vm._v(" "), _c("span", {
+    staticClass: "my-time"
+  }, [_vm._v("19:23")])])])]), _vm._v(" "), _c("div", {
+    staticClass: "message justify-content-start"
+  }, [_c("div", {
+    staticClass: "friend-message"
+  }, [_c("p", {
+    staticClass: "txt-message-normal"
+  }, [_vm._v("Waddap spa sapsp aspup "), _c("br"), _vm._v(" "), _c("span", {
+    staticClass: "friend-time"
+  }, [_vm._v("19:24")])])])]), _vm._v(" "), _c("div", {
+    staticClass: "message justify-content-start"
+  }, [_c("div", {
+    staticClass: "friend-message"
+  }, [_c("p", {
+    staticClass: "txt-message-normal"
+  }, [_vm._v("Wa sapspap ap sp a ddup "), _c("br"), _vm._v(" "), _c("span", {
+    staticClass: "friend-time"
+  }, [_vm._v("19:24")])])])]), _vm._v(" "), _c("div", {
+    staticClass: "message justify-content-end"
+  }, [_c("div", {
+    staticClass: "my-message"
+  }, [_c("p", {
+    staticClass: "txt-message-normal"
+  }, [_vm._v("Hi "), _c("br"), _vm._v(" "), _c("span", {
+    staticClass: "my-time"
+  }, [_vm._v("19:23")])])])]), _vm._v(" "), _c("div", {
+    staticClass: "message justify-content-start"
+  }, [_c("div", {
+    staticClass: "friend-message"
+  }, [_c("p", {
+    staticClass: "txt-message-normal"
+  }, [_vm._v("Waasdlmas kasd sak sdpa dpasd a da spdpad a spd as dap dap s\n                            dpasp da psdp asdp asp da sd as apddup "), _c("br"), _vm._v(" "), _c("span", {
+    staticClass: "friend-time"
+  }, [_vm._v("19:24")])])])]), _vm._v(" "), _c("div", {
+    staticClass: "message justify-content-end"
+  }, [_c("div", {
+    staticClass: "my-message"
+  }, [_c("p", {
+    staticClass: "txt-message-normal"
+  }, [_vm._v("Hddaa spa spapsap sp sp sap sap ap sp asp a aps as pa sp ap sp\n                            ai "), _c("br"), _vm._v(" "), _c("span", {
+    staticClass: "my-time"
+  }, [_vm._v("19:23")])])])]), _vm._v(" "), _c("div", {
+    staticClass: "message justify-content-start"
+  }, [_c("div", {
+    staticClass: "friend-message"
+  }, [_c("p", {
+    staticClass: "txt-message-normal"
+  }, [_vm._v("Waddap spa sapsp aspup "), _c("br"), _vm._v(" "), _c("span", {
+    staticClass: "friend-time"
+  }, [_vm._v("19:24")])])])])])])])]);
 }];
 render._withStripped = true;
 
@@ -512,7 +617,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.bg{\n    display: flex;\n    justify-content: center;\n    align-items: center;\n\n    height: 100vh;\n    background: linear-gradient(#de0606 0%, #de0606 130px, #d9dbd5 130px, #d9dbd5 100%);\n.container-lg{\n        display: flex;\n\n        height: calc(100vh - 40px);\n        background: #fff;\n\n        /*box-shadow: h-shadow v-shadow blur spread color inset;*/\n        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.06), 0 2px 5px 0 rgba(0,0,0,0.06);\n\n        /*fix*/\n        padding: 0;\n.container-left{\n            position: relative;\n\n            flex: 30%;\n            background: #fff;\n.header {\n                height: 60px;\n                background: rgba(255, 153, 153, 0.2);\n\n                display: flex;\n                align-items: center;\n                justify-content: space-between;\n\n                padding: 0 10px;\n.user-image {\n                    position: relative;\n\n                    height: 40px;\n                    width: 40px;\n\n                    border-radius: 50%;\n.cover{\n                        position: absolute;\n                        top: 0;\n                        left: 0;\n\n                        overflow: hidden;\n\n                        border-radius: 50%;\n\n                        height: 100%;\n                        width: 100%;\n\n                        -o-object-fit: cover;\n\n                           object-fit: cover;\n}\n}\n.nav-icons{\n}\n}\n.search-chat{\n                position: relative;\n\n                width: 100%;\n                height: 50px;\n\n                display: flex;\n                justify-content: center;\n                align-items: center;\n\n                background: #f6f6f6;\n\n                padding: 0 15px;\n.div-search{\n                    width: 100%;\n.input-search{\n                        width: 100%;\n\n                        outline: none;\n                        border: none;\n                        border-radius: 30px;\n\n                        background: #fff;\n                        font-size: 10px;\n\n                        padding: 10px;\n                        padding-left: 40px;\n}\n.fa-searchengin{\n                        position: absolute;\n                        left: 25px;\n                        top: 16px;\n                        font-size: 1.4rem;\n                        cursor: text;\n}\n}\n}\n.chat-list {\n                height: calc(100% - 110px);\n                background: white;\n                overflow-y: auto;\n.active {\n                    background: rgba(255, 153, 153, 0.2);\n}\n.box {\n                    position: relative;\n                    width: 100%;\n\n                    display: flex;\n\n                    padding: 10px;\n                    border-bottom: 1px solid rgba(0, 0, 0, 0.06);\n                    cursor: pointer;\n\n                    height: 80px;\n\n                    transition: 1s ;\n.box-image{\n                        display: flex;\n                        justify-content: center;\n                        align-items: center;\n                        width: 20%;\n\n                        margin-right: 15px;\n.cover{\n                            height: 50px;\n                            width: 50px;\n                            border-radius: 50%;\n}\n}\n.details{\n                        width: 80%;\n\n                        display: flex;\n                        flex-direction: column;\n                        justify-content: center;\n.details-top{\n                            display: flex;\n                            align-items: center;\n                            justify-content: space-between;\n.name{\n                                font-size: 14px;\n                                font-weight: bold;\n\n                                margin: 0;\n\n                                transition: 1s;\n}\n.time{\n                                font-size: 10px;\n                                font-weight: lighter;\n                                color: #aaa;\n\n                                margin: 0;\n}\n}\n.details-down{\n.last {\n                                margin-bottom: 0;\n                                color: #aaa;\n                                font-size: 12px;\n                                width: 180px; /* Set the width of the container */\n                                overflow: hidden; /* Hide the text that overflows the container */\n                                text-overflow: ellipsis; /* Show an ellipsis when the text overflows */\n                                white-space: nowrap; /* Prevent the text from wrapping */\n}\n}\n}\n}\n.box:hover{\n                    background: black;\n.name{\n                        color: white;\n}\n}\n}\n}\n.container-right{\n            position: relative;\n\n            flex: 70%;\n            background: #000000;\n}\n.container-right:before{\n            position: absolute;\n\n            top: 0;\n            left: 0;\n            width: 100%;\n            height: 100%;\n\n            content: \"\";\n\n            background: url(\"/assets/sp-bg.png\");\n            opacity: 1;\n\n            background-repeat: no-repeat;\n            background-position: center;\n}\n}\n}\n", ""]);
+exports.push([module.i, "\n.bg{\n    display: flex;\n    justify-content: center;\n    align-items: center;\n\n    height: 100vh;\n    background: linear-gradient(#de0606 0%, #de0606 130px, #d9dbd5 130px, #d9dbd5 100%);\n.container-lg{\n        display: flex;\n\n        height: calc(100vh - 40px);\n        background: #fff;\n\n        /*box-shadow: h-shadow v-shadow blur spread color inset;*/\n        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.06), 0 2px 5px 0 rgba(0,0,0,0.06);\n\n        /*fix*/\n        padding: 0;\n.container-left {\n            position: relative;\n\n            flex: 30%;\n            background: #fff;\n\n            border-right: 1px solid #707070;\n.header-left {\n                height: 60px;\n                background: rgb(255, 229, 229);\n\n                display: flex;\n                align-items: center;\n                justify-content: space-between;\n\n                padding: 0 10px;\n.user-image {\n                    position: relative;\n\n                    height: 40px;\n                    width: 40px;\n\n                    border-radius: 50%;\n.cover{\n                        position: absolute;\n                        top: 0;\n                        left: 0;\n\n                        overflow: hidden;\n\n                        border-radius: 50%;\n\n                        height: 100%;\n                        width: 100%;\n\n                        -o-object-fit: cover;\n\n                           object-fit: cover;\n}\n}\n.nav-icons{\n}\n}\n.search-chat{\n                position: relative;\n\n                width: 100%;\n                height: 50px;\n\n                display: flex;\n                justify-content: center;\n                align-items: center;\n\n                background: #f6f6f6;\n\n                padding: 0 15px;\n.div-search{\n                    width: 100%;\n.input-search{\n                        width: 100%;\n\n                        outline: none;\n                        border: none;\n                        border-radius: 30px;\n\n                        background: #fff;\n                        font-size: 10px;\n\n                        padding: 10px;\n                        padding-left: 40px;\n}\n.fa-searchengin{\n                        position: absolute;\n                        left: 25px;\n                        top: 16px;\n                        font-size: 1.4rem;\n                        cursor: text;\n}\n}\n}\n.chat-list {\n                height: calc(100% - 110px);\n                background: white;\n                overflow-y: auto;\n.active {\n                    background: rgb(255, 229, 229);\n}\n.box {\n                    position: relative;\n                    width: 100%;\n\n                    display: flex;\n\n                    padding: 10px;\n                    border-bottom: 1px solid rgba(0, 0, 0, 0.06);\n                    cursor: pointer;\n\n                    height: 80px;\n\n                    transition: 1s ;\n.box-image{\n                        display: flex;\n                        justify-content: center;\n                        align-items: center;\n                        width: 20%;\n\n                        margin-right: 15px;\n.cover{\n                            height: 50px;\n                            width: 50px;\n                            border-radius: 50%;\n}\n}\n.details{\n                        width: 80%;\n\n                        display: flex;\n                        flex-direction: column;\n                        justify-content: center;\n.details-top{\n                            display: flex;\n                            align-items: center;\n                            justify-content: space-between;\n.name{\n                                font-size: 14px;\n                                font-weight: bold;\n\n                                margin: 0;\n\n                                transition: 1s;\n}\n.time{\n                                font-size: 10px;\n                                font-weight: lighter;\n                                color: #aaa;\n\n                                margin: 0;\n}\n}\n.details-down{\n.last {\n                                margin-bottom: 0;\n                                color: #aaa;\n                                font-size: 12px;\n                                width: 180px; /* Set the width of the container */\n                                overflow: hidden; /* Hide the text that overflows the container */\n                                text-overflow: ellipsis; /* Show an ellipsis when the text overflows */\n                                white-space: nowrap; /* Prevent the text from wrapping */\n}\n}\n}\n}\n.box:hover{\n                    background: black;\n.name{\n                        color: white;\n}\n}\n}\n}\n.container-right {\n            position: relative;\n\n            flex: 70%;\n            background: #000000;\n.header-right {\n                height: 60px;\n                background: rgb(255, 229, 229);\n\n                display: flex;\n                align-items: center;\n                justify-content: space-between;\n\n                padding: 0 10px;\n.user-image {\n                    position: relative;\n\n                    height: 40px;\n                    width: 40px;\n\n                    border-radius: 50%;\n.cover {\n                        position: absolute;\n                        top: 0;\n                        left: 0;\n\n                        overflow: hidden;\n\n                        border-radius: 50%;\n\n                        height: 100%;\n                        width: 100%;\n\n                        -o-object-fit: cover;\n\n                           object-fit: cover;\n}\n}\n.nav-icons {\n                    font-size: 1rem;\n}\n}\n.chat-box {\n                position: relative;\n\n                width: 100%;\n                height: calc(100% - 120px);\n                padding: 50px;\n\n                overflow-y: auto;\n.message {\n                    position: relative;\n                    margin: 5px 0;\n\n                    width: 100%;\n                    display: flex;\n}\n.my-message {\n                    max-width: 65%;\n\n\n                    text-align: right;\n                    background: #fffbdb;\n\n                    padding: 8px 15px 0 15px;\n\n\n                    border-radius: 10px;\n.my-time {\n                        font-size: 0.8rem;\n                        opacity: 0.5;\n}\n.txt-message-normal::before {\n                        content: \"\";\n                        position: absolute;\n                        top: 0;\n                        right: -15px;\n                        width: 25px;\n                        height: 25px;\n                        background: linear-gradient(135deg, #fffbdb 0%, #fffbdb 50%, transparent 50%, transparent);\n}\n}\n.friend-message {\n                    max-width: 65%;\n\n                    text-align: left;\n\n                    background: rgb(255, 229, 229);\n\n                    padding: 8px 15px 0 15px;\n                    border-radius: 10px;\n.friend-time {\n                        font-size: 0.8rem;\n                        opacity: 0.5;\n}\n.txt-message-normal::before {\n                        content: \"\";\n                        position: absolute;\n                        top: 0;\n                        left: -15px;\n                        width: 25px;\n                        height: 25px;\n                        background: linear-gradient(-135deg, rgb(255, 229, 229) 0%, rgb(255, 229, 229) 50%, transparent 50%, transparent);\n}\n}\n}\n}\n\n        /*.container-right:before{*/\n        /*    position: absolute;*/\n\n        /*    top: 0;*/\n        /*    left: 0;*/\n        /*    width: 100%;*/\n        /*    height: 100%;*/\n\n        /*    content: \"\";*/\n\n        /*    background: url(\"/assets/sp-bg.png\");*/\n        /*    opacity: 1;*/\n\n        /*    background-repeat: no-repeat;*/\n        /*    background-position: center;*/\n\n\n        /*}*/\n}\n}\n", ""]);
 
 // exports
 
