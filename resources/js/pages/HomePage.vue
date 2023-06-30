@@ -646,22 +646,22 @@ export default {
             }
         }
 
-        /*.container-right:before{*/
-        /*    position: absolute;*/
+        .container-right:before {
+            position: absolute;
 
-        /*    top: 0;*/
-        /*    left: 0;*/
-        /*    width: 100%;*/
-        /*    height: 100%;*/
+            top: 60px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 120px);
 
-        /*    content: "";*/
+            content: "";
 
-        /*    background: url("/assets/sp-bg.png");*/
-        /*    opacity: 1;*/
+            background: url("/assets/sp-bg.png");
 
-        /*    background-repeat: no-repeat;*/
-        /*    background-position: center;*/
-        /*}*/
+
+            background-repeat: no-repeat;
+            background-position: center;
+        }
     }
 }
 </style>
