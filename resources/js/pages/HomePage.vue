@@ -253,6 +253,18 @@
 
 
                 </div>
+                <div class="footer-right">
+                    <div class="first">
+                        <i class="fa mr-3 fa-regular fa-face-smile"></i>
+                        <i class="fa fa-solid fa-paperclip"></i>
+                    </div>
+                    <div class="second">
+                        <input id="search" name="search" type="text">
+                    </div>
+                    <div class="third">
+                        <i class="fa fa-solid fa-microphone-slash"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -576,6 +588,62 @@ export default {
                 }
 
             }
+
+            .footer-right {
+                height: 60px;
+                width: 100%;
+                background: white;
+
+                padding: 15px;
+
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                background: #F2F3F5;
+
+                .first {
+                    width: 10%;
+                    display: flex;
+                    justify-content: center;
+
+                    font-size: 1.3rem;
+
+                    .fa {
+                        cursor: pointer;
+                    }
+
+                }
+
+                .second {
+                    width: 80%;
+
+
+                    #search {
+                        width: 100%;
+                        border: none;
+                        outline: none;
+
+                        border-radius: 20px;
+                        padding: 8px 15px;
+                        font-size: 0.8rem;
+
+                        background: white;
+                    }
+                }
+
+                .third {
+                    width: 10%;
+                    display: flex;
+                    justify-content: center;
+
+                    font-size: 1.3rem;
+
+                    .fa {
+                        cursor: pointer;
+                    }
+                }
+            }
         }
 
         /*.container-right:before{*/
@@ -593,8 +661,6 @@ export default {
 
         /*    background-repeat: no-repeat;*/
         /*    background-position: center;*/
-
-
         /*}*/
     }
 }
