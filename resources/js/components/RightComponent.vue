@@ -2,85 +2,22 @@
     <div class="container-right">
         <div class="header-right">
             <div class="user-image">
-                <img class="cover" src="/assets/miles.jpg">
+                <img :alt="contactsGift[activeChatGift].name" :src="contactsGift[activeChatGift].avatar" class="cover">
             </div>
+            <h4 class="activeName">{{ contactsGift[activeChatGift].name }}</h4>
             <div class="nav-icons">
                 <i class="ml-2 fa-solid fa-search"></i>
                 <i class="ml-2 fa-solid fa-gear"></i>
             </div>
         </div>
         <div class="chat-box">
-            <div class="message justify-content-end">
-                <div class="my-message">
-                    <p class="txt-message-normal">Hi <br> <span class="my-time">19:23</span></p>
-                </div>
-            </div>
 
-            <div class="message justify-content-start">
-                <div class="friend-message">
-                    <p class="txt-message-normal">Wa sapspap ap sp a ddup <br> <span
-                        class="friend-time">19:24</span></p>
-                </div>
-            </div>
-
-
-            <div class="message justify-content-end">
-                <div class="my-message">
-                    <p class="txt-message-normal">Hi <br> <span class="my-time">19:23</span></p>
-                </div>
-            </div>
-
-            <div class="message justify-content-start">
-                <div class="friend-message">
-                    <p class="txt-message-normal">Waasdlmas kasd sak sdpa dpasd a da spdpad a spd as dap dap s
-                        dpasp da psdp asdp asp da sd as apddup <br> <span class="friend-time">19:24</span></p>
-                </div>
-            </div>
-            <div class="message justify-content-end">
-                <div class="my-message">
-                    <p class="txt-message-normal">Hddaa spa spapsap sp sp sap sap ap sp asp a aps as pa sp ap sp
-                        ai <br> <span class="my-time">19:23</span></p>
-                </div>
-            </div>
-
-            <div class="message justify-content-start">
-                <div class="friend-message">
-                    <p class="txt-message-normal">Waddap spa sapsp aspup <br> <span
-                        class="friend-time">19:24</span></p>
-                </div>
-            </div>
-
-            <div class="message justify-content-start">
-                <div class="friend-message">
-                    <p class="txt-message-normal">Wa sapspap ap sp a ddup <br> <span
-                        class="friend-time">19:24</span></p>
-                </div>
-            </div>
-
-
-            <div class="message justify-content-end">
-                <div class="my-message">
-                    <p class="txt-message-normal">Hi <br> <span class="my-time">19:23</span></p>
-                </div>
-            </div>
-
-            <div class="message justify-content-start">
-                <div class="friend-message">
-                    <p class="txt-message-normal">Waasdlmas kasd sak sdpa dpasd a da spdpad a spd as dap dap s
-                        dpasp da psdp asdp asp da sd as apddup <br> <span class="friend-time">19:24</span></p>
-                </div>
-            </div>
-            <div class="message justify-content-end">
-                <div class="my-message">
-                    <p class="txt-message-normal">Hddaa spa spapsap sp sp sap sap ap sp asp a aps as pa sp ap sp
-                        ai <br> <span class="my-time">19:23</span></p>
-                </div>
-            </div>
-
-            <div class="message justify-content-start">
-                <div class="friend-message">
-                    <p class="txt-message-normal">Waddap spa sapsp aspup <br> <span
-                        class="friend-time">19:24</span></p>
+            <div v-for="(message, index) in contactsGift[activeChatGift].messages"
+                 :class="(message.status === 'sent') ? 'justify-content-end' : 'justify-content-start'" class="message"
+            >
+                <div :class="(message.status === 'sent') ? 'my-message' : 'friend-message'">
+                    <p class="txt-message-normal">{{ message.message }} <br> <span
+                        :class="(message.status === 'sent') ? 'my-time' : 'friend-time'">{{ message.date }}</span></p>
                 </div>
             </div>
 
@@ -92,10 +29,11 @@
                 <!--                <i class="fa fa-solid fa-paperclip"></i>-->
             </div>
             <div class="second">
-                <input id="search" name="search" placeholder="Type a message" type="text">
+                <input id="search" v-model="newMsgInput"
+                       name="search" placeholder="Type a message" type="text" @keyup.enter="addNewMessage(newMsgInput)">
             </div>
             <div class="third">
-                <i class="fa-regular fa-paper-plane fa-bounce"></i>
+                <i class="fa fa-regular fa-paper-plane fa-bounce" @click="addNewMessage(newMsgInput)"></i>
                 <!--                <i class="fa fa-solid fa-microphone-slash"></i>-->
             </div>
         </div>
@@ -103,9 +41,33 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
     mounted() {
         console.log('Component right mounted.')
+    },
+    props: {
+        contactsGift: Array,
+        activeChatGift: Number,
+        userGift: Object,
+    },
+    data: function () {
+        return {
+            newMsg: null,
+            newMsgInput: null,
+        }
+    },
+    methods: {
+        addNewMessage(messageContent) {
+            this.newMsg = {
+                date: moment(),
+                message: messageContent,
+                status: 'sent',
+            }
+            this.$emit('newMsg', this.newMsg);
+            this.newMsgInput = null;
+        }
     }
 }
 </script>
@@ -171,6 +133,11 @@ export default {
 
                 object-fit: cover;
             }
+        }
+
+        .activeName {
+            margin: 0;
+            font-weight: bolder;
         }
 
         .nav-icons {

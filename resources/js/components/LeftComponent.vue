@@ -2,9 +2,9 @@
     <div class="container-left">
         <div class="header-left">
             <div class="user-image">
-                <img :src="user.avatar" alt="cover" class="cover">
+                <img :src="userGift.avatar" alt="cover" class="cover">
             </div>
-            <h3 class="name">{{ user.name }}</h3>
+            <h3 class="name">{{ userGift.name }}</h3>
             <div class="nav-icons">
                 <i class="ml-2 fa fa-solid fa-circle-info"></i>
                 <i class="ml-2 fa fa-solid fa-message"></i>
@@ -19,7 +19,7 @@
         </div>
         <div class="chat-list">
 
-            <div v-for="(contact, index) in contacts"
+            <div v-for="(contact, index) in contactsGift"
                  :class="(index === activeIndex) ? 'active' : ''" class="box"
                  @click="activeIndex = index"
             >
@@ -30,10 +30,12 @@
                 <div class="details">
                     <div class="details-top">
                         <h4 class="name">{{ contact.name }}</h4>
-                        <p class="time">contact</p>
+                        <p v-if="contact.messages && contact.messages.length" class="time">
+                            {{ contact.messages[contact.messages.length - 1].date }}</p>
                     </div>
                     <div class="details-down">
-                        <p class="last">New haha skam asdas d as as das das das das e </p>
+                        <p v-if="contact.messages && contact.messages.length" class="last">
+                            {{ contact.messages[contact.messages.length - 1].message }}</p>
                     </div>
                 </div>
             </div>
@@ -50,71 +52,16 @@ export default {
     data: function () {
         return {
             activeIndex: null,
-            user: {
-                name: "Ghost House",
-                avatar: "/assets/miles.jpg",
-            },
-            contacts:
-                [
-                    {
-                        name: "John Doe",
-                        avatar: "https://example.com/avatar1.png",
-                        visible: true,
-                        messages: [
-                            {date: "2022-06-01T10:30:00Z", message: "Hey, how's it going?", status: "sent"},
-                            {
-                                date: "2022-06-01T10:35:00Z",
-                                message: "Not bad, thanks. How about you?",
-                                status: "received"
-                            },
-                            {
-                                date: "2022-06-01T10:40:00Z",
-                                message: "I'm doing well. What have you been up to?",
-                                status: "sent"
-                            }
-                        ]
-                    },
-                    {
-                        name: "Jane Smith",
-                        avatar: "https://example.com/avatar2.png",
-                        visible: true,
-                        messages: [
-                            {
-                                date: "2022-06-02T08:15:00Z",
-                                message: "Good morning! Ready for the big meeting today?",
-                                status: "received"
-                            },
-                            {
-                                date: "2022-06-02T08:20:00Z",
-                                message: "Definitely. I've been prepping all week.",
-                                status: "sent"
-                            }
-                        ]
-                    },
-                    {
-                        name: "Bob Johnson",
-                        avatar: "https://example.com/avatar3.png",
-                        visible: false,
-                        messages: []
-                    },
-                    {
-                        name: "Alice Lee",
-                        avatar: "https://example.com/avatar4.png",
-                        visible: true,
-                        messages: [
-                            {
-                                date: "2022-06-03T14:45:00Z",
-                                message: "Hey, can you send me the report you mentioned?",
-                                status: "sent"
-                            },
-                            {
-                                date: "2022-06-03T14:50:00Z",
-                                message: "Sure, I'll send it to you now.",
-                                status: "received"
-                            }
-                        ]
-                    }
-                ],
+        }
+    },
+    props: {
+        contactsGift: Array,
+        userGift: Object,
+    },
+    watch: {
+        activeIndex: function (newVal, oldVal) {
+            console.log(newVal);
+            this.$emit('activeChat', this.activeIndex);
         }
     }
 }
@@ -127,8 +74,6 @@ export default {
     flex: 30%;
     background: #fff;
 
-    border-right: 1px solid #ffffff;
-
     .header-left {
         height: 60px;
         background: #f6f6f6;
@@ -138,6 +83,8 @@ export default {
         justify-content: space-between;
 
         padding: 0 10px;
+
+        border-right: 1px solid #ffffff;
 
         .user-image {
             position: relative;
@@ -261,7 +208,7 @@ export default {
 
             height: 80px;
 
-            transition: .2s;
+            transition: 1s ease-in-out;
 
 
             .box-image {

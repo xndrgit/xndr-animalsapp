@@ -1,7 +1,7 @@
 <template>
     <div class="spiderapp">
-        <LeftComponent/>
-        <RightComponent/>
+        <LeftComponent :contactsGift="contacts" :userGift="user" @activeChat="activeChatFunction"/>
+        <RightComponent :activeChatGift="activeChat" :contactsGift="contacts" :userGift="user" @newMsg="pushFunction"/>
     </div>
 </template>
 
@@ -10,10 +10,87 @@ import LeftComponent from "../components/LeftComponent.vue";
 import RightComponent from "../components/RightComponent.vue";
 
 export default {
+    data: function () {
+        return {
+            activeChat: -1,
+            user: {
+                name: "Ghost House",
+                avatar: "/assets/miles.jpg",
+            },
+            contacts: [
+                {
+                    name: "John Doe",
+                    avatar: "https://example.com/avatar1.png",
+                    visible: true,
+                    messages: [
+                        {date: "2022-06-01T10:30:00Z", message: "Hey, how's it going?", status: "sent"},
+                        {
+                            date: "2022-06-01T10:35:00Z",
+                            message: "Not bad, thanks. How about you?",
+                            status: "received"
+                        },
+                        {
+                            date: "2022-06-01T10:40:00Z",
+                            message: "I'm doing well. What have you been up to?",
+                            status: "sent"
+                        }
+                    ]
+                },
+                {
+                    name: "Jane Smith",
+                    avatar: "https://example.com/avatar2.png",
+                    visible: true,
+                    messages: [
+                        {
+                            date: "2022-06-02T08:15:00Z",
+                            message: "Good morning! Ready for the big meeting today?",
+                            status: "received"
+                        },
+                        {
+                            date: "2022-06-02T08:20:00Z",
+                            message: "Definitely. I've been prepping all week.",
+                            status: "sent"
+                        }
+                    ]
+                },
+                {
+                    name: "Bob Johnson",
+                    avatar: "https://example.com/avatar3.png",
+                    visible: false,
+                    messages: []
+                },
+                {
+                    name: "Alice Lee",
+                    avatar: "https://example.com/avatar4.png",
+                    visible: true,
+                    messages: [
+                        {
+                            date: "2022-06-03T14:45:00Z",
+                            message: "Hey, can you send me the report you mentioned?",
+                            status: "sent"
+                        },
+                        {
+                            date: "2022-06-03T14:50:00Z",
+                            message: "Sure, I'll send it to you now.",
+                            status: "received"
+                        }
+                    ]
+                }
+            ],
+        }
+    },
     name: 'HomePage.vue',
     components: {
         LeftComponent,
         RightComponent
+    },
+    methods: {
+        activeChatFunction(arg) {
+            this.activeChat = arg;
+        },
+        pushFunction(newMsg) {
+            this.contacts[this.activeChat].messages.push(newMsg);
+        }
     }
 }
 </script>
