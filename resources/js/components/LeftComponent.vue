@@ -13,7 +13,8 @@
         </div>
         <div class="search-chat">
             <div class="div-search">
-                <input class="input-search" placeholder="Search or start new chat" type="text">
+                <input v-model="searchInput" class="input-search" placeholder="Search or start new chat"
+                       type="text" @keyup="searchContact(searchInput)">
                 <i class="fa-brands fa-searchengin fa-bounce"></i>
             </div>
         </div>
@@ -22,6 +23,7 @@
             <div v-for="(contact, index) in contactsGift"
                  :class="(index === activeIndex) ? 'active' : ''" class="box"
                  @click="activeIndex = index"
+                 v-if="contact.visible"
             >
                 <div class="box-image">
                     <img :src="contact.avatar"
@@ -52,6 +54,7 @@ export default {
     data: function () {
         return {
             activeIndex: null,
+            searchInput: null,
         }
     },
     props: {
@@ -62,6 +65,18 @@ export default {
         activeIndex: function (newVal, oldVal) {
             console.log(newVal);
             this.$emit('activeChat', this.activeIndex);
+        }
+    },
+    methods: {
+        searchContact(arg) {
+            // console.log(arg);
+            arg = this.getTrimmed(arg);
+            this.contactsGift.forEach(element => {
+                element.visible = this.getTrimmed(element.name).includes(arg);
+            })
+        },
+        getTrimmed(stringToTrim) {
+            return stringToTrim.trim().toLowerCase();
         }
     }
 }
@@ -114,7 +129,7 @@ export default {
 
         .name {
             position: relative;
-            left: -50px;
+            //left: -50px;
             font-weight: bold;
             font-size: 0.8rem;
 

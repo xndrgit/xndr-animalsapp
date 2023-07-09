@@ -101,7 +101,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      activeIndex: null
+      activeIndex: null,
+      searchInput: null
     };
   },
   props: {
@@ -112,6 +113,19 @@ __webpack_require__.r(__webpack_exports__);
     activeIndex: function activeIndex(newVal, oldVal) {
       console.log(newVal);
       this.$emit('activeChat', this.activeIndex);
+    }
+  },
+  methods: {
+    searchContact: function searchContact(arg) {
+      var _this = this;
+      // console.log(arg);
+      arg = this.getTrimmed(arg);
+      this.contactsGift.forEach(function (element) {
+        element.visible = _this.getTrimmed(element.name).includes(arg);
+      });
+    },
+    getTrimmed: function getTrimmed(stringToTrim) {
+      return stringToTrim.trim().toLowerCase();
     }
   }
 });
@@ -142,18 +156,31 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       newMsg: null,
-      newMsgInput: null
+      newMsgInput: null,
+      viewProfile: false
     };
   },
   methods: {
     addNewMessage: function addNewMessage(messageContent) {
-      this.newMsg = {
-        date: moment__WEBPACK_IMPORTED_MODULE_0___default()(),
-        message: messageContent,
-        status: 'sent'
-      };
-      this.$emit('newMsg', this.newMsg);
-      this.newMsgInput = null;
+      if (messageContent.length > 0) {
+        this.newMsg = {
+          date: moment__WEBPACK_IMPORTED_MODULE_0___default()().format('D/M/YY, HH:mm:ss'),
+          message: messageContent.trim(),
+          status: 'sent'
+        };
+        this.$emit('newMsg', this.newMsg);
+        this.newMsgInput = null;
+      }
+    },
+    viewProfileFunction: function viewProfileFunction() {
+      if (!this.viewProfile) {
+        this.viewProfile = true;
+      } else {
+        this.viewProfile = false;
+      }
+    },
+    removeProfileFunction: function removeProfileFunction() {
+      return this.viewProfile = false;
     }
   }
 });
@@ -208,12 +235,12 @@ __webpack_require__.r(__webpack_exports__);
     return {
       activeChat: -1,
       user: {
-        name: "Ghost House",
-        avatar: "/assets/miles.jpg"
+        name: "AnimalsApp",
+        avatar: "/assets/logo.png"
       },
       contacts: [{
-        name: "John Doe",
-        avatar: "https://example.com/avatar1.png",
+        name: "Dog",
+        avatar: "/assets/dog.jpg",
         visible: true,
         messages: [{
           date: "2022-06-01T10:30:00Z",
@@ -221,7 +248,7 @@ __webpack_require__.r(__webpack_exports__);
           status: "sent"
         }, {
           date: "2022-06-01T10:35:00Z",
-          message: "Not bad, thanks. How about you?",
+          message: "Bau!",
           status: "received"
         }, {
           date: "2022-06-01T10:40:00Z",
@@ -229,12 +256,12 @@ __webpack_require__.r(__webpack_exports__);
           status: "sent"
         }]
       }, {
-        name: "Jane Smith",
-        avatar: "https://example.com/avatar2.png",
+        name: "Pucho",
+        avatar: "/assets/pucho.jpg",
         visible: true,
         messages: [{
           date: "2022-06-02T08:15:00Z",
-          message: "Good morning! Ready for the big meeting today?",
+          message: "Grrr",
           status: "received"
         }, {
           date: "2022-06-02T08:20:00Z",
@@ -242,13 +269,13 @@ __webpack_require__.r(__webpack_exports__);
           status: "sent"
         }]
       }, {
-        name: "Bob Johnson",
-        avatar: "https://example.com/avatar3.png",
-        visible: false,
+        name: "Cow",
+        avatar: "/assets/cow.jpg",
+        visible: true,
         messages: []
       }, {
-        name: "Alice Lee",
-        avatar: "https://example.com/avatar4.png",
+        name: "Sheep",
+        avatar: "/assets/sheep.jpg",
         visible: true,
         messages: [{
           date: "2022-06-03T14:45:00Z",
@@ -256,10 +283,11 @@ __webpack_require__.r(__webpack_exports__);
           status: "sent"
         }, {
           date: "2022-06-03T14:50:00Z",
-          message: "Sure, I'll send it to you now.",
+          message: "Beeeee",
           status: "received"
         }]
-      }]
+      }],
+      viewProfile: false
     };
   },
   name: 'HomePage.vue',
@@ -318,10 +346,40 @@ var render = function render() {
     }
   })]), _vm._v(" "), _c("h3", {
     staticClass: "name"
-  }, [_vm._v(_vm._s(_vm.userGift.name))]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.userGift.name))]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c("div", {
+    staticClass: "search-chat"
+  }, [_c("div", {
+    staticClass: "div-search"
+  }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.searchInput,
+      expression: "searchInput"
+    }],
+    staticClass: "input-search",
+    attrs: {
+      placeholder: "Search or start new chat",
+      type: "text"
+    },
+    domProps: {
+      value: _vm.searchInput
+    },
+    on: {
+      keyup: function keyup($event) {
+        return _vm.searchContact(_vm.searchInput);
+      },
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.searchInput = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("i", {
+    staticClass: "fa-brands fa-searchengin fa-bounce"
+  })])]), _vm._v(" "), _c("div", {
     staticClass: "chat-list"
   }, _vm._l(_vm.contactsGift, function (contact, index) {
-    return _c("div", {
+    return contact.visible ? _c("div", {
       staticClass: "box",
       "class": index === _vm.activeIndex ? "active" : "",
       on: {
@@ -348,7 +406,7 @@ var render = function render() {
       staticClass: "details-down"
     }, [contact.messages && contact.messages.length ? _c("p", {
       staticClass: "last"
-    }, [_vm._v("\n                        " + _vm._s(contact.messages[contact.messages.length - 1].message))]) : _vm._e()])])]);
+    }, [_vm._v("\n                        " + _vm._s(contact.messages[contact.messages.length - 1].message))]) : _vm._e()])])]) : _vm._e();
   }), 0)]);
 };
 var staticRenderFns = [function () {
@@ -363,22 +421,6 @@ var staticRenderFns = [function () {
   }), _vm._v(" "), _c("i", {
     staticClass: "ml-2 fa fa-solid fa-gear"
   })]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "search-chat"
-  }, [_c("div", {
-    staticClass: "div-search"
-  }, [_c("input", {
-    staticClass: "input-search",
-    attrs: {
-      placeholder: "Search or start new chat",
-      type: "text"
-    }
-  }), _vm._v(" "), _c("i", {
-    staticClass: "fa-brands fa-searchengin fa-bounce"
-  })])]);
 }];
 render._withStripped = true;
 
@@ -404,7 +446,13 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "header-right"
   }, [_c("div", {
-    staticClass: "user-image"
+    staticClass: "user-image",
+    "class": _vm.viewProfile ? "activeProfile" : "",
+    on: {
+      click: function click($event) {
+        return _vm.viewProfileFunction();
+      }
+    }
   }, [_c("img", {
     staticClass: "cover",
     attrs: {
@@ -413,7 +461,19 @@ var render = function render() {
     }
   })]), _vm._v(" "), _c("h4", {
     staticClass: "activeName"
-  }, [_vm._v(_vm._s(_vm.contactsGift[_vm.activeChatGift].name))]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.contactsGift[_vm.activeChatGift].name))]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _vm.viewProfile ? _c("div", {
+    staticClass: "img-profile",
+    style: {
+      background: "url(".concat(_vm.contactsGift[_vm.activeChatGift].avatar, ")")
+    }
+  }, [_vm.viewProfile ? _c("div", {
+    staticClass: "remove-img-profile",
+    on: {
+      click: _vm.removeProfileFunction
+    }
+  }, [_c("i", {
+    staticClass: "fa fa-solid fa-circle-xmark fa-bounce"
+  })]) : _vm._e()]) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "chat-box"
   }, _vm._l(_vm.contactsGift[_vm.activeChatGift].messages, function (message, index) {
     return _c("div", {
@@ -425,7 +485,9 @@ var render = function render() {
       staticClass: "txt-message-normal"
     }, [_vm._v(_vm._s(message.message) + " "), _c("br"), _vm._v(" "), _c("span", {
       "class": message.status === "sent" ? "my-time" : "friend-time"
-    }, [_vm._v(_vm._s(message.date))])])])]);
+    }, [_vm._v(_vm._s(message.date))])]), _vm._v(" "), _c("i", {
+      staticClass: "fa fa-solid fa-circle-xmark fa-bounce"
+    })])]);
   }), 0), _vm._v(" "), _c("div", {
     staticClass: "footer-right"
   }, [_vm._m(1), _vm._v(" "), _c("div", {
@@ -627,7 +689,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".container-left[data-v-9bbcf54a] {\n  position: relative;\n  flex: 30%;\n  background: #fff;\n}\n.container-left .header-left[data-v-9bbcf54a] {\n  height: 60px;\n  background: #f6f6f6;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 10px;\n  border-right: 1px solid #ffffff;\n}\n.container-left .header-left .user-image[data-v-9bbcf54a] {\n  position: relative;\n  height: 40px;\n  width: 40px;\n  border-radius: 50%;\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n}\n.container-left .header-left .user-image .cover[data-v-9bbcf54a] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  overflow: hidden;\n  border-radius: 50%;\n  height: 100%;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.container-left .header-left .name[data-v-9bbcf54a] {\n  position: relative;\n  left: -50px;\n  font-weight: bold;\n  font-size: 0.8rem;\n  margin: 0;\n  width: -moz-fit-content;\n  width: fit-content;\n}\n.container-left .header-left .nav-icons .fa[data-v-9bbcf54a] {\n  cursor: pointer;\n}\n.container-left .search-chat[data-v-9bbcf54a] {\n  position: relative;\n  width: 100%;\n  height: 50px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background: #f6f6f6;\n  padding: 0 15px;\n}\n.container-left .search-chat .div-search[data-v-9bbcf54a] {\n  width: 100%;\n}\n.container-left .search-chat .div-search .input-search[data-v-9bbcf54a] {\n  width: 100%;\n  outline: none;\n  border: none;\n  border-radius: 30px;\n  background: #fff;\n  font-size: 10px;\n  padding: 10px;\n  padding-left: 40px;\n}\n.container-left .search-chat .div-search .input-search[data-v-9bbcf54a]:focus {\n  background: #f6f6f6;\n}\n.container-left .search-chat .div-search .fa-searchengin[data-v-9bbcf54a] {\n  position: absolute;\n  left: 18px;\n  top: 8px;\n  font-size: 1.4rem;\n  cursor: pointer;\n  background: #f6f6f6;\n  border-radius: 50px;\n  border: 3px solid white;\n  padding: 0.2rem;\n  transition: 0.5s;\n}\n.container-left .search-chat .div-search .fa-searchengin[data-v-9bbcf54a]:hover {\n  background: #f6f6f6;\n}\n.container-left .chat-list[data-v-9bbcf54a] {\n  height: calc(100% - 110px);\n  background: #f6f6f6;\n  overflow-y: auto;\n}\n.container-left .chat-list .active[data-v-9bbcf54a] {\n  background: rgb(0, 0, 0);\n  color: white;\n}\n.container-left .chat-list .box[data-v-9bbcf54a] {\n  position: relative;\n  width: 100%;\n  display: flex;\n  padding: 10px;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.06);\n  cursor: pointer;\n  height: 80px;\n  transition: 1s ease-in-out;\n}\n.container-left .chat-list .box .box-image[data-v-9bbcf54a] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 20%;\n  margin-right: 15px;\n}\n.container-left .chat-list .box .box-image .cover[data-v-9bbcf54a] {\n  height: 50px;\n  width: 50px;\n  border-radius: 50%;\n}\n.container-left .chat-list .box .details[data-v-9bbcf54a] {\n  width: 80%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.container-left .chat-list .box .details .details-top[data-v-9bbcf54a] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.container-left .chat-list .box .details .details-top .name[data-v-9bbcf54a] {\n  font-size: 14px;\n  font-weight: bold;\n  margin: 0;\n  transition: 0.1s;\n}\n.container-left .chat-list .box .details .details-top .time[data-v-9bbcf54a] {\n  font-size: 10px;\n  font-weight: lighter;\n  color: #aaa;\n  margin: 0;\n}\n.container-left .chat-list .box .details .details-down .last[data-v-9bbcf54a] {\n  margin-bottom: 0;\n  color: #aaa;\n  font-size: 12px;\n  width: 180px; /* Set the width of the container */\n  overflow: hidden; /* Hide the text that overflows the container */\n  text-overflow: ellipsis; /* Show an ellipsis when the text overflows */\n  white-space: nowrap; /* Prevent the text from wrapping */\n}\n.container-left .chat-list .box[data-v-9bbcf54a]:hover {\n  background: black;\n}\n.container-left .chat-list .box:hover .name[data-v-9bbcf54a] {\n  color: white;\n}", ""]);
+exports.push([module.i, ".container-left[data-v-9bbcf54a] {\n  position: relative;\n  flex: 30%;\n  background: #fff;\n}\n.container-left .header-left[data-v-9bbcf54a] {\n  height: 60px;\n  background: #f6f6f6;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 10px;\n  border-right: 1px solid #ffffff;\n}\n.container-left .header-left .user-image[data-v-9bbcf54a] {\n  position: relative;\n  height: 40px;\n  width: 40px;\n  border-radius: 50%;\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n}\n.container-left .header-left .user-image .cover[data-v-9bbcf54a] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  overflow: hidden;\n  border-radius: 50%;\n  height: 100%;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.container-left .header-left .name[data-v-9bbcf54a] {\n  position: relative;\n  font-weight: bold;\n  font-size: 0.8rem;\n  margin: 0;\n  width: -moz-fit-content;\n  width: fit-content;\n}\n.container-left .header-left .nav-icons .fa[data-v-9bbcf54a] {\n  cursor: pointer;\n}\n.container-left .search-chat[data-v-9bbcf54a] {\n  position: relative;\n  width: 100%;\n  height: 50px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background: #f6f6f6;\n  padding: 0 15px;\n}\n.container-left .search-chat .div-search[data-v-9bbcf54a] {\n  width: 100%;\n}\n.container-left .search-chat .div-search .input-search[data-v-9bbcf54a] {\n  width: 100%;\n  outline: none;\n  border: none;\n  border-radius: 30px;\n  background: #fff;\n  font-size: 10px;\n  padding: 10px;\n  padding-left: 40px;\n}\n.container-left .search-chat .div-search .input-search[data-v-9bbcf54a]:focus {\n  background: #f6f6f6;\n}\n.container-left .search-chat .div-search .fa-searchengin[data-v-9bbcf54a] {\n  position: absolute;\n  left: 18px;\n  top: 8px;\n  font-size: 1.4rem;\n  cursor: pointer;\n  background: #f6f6f6;\n  border-radius: 50px;\n  border: 3px solid white;\n  padding: 0.2rem;\n  transition: 0.5s;\n}\n.container-left .search-chat .div-search .fa-searchengin[data-v-9bbcf54a]:hover {\n  background: #f6f6f6;\n}\n.container-left .chat-list[data-v-9bbcf54a] {\n  height: calc(100% - 110px);\n  background: #f6f6f6;\n  overflow-y: auto;\n}\n.container-left .chat-list .active[data-v-9bbcf54a] {\n  background: rgb(0, 0, 0);\n  color: white;\n}\n.container-left .chat-list .box[data-v-9bbcf54a] {\n  position: relative;\n  width: 100%;\n  display: flex;\n  padding: 10px;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.06);\n  cursor: pointer;\n  height: 80px;\n  transition: 1s ease-in-out;\n}\n.container-left .chat-list .box .box-image[data-v-9bbcf54a] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 20%;\n  margin-right: 15px;\n}\n.container-left .chat-list .box .box-image .cover[data-v-9bbcf54a] {\n  height: 50px;\n  width: 50px;\n  border-radius: 50%;\n}\n.container-left .chat-list .box .details[data-v-9bbcf54a] {\n  width: 80%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.container-left .chat-list .box .details .details-top[data-v-9bbcf54a] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.container-left .chat-list .box .details .details-top .name[data-v-9bbcf54a] {\n  font-size: 14px;\n  font-weight: bold;\n  margin: 0;\n  transition: 0.1s;\n}\n.container-left .chat-list .box .details .details-top .time[data-v-9bbcf54a] {\n  font-size: 10px;\n  font-weight: lighter;\n  color: #aaa;\n  margin: 0;\n}\n.container-left .chat-list .box .details .details-down .last[data-v-9bbcf54a] {\n  margin-bottom: 0;\n  color: #aaa;\n  font-size: 12px;\n  width: 180px; /* Set the width of the container */\n  overflow: hidden; /* Hide the text that overflows the container */\n  text-overflow: ellipsis; /* Show an ellipsis when the text overflows */\n  white-space: nowrap; /* Prevent the text from wrapping */\n}\n.container-left .chat-list .box[data-v-9bbcf54a]:hover {\n  background: black;\n}\n.container-left .chat-list .box:hover .name[data-v-9bbcf54a] {\n  color: white;\n}", ""]);
 
 // exports
 
@@ -646,7 +708,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".container-right[data-v-14290628]:before {\n  position: absolute;\n  top: 60px;\n  left: 0;\n  width: 100%;\n  height: calc(100% - 120px);\n  content: \"\";\n  background: url(\"/assets/sp-bg.png\");\n  background-repeat: no-repeat;\n  background-position: center;\n}\n.container-right[data-v-14290628] {\n  position: relative;\n  flex: 70%;\n  background: #000000;\n}\n.container-right .header-right[data-v-14290628] {\n  height: 60px;\n  background: #f6f6f6;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 10px;\n}\n.container-right .header-right .user-image[data-v-14290628] {\n  position: relative;\n  height: 40px;\n  width: 40px;\n  border-radius: 50%;\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n}\n.container-right .header-right .user-image .cover[data-v-14290628] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  overflow: hidden;\n  border-radius: 50%;\n  height: 100%;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.container-right .header-right .activeName[data-v-14290628] {\n  margin: 0;\n  font-weight: bolder;\n}\n.container-right .header-right .nav-icons[data-v-14290628] {\n  font-size: 1rem;\n}\n.container-right .chat-box[data-v-14290628] {\n  position: relative;\n  width: 100%;\n  height: calc(100% - 120px);\n  padding: 50px;\n  overflow-y: auto;\n}\n.container-right .chat-box .message[data-v-14290628] {\n  position: relative;\n  margin: 5px 0;\n  width: 100%;\n  display: flex;\n}\n.container-right .chat-box .message p[data-v-14290628] {\n  margin: 0;\n  font-size: 0.8rem;\n}\n.container-right .chat-box .my-message[data-v-14290628] {\n  max-width: 65%;\n  text-align: right;\n  background: #fffbdb;\n  padding: 8px 15px 0 15px;\n  border-radius: 10px;\n}\n.container-right .chat-box .my-message .my-time[data-v-14290628] {\n  font-size: 0.8rem;\n  opacity: 0.5;\n}\n.container-right .chat-box .my-message .txt-message-normal[data-v-14290628]::before {\n  content: \"\";\n  position: absolute;\n  top: 0;\n  right: -15px;\n  width: 25px;\n  height: 25px;\n  background: linear-gradient(135deg, #fffbdb 0%, #fffbdb 50%, transparent 50%, transparent);\n}\n.container-right .chat-box .friend-message[data-v-14290628] {\n  max-width: 65%;\n  text-align: left;\n  background: rgb(255, 229, 229);\n  padding: 8px 15px 0 15px;\n  border-radius: 10px;\n}\n.container-right .chat-box .friend-message .friend-time[data-v-14290628] {\n  font-size: 0.8rem;\n  opacity: 0.5;\n}\n.container-right .chat-box .friend-message .txt-message-normal[data-v-14290628]::before {\n  content: \"\";\n  position: absolute;\n  top: 0;\n  left: -15px;\n  width: 25px;\n  height: 25px;\n  background: linear-gradient(-135deg, rgb(255, 229, 229) 0%, rgb(255, 229, 229) 50%, transparent 50%, transparent);\n}\n.container-right .footer-right[data-v-14290628] {\n  height: 60px;\n  width: 100%;\n  background: white;\n  padding: 15px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  background: #F2F3F5;\n}\n.container-right .footer-right .first[data-v-14290628] {\n  width: 10%;\n  display: flex;\n  justify-content: center;\n  font-size: 1.3rem;\n}\n.container-right .footer-right .first .fa[data-v-14290628] {\n  cursor: pointer;\n}\n.container-right .footer-right .second[data-v-14290628] {\n  width: 80%;\n}\n.container-right .footer-right .second #search[data-v-14290628] {\n  width: 100%;\n  border: none;\n  outline: none;\n  border-radius: 20px;\n  padding: 8px 15px;\n  font-size: 0.8rem;\n  background: white;\n}\n.container-right .footer-right .third[data-v-14290628] {\n  width: 10%;\n  display: flex;\n  justify-content: center;\n  font-size: 1.3rem;\n}\n.container-right .footer-right .third .fa[data-v-14290628] {\n  cursor: pointer;\n}", ""]);
+exports.push([module.i, ".container-right[data-v-14290628]:before {\n  position: absolute;\n  top: 60px;\n  left: 0;\n  width: 100%;\n  height: calc(100% - 120px);\n  content: \"\";\n  background: url(\"/assets/logo.png\");\n  background-repeat: no-repeat;\n  background-position: center;\n}\n.container-right[data-v-14290628] {\n  position: relative;\n  flex: 70%;\n  background: #000000;\n}\n.container-right .header-right[data-v-14290628] {\n  height: 60px;\n  background: #f6f6f6;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 10px;\n}\n.container-right .header-right .user-image[data-v-14290628] {\n  position: relative;\n  height: 40px;\n  width: 40px;\n  border-radius: 50%;\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n  cursor: pointer;\n  transition: 0.1s;\n}\n.container-right .header-right .user-image .cover[data-v-14290628] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  overflow: hidden;\n  border-radius: 50%;\n  height: 100%;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.container-right .header-right .activeProfile[data-v-14290628] {\n  border: 2px solid #05fa6f;\n}\n.container-right .header-right .activeName[data-v-14290628] {\n  margin: 0;\n  font-weight: bolder;\n}\n.container-right .header-right .nav-icons[data-v-14290628] {\n  font-size: 1rem;\n}\n.container-right .img-profile[data-v-14290628] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 400px;\n  height: 400px;\n  background-size: cover !important;\n  background-repeat: no-repeat !important;\n  background-position: center !important;\n  border: 2px solid white;\n  z-index: 10;\n}\n.container-right .remove-img-profile[data-v-14290628] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  top: 0px;\n  right: -30px;\n  transform: translate(-50%, -50%);\n  color: #ff0000;\n  background: #fcfcfc;\n  border-radius: 50%;\n  z-index: 12;\n}\n.container-right .remove-img-profile .fa[data-v-14290628] {\n  font-size: 30px;\n  cursor: pointer;\n}\n.container-right .chat-box[data-v-14290628] {\n  position: relative;\n  width: 100%;\n  height: calc(100% - 120px);\n  padding: 50px;\n  overflow-y: auto;\n}\n.container-right .chat-box .message[data-v-14290628] {\n  position: relative;\n  margin: 5px 0;\n  width: 100%;\n  display: flex;\n  transition: 0.2s;\n}\n.container-right .chat-box .message[data-v-14290628]:active {\n  background: #4aa0e6;\n  opacity: 0.8;\n  border-radius: 0;\n}\n.container-right .chat-box .message:active .my-message[data-v-14290628] {\n  border-radius: 0;\n  background: #4aa0e6;\n}\n.container-right .chat-box .message:active .my-message .txt-message-normal[data-v-14290628]:before {\n  opacity: 0;\n}\n.container-right .chat-box .message:active .friend-message[data-v-14290628] {\n  border-radius: 0;\n  background: #4aa0e6;\n}\n.container-right .chat-box .message:active .friend-message .txt-message-normal[data-v-14290628]:before {\n  opacity: 0;\n}\n.container-right .chat-box .message p[data-v-14290628] {\n  margin: 0;\n  font-size: 0.8rem;\n}\n.container-right .chat-box .my-message[data-v-14290628] {\n  position: relative;\n  max-width: 65%;\n  text-align: right;\n  background: #fffbdb;\n  padding: 8px 20px 0 20px;\n  border-radius: 10px;\n  transition: 0.2s;\n}\n.container-right .chat-box .my-message .fa[data-v-14290628] {\n  position: absolute;\n  top: -8px;\n  left: -5px;\n  font-size: 20px;\n  color: red;\n  background: white;\n  border-radius: 50%;\n  opacity: 0;\n  transition: 0.2s;\n  cursor: pointer;\n}\n.container-right .chat-box .my-message:hover .fa[data-v-14290628] {\n  opacity: 1;\n}\n.container-right .chat-box .my-message:active .fa[data-v-14290628] {\n  opacity: 0;\n}\n.container-right .chat-box .my-message .my-time[data-v-14290628] {\n  font-size: 0.8rem;\n  opacity: 0.5;\n}\n.container-right .chat-box .my-message .txt-message-normal[data-v-14290628]::before {\n  content: \"\";\n  position: absolute;\n  top: 0;\n  right: -15px;\n  width: 25px;\n  height: 25px;\n  background: linear-gradient(135deg, #fffbdb 0%, #fffbdb 50%, transparent 50%, transparent);\n  transition: 0.2s;\n}\n.container-right .chat-box .friend-message[data-v-14290628] {\n  position: relative;\n  max-width: 65%;\n  text-align: left;\n  background: rgb(255, 229, 229);\n  padding: 8px 15px 0 15px;\n  border-radius: 10px;\n  transition: 0.2s;\n}\n.container-right .chat-box .friend-message .fa[data-v-14290628] {\n  position: absolute;\n  top: -8px;\n  right: -5px;\n  font-size: 20px;\n  color: red;\n  background: white;\n  border-radius: 50%;\n  opacity: 0;\n  transition: 0.2s;\n  cursor: pointer;\n}\n.container-right .chat-box .friend-message:hover .fa[data-v-14290628] {\n  opacity: 1;\n}\n.container-right .chat-box .friend-message:active .fa[data-v-14290628] {\n  opacity: 0;\n}\n.container-right .chat-box .friend-message .friend-time[data-v-14290628] {\n  font-size: 0.8rem;\n  opacity: 0.5;\n}\n.container-right .chat-box .friend-message .txt-message-normal[data-v-14290628]::before {\n  content: \"\";\n  position: absolute;\n  top: 0;\n  left: -15px;\n  width: 25px;\n  height: 25px;\n  background: linear-gradient(-135deg, rgb(255, 229, 229) 0%, rgb(255, 229, 229) 50%, transparent 50%, transparent);\n  transition: 0.2s;\n}\n.container-right .footer-right[data-v-14290628] {\n  height: 60px;\n  width: 100%;\n  background: white;\n  padding: 15px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  background: #F2F3F5;\n}\n.container-right .footer-right .first[data-v-14290628] {\n  width: 10%;\n  display: flex;\n  justify-content: center;\n  font-size: 1.3rem;\n}\n.container-right .footer-right .first .fa[data-v-14290628] {\n  cursor: pointer;\n}\n.container-right .footer-right .second[data-v-14290628] {\n  width: 80%;\n}\n.container-right .footer-right .second #search[data-v-14290628] {\n  width: 100%;\n  border: none;\n  outline: none;\n  border-radius: 20px;\n  padding: 8px 15px;\n  font-size: 0.8rem;\n  background: white;\n}\n.container-right .footer-right .third[data-v-14290628] {\n  width: 10%;\n  display: flex;\n  justify-content: center;\n  font-size: 1.3rem;\n}\n.container-right .footer-right .third .fa[data-v-14290628] {\n  cursor: pointer;\n}", ""]);
 
 // exports
 

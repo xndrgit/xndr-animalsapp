@@ -14,19 +14,19 @@ export default {
         return {
             activeChat: -1,
             user: {
-                name: "Ghost House",
-                avatar: "/assets/miles.jpg",
+                name: "AnimalsApp",
+                avatar: "/assets/logo.png",
             },
             contacts: [
                 {
-                    name: "John Doe",
-                    avatar: "https://example.com/avatar1.png",
+                    name: "Dog",
+                    avatar: "/assets/dog.jpg",
                     visible: true,
                     messages: [
                         {date: "2022-06-01T10:30:00Z", message: "Hey, how's it going?", status: "sent"},
                         {
                             date: "2022-06-01T10:35:00Z",
-                            message: "Not bad, thanks. How about you?",
+                            message: "Bau!",
                             status: "received"
                         },
                         {
@@ -37,13 +37,13 @@ export default {
                     ]
                 },
                 {
-                    name: "Jane Smith",
-                    avatar: "https://example.com/avatar2.png",
+                    name: "Pucho",
+                    avatar: "/assets/pucho.jpg",
                     visible: true,
                     messages: [
                         {
                             date: "2022-06-02T08:15:00Z",
-                            message: "Good morning! Ready for the big meeting today?",
+                            message: "Grrr",
                             status: "received"
                         },
                         {
@@ -54,14 +54,14 @@ export default {
                     ]
                 },
                 {
-                    name: "Bob Johnson",
-                    avatar: "https://example.com/avatar3.png",
-                    visible: false,
+                    name: "Cow",
+                    avatar: "/assets/cow.jpg",
+                    visible: true,
                     messages: []
                 },
                 {
-                    name: "Alice Lee",
-                    avatar: "https://example.com/avatar4.png",
+                    name: "Sheep",
+                    avatar: "/assets/sheep.jpg",
                     visible: true,
                     messages: [
                         {
@@ -71,12 +71,13 @@ export default {
                         },
                         {
                             date: "2022-06-03T14:50:00Z",
-                            message: "Sure, I'll send it to you now.",
+                            message: "Beeeee",
                             status: "received"
                         }
                     ]
                 }
             ],
+            viewProfile: false,
         }
     },
     name: 'HomePage.vue',
@@ -90,7 +91,7 @@ export default {
         },
         pushFunction(newMsg) {
             this.contacts[this.activeChat].messages.push(newMsg);
-        }
+        },
     }
 }
 </script>
