@@ -21,13 +21,13 @@
 
         <div class="chat-box">
 
-            <div v-for="(message, index) in contactsGift[activeChatGift].messages"
+            <div v-for="(message, index) in contactsGift[activeChatGift].messages" :key="index"
                  :class="(message.status === 'sent') ? 'justify-content-end' : 'justify-content-start'" class="message"
             >
                 <div :class="(message.status === 'sent') ? 'my-message' : 'friend-message'">
                     <p class="txt-message-normal">{{ message.message }} <br> <span
                         :class="(message.status === 'sent') ? 'my-time' : 'friend-time'">{{ message.date }}</span></p>
-                    <i class="fa fa-solid fa-circle-xmark fa-bounce "></i>
+                    <i class="fa fa-solid fa-circle-xmark fa-bounce " @click="removeMessageFunction(index)"></i>
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
         </div>
         <div class="footer-right">
             <div class="first">
-                <i class="fa mr-3 fa-regular fa-face-smile"></i>
+                <i class="fa mr-3 fa-regular fa-face-smile fa-bounce"></i>
                 <!--                <i class="fa fa-solid fa-paperclip"></i>-->
             </div>
             <div class="second">
@@ -90,6 +90,9 @@ export default {
         },
         removeProfileFunction() {
             return this.viewProfile = false;
+        },
+        removeMessageFunction(index) {
+            this.$emit('index', index);
         },
 
     },
@@ -287,9 +290,9 @@ export default {
 
             .fa {
                 position: absolute;
-                top: -8px;
-                left: -5px;
-                font-size: 20px;
+                top: -12px;
+                left: -12px;
+                font-size: 25px;
 
                 color: red;
                 background: white;
@@ -347,9 +350,9 @@ export default {
 
             .fa {
                 position: absolute;
-                top: -8px;
-                right: -5px;
-                font-size: 20px;
+                top: -12px;
+                right: -12px;
+                font-size: 25px;
 
                 color: red;
                 background: white;
@@ -413,8 +416,12 @@ export default {
 
             .fa {
                 cursor: pointer;
-            }
+                transition: 0.1s;
 
+                &:active {
+                    font-size: 30px;
+                }
+            }
         }
 
         .second {
@@ -443,6 +450,11 @@ export default {
 
             .fa {
                 cursor: pointer;
+                transition: 0.1s;
+
+                &:active {
+                    font-size: 30px;
+                }
             }
         }
     }

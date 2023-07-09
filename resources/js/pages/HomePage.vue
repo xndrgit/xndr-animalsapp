@@ -1,7 +1,8 @@
 <template>
     <div class="spiderapp">
         <LeftComponent :contactsGift="contacts" :userGift="user" @activeChat="activeChatFunction"/>
-        <RightComponent :activeChatGift="activeChat" :contactsGift="contacts" :userGift="user" @newMsg="pushFunction"/>
+        <RightComponent :activeChatGift="activeChat" :contactsGift="contacts" :userGift="user" @index="removeFunction"
+                        @newMsg="pushFunction"/>
     </div>
 </template>
 
@@ -92,6 +93,9 @@ export default {
         pushFunction(newMsg) {
             this.contacts[this.activeChat].messages.push(newMsg);
         },
+        removeFunction(index) {
+            this.contacts[this.activeChat].messages.splice(index, 1);
+        }
     }
 }
 </script>
