@@ -2,7 +2,9 @@
     <div class="spiderapp">
         <LeftComponent :contactsGift="contacts" :userGift="user" @activeChat="activeChatFunction"/>
         <RightComponent :activeChatGift="activeChat" :contactsGift="contacts" :userGift="user" @index="removeFunction"
-                        @newMsg="pushFunction"/>
+                        @cowMsg="cowMsgFunction"
+                        @dogMsg="dogMsgFunction" @newMsg="pushFunction" @puchoMsg="puchoMsgFunction"
+                        @sheepMsg="sheepMsgFunction"/>
     </div>
 </template>
 
@@ -95,6 +97,18 @@ export default {
         },
         removeFunction(index) {
             this.contacts[this.activeChat].messages.splice(index, 1);
+        },
+        dogMsgFunction(dogMsg) {
+            this.contacts[this.activeChat].messages.push(dogMsg);
+        },
+        puchoMsgFunction(puchoMsg) {
+            this.contacts[this.activeChat].messages.push(puchoMsg);
+        },
+        cowMsgFunction(cowMsg) {
+            this.contacts[this.activeChat].messages.push(cowMsg);
+        },
+        sheepMsgFunction(sheepMsg) {
+            this.contacts[this.activeChat].messages.push(sheepMsg);
         }
     }
 }
