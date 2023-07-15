@@ -544,39 +544,41 @@ var render = function render() {
   }, [_c("i", {
     staticClass: "fa fa-solid fa-circle-xmark fa-bounce"
   })]) : _vm._e()]) : _vm._e(), _vm._v(" "), _c("div", {
-    staticClass: "chat-box"
-  }, [_vm._l(_vm.contactsGift[_vm.activeChatGift].messages, function (message, index) {
-    return _c("div", {
-      key: index,
-      staticClass: "message",
-      "class": message.status === "sent" ? "justify-content-end" : "justify-content-start"
-    }, [_c("div", {
-      "class": message.status === "sent" ? "my-message" : "friend-message"
-    }, [_c("p", {
-      staticClass: "txt-message-normal"
-    }, [_vm._v(_vm._s(message.message) + " "), _c("br"), _vm._v(" "), _c("span", {
-      "class": message.status === "sent" ? "my-time" : "friend-time"
-    }, [_vm._v(_vm._s(message.date))])]), _vm._v(" "), _c("i", {
-      staticClass: "fa fa-solid fa-circle-xmark fa-bounce",
-      on: {
-        click: function click($event) {
-          return _vm.removeMessageFunction(index);
-        }
-      }
-    })])]);
-  }), _vm._v(" "), _vm.typing ? _c("div", {
-    staticClass: "typing text-white"
-  }, [_c("h6", [_vm._v(_vm._s(_vm.contactsGift[_vm.activeChatGift].name) + " sta scrivendo...")])]) : _vm._e()], 2), _vm._v(" "), _c("div", {
-    staticClass: "footer-right"
+      staticClass: "chat-box"
+  }, _vm._l(_vm.contactsGift[_vm.activeChatGift].messages, function (message, index) {
+      return _c("div", {
+          key: index,
+          staticClass: "message",
+          "class": message.status === "sent" ? "justify-content-end" : "justify-content-start"
+      }, [_c("div", {
+          "class": message.status === "sent" ? "my-message" : "friend-message"
+      }, [_c("p", {
+          staticClass: "txt-message-normal"
+      }, [_vm._v(_vm._s(message.message) + " "), _c("br"), _vm._v(" "), _c("span", {
+          "class": message.status === "sent" ? "my-time" : "friend-time"
+      }, [_vm._v(_vm._s(message.date))])]), _vm._v(" "), _c("i", {
+          staticClass: "fa fa-solid fa-circle-xmark",
+          on: {
+              click: function click($event) {
+                  return _vm.removeMessageFunction(index);
+              }
+          }
+      })])]);
+  }), 0), _vm._v(" "), _vm.typing ? _c("div", {
+      staticClass: "typing d-flex align-content-center"
+  }, [_c("h6", [_vm._v("\n            " + _vm._s(_vm.contactsGift[_vm.activeChatGift].name) + " is typing\n        ")]), _vm._v(" "), _c("i", {
+      staticClass: "pl-1 fa-2xs fa-regular fa-comment-dots fa-bounce"
+  })]) : _vm._e(), _vm._v(" "), _c("div", {
+      staticClass: "footer-right"
   }, [_vm._m(1), _vm._v(" "), _c("div", {
-    staticClass: "second"
+      staticClass: "second"
   }, [_c("input", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.newMsgInput,
-      expression: "newMsgInput"
-    }],
+      directives: [{
+          name: "model",
+          rawName: "v-model",
+          value: _vm.newMsgInput,
+          expression: "newMsgInput"
+      }],
     attrs: {
       id: "search",
       name: "search",
@@ -791,7 +793,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".container-right[data-v-14290628]:before {\n  position: absolute;\n  top: 60px;\n  left: 0;\n  width: 100%;\n  height: calc(100% - 120px);\n  content: \"\";\n  background: url(\"/assets/logo.png\");\n  background-repeat: no-repeat;\n  background-position: center;\n}\n.container-right[data-v-14290628] {\n  position: relative;\n  flex: 70%;\n  background: #000000;\n}\n.container-right .header-right[data-v-14290628] {\n  height: 60px;\n  background: #f6f6f6;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 10px;\n}\n.container-right .header-right .user-image[data-v-14290628] {\n  position: relative;\n  height: 40px;\n  width: 40px;\n  border-radius: 50%;\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n  cursor: pointer;\n  transition: 0.1s;\n}\n.container-right .header-right .user-image .cover[data-v-14290628] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  overflow: hidden;\n  border-radius: 50%;\n  height: 100%;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.container-right .header-right .activeProfile[data-v-14290628] {\n  border: 2px solid #05fa6f;\n}\n.container-right .header-right .activeName[data-v-14290628] {\n  margin: 0;\n  font-weight: bolder;\n}\n.container-right .header-right .nav-icons[data-v-14290628] {\n  font-size: 1rem;\n}\n.container-right .img-profile[data-v-14290628] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 400px;\n  height: 400px;\n  background-size: cover !important;\n  background-repeat: no-repeat !important;\n  background-position: center !important;\n  border: 2px solid white;\n  z-index: 10;\n}\n.container-right .remove-img-profile[data-v-14290628] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  top: 0px;\n  right: -30px;\n  transform: translate(-50%, -50%);\n  color: #ff0000;\n  background: #fcfcfc;\n  border-radius: 50%;\n  z-index: 12;\n}\n.container-right .remove-img-profile .fa[data-v-14290628] {\n  font-size: 30px;\n  cursor: pointer;\n}\n.container-right .chat-box[data-v-14290628] {\n  position: relative;\n  width: 100%;\n  height: calc(100% - 120px);\n  padding: 50px;\n  overflow-y: auto;\n}\n.container-right .chat-box .message[data-v-14290628] {\n  position: relative;\n  margin: 5px 0;\n  width: 100%;\n  display: flex;\n  transition: 0.2s;\n}\n.container-right .chat-box .message[data-v-14290628]:active {\n  background: #4aa0e6;\n  opacity: 0.8;\n  border-radius: 0;\n}\n.container-right .chat-box .message:active .my-message[data-v-14290628] {\n  border-radius: 0;\n  background: #4aa0e6;\n}\n.container-right .chat-box .message:active .my-message .txt-message-normal[data-v-14290628]:before {\n  opacity: 0;\n}\n.container-right .chat-box .message:active .friend-message[data-v-14290628] {\n  border-radius: 0;\n  background: #4aa0e6;\n}\n.container-right .chat-box .message:active .friend-message .txt-message-normal[data-v-14290628]:before {\n  opacity: 0;\n}\n.container-right .chat-box .message p[data-v-14290628] {\n  margin: 0;\n  font-size: 0.8rem;\n}\n.container-right .chat-box .my-message[data-v-14290628] {\n  position: relative;\n  max-width: 65%;\n  text-align: right;\n  background: #fffbdb;\n  padding: 8px 20px 0 20px;\n  border-radius: 10px;\n  transition: 0.2s;\n}\n.container-right .chat-box .my-message .fa[data-v-14290628] {\n  position: absolute;\n  top: -12px;\n  left: -12px;\n  font-size: 25px;\n  color: red;\n  background: white;\n  border-radius: 50%;\n  opacity: 0;\n  transition: 0.2s;\n  cursor: pointer;\n}\n.container-right .chat-box .my-message:hover .fa[data-v-14290628] {\n  opacity: 1;\n}\n.container-right .chat-box .my-message:active .fa[data-v-14290628] {\n  opacity: 0;\n}\n.container-right .chat-box .my-message .my-time[data-v-14290628] {\n  font-size: 0.8rem;\n  opacity: 0.5;\n}\n.container-right .chat-box .my-message .txt-message-normal[data-v-14290628]::before {\n  content: \"\";\n  position: absolute;\n  top: 0;\n  right: -15px;\n  width: 25px;\n  height: 25px;\n  background: linear-gradient(135deg, #fffbdb 0%, #fffbdb 50%, transparent 50%, transparent);\n  transition: 0.2s;\n}\n.container-right .chat-box .friend-message[data-v-14290628] {\n  position: relative;\n  max-width: 65%;\n  text-align: left;\n  background: rgb(255, 229, 229);\n  padding: 8px 15px 0 15px;\n  border-radius: 10px;\n  transition: 0.2s;\n}\n.container-right .chat-box .friend-message .fa[data-v-14290628] {\n  position: absolute;\n  top: -12px;\n  right: -12px;\n  font-size: 25px;\n  color: red;\n  background: white;\n  border-radius: 50%;\n  opacity: 0;\n  transition: 0.2s;\n  cursor: pointer;\n}\n.container-right .chat-box .friend-message:hover .fa[data-v-14290628] {\n  opacity: 1;\n}\n.container-right .chat-box .friend-message:active .fa[data-v-14290628] {\n  opacity: 0;\n}\n.container-right .chat-box .friend-message .friend-time[data-v-14290628] {\n  font-size: 0.8rem;\n  opacity: 0.5;\n}\n.container-right .chat-box .friend-message .txt-message-normal[data-v-14290628]::before {\n  content: \"\";\n  position: absolute;\n  top: 0;\n  left: -15px;\n  width: 25px;\n  height: 25px;\n  background: linear-gradient(-135deg, rgb(255, 229, 229) 0%, rgb(255, 229, 229) 50%, transparent 50%, transparent);\n  transition: 0.2s;\n}\n.container-right .chat-box .typing[data-v-14290628] {\n  position: absolute;\n  bottom: 0px;\n  left: 10px;\n}\n.container-right .footer-right[data-v-14290628] {\n  height: 60px;\n  width: 100%;\n  background: white;\n  padding: 15px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  background: #F2F3F5;\n}\n.container-right .footer-right .first[data-v-14290628] {\n  width: 10%;\n  display: flex;\n  justify-content: center;\n  font-size: 1.3rem;\n}\n.container-right .footer-right .first .fa[data-v-14290628] {\n  cursor: pointer;\n  transition: 0.1s;\n}\n.container-right .footer-right .first .fa[data-v-14290628]:active {\n  font-size: 30px;\n}\n.container-right .footer-right .second[data-v-14290628] {\n  width: 80%;\n}\n.container-right .footer-right .second #search[data-v-14290628] {\n  width: 100%;\n  border: none;\n  outline: none;\n  border-radius: 20px;\n  padding: 8px 15px;\n  font-size: 0.8rem;\n  background: white;\n}\n.container-right .footer-right .third[data-v-14290628] {\n  width: 10%;\n  display: flex;\n  justify-content: center;\n  font-size: 1.3rem;\n}\n.container-right .footer-right .third .fa[data-v-14290628] {\n  cursor: pointer;\n  transition: 0.1s;\n}\n.container-right .footer-right .third .fa[data-v-14290628]:active {\n  font-size: 30px;\n}", ""]);
+            exports.push([module.i, ".container-right[data-v-14290628]:before {\n  position: absolute;\n  top: 60px;\n  left: 0;\n  width: 100%;\n  height: calc(100% - 120px);\n  content: \"\";\n  background: url(\"/assets/logo.png\");\n  background-repeat: no-repeat;\n  background-position: center;\n}\n.container-right[data-v-14290628] {\n  position: relative;\n  flex: 70%;\n  background: #000000;\n}\n.container-right .header-right[data-v-14290628] {\n  height: 60px;\n  background: #f6f6f6;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 10px;\n}\n.container-right .header-right .user-image[data-v-14290628] {\n  position: relative;\n  height: 40px;\n  width: 40px;\n  border-radius: 50%;\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n  cursor: pointer;\n  transition: 0.1s;\n}\n.container-right .header-right .user-image .cover[data-v-14290628] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  overflow: hidden;\n  border-radius: 50%;\n  height: 100%;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.container-right .header-right .activeProfile[data-v-14290628] {\n  border: 2px solid #05fa6f;\n}\n.container-right .header-right .activeName[data-v-14290628] {\n  margin: 0;\n  font-weight: bolder;\n}\n.container-right .header-right .nav-icons[data-v-14290628] {\n  font-size: 1rem;\n}\n.container-right .img-profile[data-v-14290628] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 400px;\n  height: 400px;\n  background-size: cover !important;\n  background-repeat: no-repeat !important;\n  background-position: center !important;\n  border: 2px solid white;\n  z-index: 10;\n}\n.container-right .remove-img-profile[data-v-14290628] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  top: 0px;\n  right: -30px;\n  transform: translate(-50%, -50%);\n  color: #ff0000;\n  background: #fcfcfc;\n  border-radius: 50%;\n  z-index: 12;\n}\n.container-right .remove-img-profile .fa[data-v-14290628] {\n  font-size: 30px;\n  cursor: pointer;\n}\n.container-right .chat-box[data-v-14290628] {\n  position: relative;\n  width: 100%;\n  height: calc(100% - 120px);\n  padding: 50px;\n  overflow-y: auto;\n}\n.container-right .chat-box .message[data-v-14290628] {\n  position: relative;\n  margin: 5px 0;\n  width: 100%;\n  display: flex;\n  transition: 0.2s;\n}\n.container-right .chat-box .message[data-v-14290628]:active {\n  background: #4aa0e6;\n  opacity: 0.8;\n  border-radius: 0;\n}\n.container-right .chat-box .message:active .my-message[data-v-14290628] {\n  border-radius: 0;\n  background: #4aa0e6;\n}\n.container-right .chat-box .message:active .my-message .txt-message-normal[data-v-14290628]:before {\n  opacity: 0;\n}\n.container-right .chat-box .message:active .friend-message[data-v-14290628] {\n  border-radius: 0;\n  background: #4aa0e6;\n}\n.container-right .chat-box .message:active .friend-message .txt-message-normal[data-v-14290628]:before {\n  opacity: 0;\n}\n.container-right .chat-box .message p[data-v-14290628] {\n  margin: 0;\n  font-size: 0.8rem;\n}\n.container-right .chat-box .my-message[data-v-14290628] {\n  position: relative;\n  max-width: 65%;\n  text-align: right;\n  background: #fffbdb;\n  padding: 8px 20px 0 20px;\n  border-radius: 10px;\n  transition: 0.2s;\n}\n.container-right .chat-box .my-message .fa[data-v-14290628] {\n  position: absolute;\n  top: -12px;\n  left: -12px;\n  font-size: 25px;\n  color: red;\n  background: white;\n  border-radius: 50%;\n  opacity: 0;\n  transition: 0.2s;\n  cursor: pointer;\n}\n.container-right .chat-box .my-message:hover .fa[data-v-14290628] {\n  opacity: 1;\n}\n.container-right .chat-box .my-message:active .fa[data-v-14290628] {\n  opacity: 0;\n}\n.container-right .chat-box .my-message .my-time[data-v-14290628] {\n  font-size: 0.8rem;\n  opacity: 0.5;\n}\n.container-right .chat-box .my-message .txt-message-normal[data-v-14290628]::before {\n  content: \"\";\n  position: absolute;\n  top: 0;\n  right: -15px;\n  width: 25px;\n  height: 25px;\n  background: linear-gradient(135deg, #fffbdb 0%, #fffbdb 50%, transparent 50%, transparent);\n  transition: 0.2s;\n}\n.container-right .chat-box .friend-message[data-v-14290628] {\n  position: relative;\n  max-width: 65%;\n  text-align: left;\n  background: rgb(255, 229, 229);\n  padding: 8px 15px 0 15px;\n  border-radius: 10px;\n  transition: 0.2s;\n}\n.container-right .chat-box .friend-message .fa[data-v-14290628] {\n  position: absolute;\n  top: -12px;\n  right: -12px;\n  font-size: 25px;\n  color: red;\n  background: white;\n  border-radius: 50%;\n  opacity: 0;\n  transition: 0.2s;\n  cursor: pointer;\n}\n.container-right .chat-box .friend-message:hover .fa[data-v-14290628] {\n  opacity: 1;\n}\n.container-right .chat-box .friend-message:active .fa[data-v-14290628] {\n  opacity: 0;\n}\n.container-right .chat-box .friend-message .friend-time[data-v-14290628] {\n  font-size: 0.8rem;\n  opacity: 0.5;\n}\n.container-right .chat-box .friend-message .txt-message-normal[data-v-14290628]::before {\n  content: \"\";\n  position: absolute;\n  top: 0;\n  left: -15px;\n  width: 25px;\n  height: 25px;\n  background: linear-gradient(-135deg, rgb(255, 229, 229) 0%, rgb(255, 229, 229) 50%, transparent 50%, transparent);\n  transition: 0.2s;\n}\n.container-right .typing[data-v-14290628] {\n  position: absolute;\n  bottom: 70px;\n  left: 50px;\n  color: rgb(15, 234, 110);\n  font-weight: bold;\n  font-size: 1.4rem;\n}\n.container-right .footer-right[data-v-14290628] {\n  height: 60px;\n  width: 100%;\n  background: white;\n  padding: 15px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  background: #F2F3F5;\n}\n.container-right .footer-right .first[data-v-14290628] {\n  width: 10%;\n  display: flex;\n  justify-content: center;\n  font-size: 1.3rem;\n}\n.container-right .footer-right .first .fa[data-v-14290628] {\n  cursor: pointer;\n  transition: 0.1s;\n}\n.container-right .footer-right .first .fa[data-v-14290628]:active {\n  font-size: 30px;\n}\n.container-right .footer-right .second[data-v-14290628] {\n  width: 80%;\n}\n.container-right .footer-right .second #search[data-v-14290628] {\n  width: 100%;\n  border: none;\n  outline: none;\n  border-radius: 20px;\n  padding: 8px 15px;\n  font-size: 0.8rem;\n  background: white;\n}\n.container-right .footer-right .third[data-v-14290628] {\n  width: 10%;\n  display: flex;\n  justify-content: center;\n  font-size: 1.3rem;\n}\n.container-right .footer-right .third .fa[data-v-14290628] {\n  cursor: pointer;\n  transition: 0.1s;\n}\n.container-right .footer-right .third .fa[data-v-14290628]:active {\n  font-size: 30px;\n}", ""]);
 
 // exports
 
@@ -23425,7 +23427,7 @@ function addStyle (obj, options) {
 	// If a transform function was defined, run it on the css
 	if (options.transform && obj.css) {
 	    result = typeof options.transform === 'function'
-		 ? options.transform(obj.css) 
+		 ? options.transform(obj.css)
 		 : options.transform.default(obj.css);
 
 	    if (result) {
@@ -27665,7 +27667,7 @@ function createTextVNode(val) {
 // multiple renders, cloning them avoids errors when DOM manipulations rely
 // on their elm reference.
 function cloneVNode(vnode) {
-    const cloned = new VNode(vnode.tag, vnode.data, 
+    const cloned = new VNode(vnode.tag, vnode.data,
     // #7975
     // clone children array to avoid mutating original in case of cloning
     // a child.
@@ -29061,7 +29063,7 @@ function bindObjectListeners(data, value) {
     return data;
 }
 
-function resolveScopedSlots(fns, res, 
+function resolveScopedSlots(fns, res,
 // the following are added in 2.6
 hasDynamicKeys, contentHashKey) {
     res = res || { $stable: !hasDynamicKeys };
@@ -31101,7 +31103,7 @@ let uid$1 = 0;
  */
 class Watcher {
     constructor(vm, expOrFn, cb, options, isRenderWatcher) {
-        recordEffectScope(this, 
+        recordEffectScope(this,
         // if the active effect scope is manually created (not a component scope),
         // prioritize it
         activeEffectScope && !activeEffectScope._vm
@@ -32001,14 +32003,14 @@ function createComponent(Ctor, data, context, children, tag) {
     const name = getComponentName(Ctor.options) || tag;
     const vnode = new VNode(
     // @ts-expect-error
-    `vue-component-${Ctor.cid}${name ? `-${name}` : ''}`, data, undefined, undefined, undefined, context, 
+    `vue-component-${Ctor.cid}${name ? `-${name}` : ''}`, data, undefined, undefined, undefined, context,
     // @ts-expect-error
     { Ctor, propsData, listeners, tag, children }, asyncFactory);
     return vnode;
 }
 function createComponentInstanceForVnode(
 // we know it's MountedComponentVNode but flow doesn't
-vnode, 
+vnode,
 // activeInstance in lifecycle state
 parent) {
     const options = {
@@ -34083,7 +34085,7 @@ function createPatchFunction(backend) {
                 const oldElm = oldVnode.elm;
                 const parentElm = nodeOps.parentNode(oldElm);
                 // create new node
-                createElm(vnode, insertedVnodeQueue, 
+                createElm(vnode, insertedVnodeQueue,
                 // extremely rare edge case: do not insert if old element is in a
                 // leaving transition. Only happens when combining transition +
                 // keep-alive + HOCs. (#4590)
@@ -34981,7 +34983,7 @@ function add(name, handler, capture, passive) {
     target.addEventListener(name, handler, supportsPassive ? { capture, passive } : capture);
 }
 function remove(name, handler, capture, _target) {
-    (_target || target).removeEventListener(name, 
+    (_target || target).removeEventListener(name,
     //@ts-expect-error
     handler._wrapper || handler, capture);
 }
@@ -38955,7 +38957,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   "9bbcf54a",
   null
-  
+
 )
 
 /* hot reload */
@@ -38975,7 +38977,7 @@ component.options.__file = "resources/js/components/LeftComponent.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LeftComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./LeftComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LeftComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LeftComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LeftComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -39042,7 +39044,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   "14290628",
   null
-  
+
 )
 
 /* hot reload */
@@ -39062,7 +39064,7 @@ component.options.__file = "resources/js/components/RightComponent.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RightComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./RightComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/RightComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RightComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RightComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -39163,7 +39165,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   "520b5d54",
   null
-  
+
 )
 
 /* hot reload */
@@ -39183,7 +39185,7 @@ component.options.__file = "resources/js/pages/About.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_About_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./About.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/About.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_About_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_About_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -39232,7 +39234,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   "2d69ed48",
   null
-  
+
 )
 
 /* hot reload */
@@ -39252,7 +39254,7 @@ component.options.__file = "resources/js/pages/Contacts.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Contacts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Contacts.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Contacts.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Contacts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Contacts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -39303,7 +39305,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   "04c29797",
   null
-  
+
 )
 
 /* hot reload */
@@ -39323,7 +39325,7 @@ component.options.__file = "resources/js/pages/HomePage.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HomePage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./HomePage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/HomePage.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HomePage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HomePage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -39435,7 +39437,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-  
+
 )
 
 /* hot reload */
@@ -39457,7 +39459,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/App.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a);
 
 /***/ }),
 

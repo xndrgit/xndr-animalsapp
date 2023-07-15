@@ -1,11 +1,18 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap);/*!
+@import url(https://fonts.googleapis.com/css?family=Nunito);
+@import url(https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;
+
+600;700&display=swap
+)
+;
+/*!
  * Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  * Copyright 2023 Fonticons, Inc.
  */
 .fa {
-  font-family: var(--fa-style-family, "Font Awesome 6 Free");
-  font-weight: var(--fa-style, 900); }
+    font-family: var(--fa-style-family, "Font Awesome 6 Free");
+    font-weight: var(--fa-style, 900);
+}
 
 .fa,
 .fa-classic,
@@ -7785,14 +7792,6 @@ readers do not read off random characters that represent icons */
   src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-v4compatibility.woff2?4bc58bc16bb05a05d3a47a4f7e143b75) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-v4compatibility.ttf?d20cedd7e254d4b58b721b6995ca52b4) format("truetype");
   unicode-range: U+F041,U+F047,U+F065-F066,U+F07D-F07E,U+F080,U+F08B,U+F08E,U+F090,U+F09A,U+F0AC,U+F0AE,U+F0B2,U+F0D0,U+F0D6,U+F0E4,U+F0EC,U+F10A-F10B,U+F123,U+F13E,U+F148-F149,U+F14C,U+F156,U+F15E,U+F160-F161,U+F163,U+F175-F178,U+F195,U+F1F8,U+F219,U+F27A; }
 @charset "UTF-8";
-
-/*!
- * Bootstrap v4.6.2 (https://getbootstrap.com/)
- * Copyright 2011-2022 The Bootstrap Authors
- * Copyright 2011-2022 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
-
 :root {
   --blue: #3490dc;
   --indigo: #6574cd;

@@ -27,14 +27,17 @@
                 <div :class="(message.status === 'sent') ? 'my-message' : 'friend-message'">
                     <p class="txt-message-normal">{{ message.message }} <br> <span
                         :class="(message.status === 'sent') ? 'my-time' : 'friend-time'">{{ message.date }}</span></p>
-                    <i class="fa fa-solid fa-circle-xmark fa-bounce " @click="removeMessageFunction(index)"></i>
+                    <i class="fa fa-solid fa-circle-xmark " @click="removeMessageFunction(index)"></i>
                 </div>
             </div>
 
+        </div>
 
-            <div v-if="typing" class="typing text-white">
-                <h6>{{ contactsGift[activeChatGift].name }} sta scrivendo...</h6>
-            </div>
+        <div v-if="typing" class="typing d-flex align-content-center">
+            <h6>
+                {{ contactsGift[activeChatGift].name }} is typing
+            </h6>
+            <i class="pl-1 fa-2xs fa-regular fa-comment-dots fa-bounce"></i>
         </div>
 
 
@@ -460,13 +463,20 @@ export default {
             }
         }
 
-        .typing {
-            position: absolute;
-            bottom: 0px;
-            left: 10px;
-        }
+
     }
 
+    .typing {
+        position: absolute;
+        bottom: 70px;
+        left: 50px;
+
+        color: rgb(15, 234, 110);
+
+        font-weight: bold;
+        font-size: 1.4rem;
+
+    }
 
     .footer-right {
         height: 60px;
