@@ -1,18 +1,13 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);
-@import url(https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;
+@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;
 
-600;700&display=swap
-)
-;
-/*!
+600;700&display=swap);/*!
  * Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  * Copyright 2023 Fonticons, Inc.
  */
 .fa {
-    font-family: var(--fa-style-family, "Font Awesome 6 Free");
-    font-weight: var(--fa-style, 900);
-}
+  font-family: var(--fa-style-family, "Font Awesome 6 Free");
+  font-weight: var(--fa-style, 900); }
 
 .fa,
 .fa-classic,

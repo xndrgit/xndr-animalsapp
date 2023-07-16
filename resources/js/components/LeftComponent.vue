@@ -87,7 +87,7 @@ export default {
     position: relative;
 
     flex: 30%;
-    background: #fff;
+    background: #F2F3F5;
 
     .header-left {
         height: 60px;
@@ -203,7 +203,7 @@ export default {
 
     .chat-list {
         height: calc(100% - 110px);
-        background: #f6f6f6;
+        background: #F2F3F5;
         overflow-y: auto;
 
         .active {

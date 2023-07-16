@@ -19,8 +19,7 @@
         </div>
 
 
-        <div class="chat-box">
-
+        <div ref="chatBox" :class="viewProfile ? 'bgOpacity': '' " class="chat-box">
             <div v-for="(message, index) in contactsGift[activeChatGift].messages" :key="index"
                  :class="(message.status === 'sent') ? 'justify-content-end' : 'justify-content-start'" class="message"
             >
@@ -30,14 +29,15 @@
                     <i class="fa fa-solid fa-circle-xmark " @click="removeMessageFunction(index)"></i>
                 </div>
             </div>
-
         </div>
 
-        <div v-if="typing" class="typing d-flex align-content-center">
-            <h6>
-                {{ contactsGift[activeChatGift].name }} is typing
-            </h6>
-            <i class="pl-1 fa-2xs fa-regular fa-comment-dots fa-bounce"></i>
+        <div v-if="typing" class="typing d-flex align-items-center">
+            <div class="justify-content-start">
+                <div class="friend-message">
+                    <p class="txt-message-normal">{{ contactsGift[activeChatGift].name }} is typing <i
+                        class="pl-1 fa-2 fa-regular fa-comment-dots fa-bounce"></i></p>
+                </div>
+            </div>
         </div>
 
 
@@ -47,7 +47,7 @@
                 <!--                <i class="fa fa-solid fa-paperclip"></i>-->
             </div>
             <div class="second">
-                <input id="search" v-model="newMsgInput"
+                <input id="search" v-model="newMsgInput" v-focus
                        name="search" placeholder="Type a message" type="text" @keyup.enter="addNewMessage(newMsgInput)">
             </div>
             <div class="third">
@@ -62,8 +62,18 @@
 import moment from "moment";
 
 export default {
+    directives: {
+        focus: {
+            // When the bound element is inserted into the DOM...
+            inserted: function (el) {
+                // Focus the element
+                el.focus();
+            }
+        }
+    },
     mounted() {
-        console.log('Component right mounted.')
+        console.log('Component right mounted.');
+        this.scrollDown();
     },
     props: {
         contactsGift: Array,
@@ -88,6 +98,10 @@ export default {
     },
 
     methods: {
+        scrollDown() {
+            this.$refs.chatBox.scrollTop = this.$refs.chatBox.scrollHeight;
+        },
+
         addNewMessage(messageContent) {
             if (messageContent.length > 0) {
                 this.newMsg = {
@@ -99,6 +113,7 @@ export default {
                 this.newMsgInput = null;
 
                 this.replyBotFunction(this.activeChatGift);
+                this.scrollDown();
             }
         },
         replyBotFunction(active) {
@@ -148,6 +163,7 @@ export default {
                 }
                 clearInterval(intervalId);
                 this.typing = false;
+                this.scrollDown();
             }, 5000);
 
 
@@ -172,6 +188,10 @@ export default {
 
 
 <style lang="scss" scoped>
+.bgOpacity {
+    background: #F2F3F5;
+}
+
 .container-right:before {
     position: absolute;
 
@@ -265,7 +285,7 @@ export default {
         background-repeat: no-repeat !important;
         background-position: center !important;
 
-        border: 2px solid white;
+        border: 0;
         z-index: 10;
 
     }
@@ -302,6 +322,7 @@ export default {
         padding: 50px;
 
         overflow-y: auto;
+        transition: 0.8s;
 
         .message {
             position: relative;
@@ -343,8 +364,6 @@ export default {
 
 
         }
-
-
         .my-message {
             position: relative;
             max-width: 65%;
@@ -403,7 +422,6 @@ export default {
             }
 
         }
-
         .friend-message {
             position: relative;
 
@@ -462,26 +480,23 @@ export default {
 
             }
         }
-
-
     }
 
     .typing {
         position: absolute;
-        bottom: 70px;
+        width: 100%;
+        bottom: 60px;
         left: 50px;
 
         color: rgb(15, 234, 110);
 
         font-weight: bold;
-        font-size: 1.4rem;
-
+        font-size: 0.6rem;
     }
 
     .footer-right {
         height: 60px;
         width: 100%;
-        background: white;
 
         padding: 15px;
 
