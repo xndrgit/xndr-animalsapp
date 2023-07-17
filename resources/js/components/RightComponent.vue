@@ -20,7 +20,7 @@
 
 
         <div ref="chatBox" :class="viewProfile ? 'bgOpacity': '' " class="chat-box">
-            <div v-for="(message, index) in contactsGift[activeChatGift].messages" :key="index"
+            <div v-for="(message, index) in contactsGift[activeChatGift].messages" :key="index" ref="message"
                  :class="(message.status === 'sent') ? 'justify-content-end' : 'justify-content-start'" class="message"
             >
                 <div :class="(message.status === 'sent') ? 'my-message' : 'friend-message'">
@@ -80,6 +80,14 @@ export default {
         activeChatGift: Number,
         userGift: Object,
     },
+    watch: {
+        activeChatGift(newVal, oldVal) {
+            //  This ensures that the scrollHeight of the chatBox element has been updated before the scrollDown() function is called.
+            this.$nextTick(() => {
+                this.scrollDown();
+            });
+        }
+    },
     data: function () {
         return {
             newMsg: null,
@@ -99,7 +107,14 @@ export default {
 
     methods: {
         scrollDown() {
-            this.$refs.chatBox.scrollTop = this.$refs.chatBox.scrollHeight;
+            const chatBox = this.$refs.chatBox;
+            const scrollTop = chatBox.scrollHeight;
+
+            chatBox.scrollTo({
+                top: scrollTop,
+                left: 0,
+                behavior: 'smooth'
+            });
         },
 
         addNewMessage(messageContent) {
@@ -112,8 +127,15 @@ export default {
                 this.$emit('newMsg', this.newMsg);
                 this.newMsgInput = null;
 
-                this.replyBotFunction(this.activeChatGift);
-                this.scrollDown();
+                const currentChat = this.activeChatGift;
+                console.log(currentChat);
+                this.replyBotFunction(currentChat);
+
+                //  This ensures that the scrollHeight of the chatBox element has been updated before the scrollDown() function is called.
+                this.$nextTick(() => {
+                    this.scrollDown();
+                });
+
             }
         },
         replyBotFunction(active) {
@@ -163,8 +185,12 @@ export default {
                 }
                 clearInterval(intervalId);
                 this.typing = false;
-                this.scrollDown();
-            }, 5000);
+
+                //  This ensures that the scrollHeight of the chatBox element has been updated before the scrollDown() function is called.
+                this.$nextTick(() => {
+                    this.scrollDown();
+                });
+            }, 3000);
 
 
         },
@@ -203,10 +229,8 @@ export default {
 
     content: "";
 
-    //background: #f6f6f6;
+
     background: url("/assets/logo.png");
-
-
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -296,7 +320,7 @@ export default {
         align-items: center;
 
         position: absolute;
-        top: 0px;
+        top: 0;
         right: -30px;
         transform: translate(-50%, -50%);
 
@@ -319,7 +343,7 @@ export default {
 
         width: 100%;
         height: calc(100% - 120px);
-        padding: 50px;
+        padding: 0 50px;
 
         overflow-y: auto;
         transition: 0.8s;
@@ -329,6 +353,7 @@ export default {
             margin: 5px 0;
 
             width: 100%;
+            min-height: 50px;
             display: flex;
 
             transition: 0.2s;
@@ -485,7 +510,7 @@ export default {
     .typing {
         position: absolute;
         width: 100%;
-        bottom: 60px;
+        bottom: 50px;
         left: 50px;
 
         color: rgb(15, 234, 110);
