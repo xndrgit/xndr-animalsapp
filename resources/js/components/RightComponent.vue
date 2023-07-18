@@ -6,8 +6,15 @@
             </div>
             <h4 class="activeName">{{ contactsGift[activeChatGift].name }}</h4>
             <div class="nav-icons">
-                <i class="ml-2 fa-solid fa-search"></i>
-                <i class="ml-2 fa-solid fa-gear"></i>
+                <i class="ml-2 fa fa-solid fa-gear" @click="handleSettings"></i>
+                <div :class="settings ? 'active' : ''" class="settings">
+                    <ul>
+                        <li @click="clearChat(activeChatGift)">Clear Chat | 🧹</li>
+                        <li><a href="https://github.com/XanderWorld/laravel7-spiderapp-XanderWilde">Repository | 🔏</a>
+                        </li>
+                        <li><a href="https://github.com/XanderWorld">Git | ℹ️</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -102,6 +109,8 @@ export default {
             viewProfile: false,
 
             typing: false,
+
+            settings: false,
         }
     },
 
@@ -194,19 +203,29 @@ export default {
 
 
         },
+
+
         viewProfileFunction() {
-            if (!this.viewProfile) {
-                this.viewProfile = true;
-            } else {
-                this.viewProfile = false;
-            }
+            this.viewProfile = !this.viewProfile;
         },
         removeProfileFunction() {
             return this.viewProfile = false;
         },
+
         removeMessageFunction(index) {
             this.$emit('index', index);
         },
+        clearChat(activeChat) {
+            // Show a confirmation dialog to the user
+            if (confirm("Are you sure you want to clear this chat?")) {
+                // Emit the 'activeChatDelete' event with the active chat as the payload
+                this.$emit('activeChatDelete', activeChat);
+            }
+        },
+
+        handleSettings() {
+            this.settings = !this.settings;
+        }
 
     },
 }
@@ -293,6 +312,59 @@ export default {
 
         .nav-icons {
             font-size: 1rem;
+            position: relative;
+
+            .settings {
+                position: absolute;
+                width: 200px;
+
+                background: #f6f6f6;
+
+                right: -10px;
+
+                z-index: 9;
+                opacity: 0;
+
+                transition: 0.8s;
+
+                ul {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: flex-end;
+
+                    list-style: none;
+
+                    padding: 0 1rem;
+
+                    li {
+                        cursor: pointer;
+                        width: fit-content;
+
+                        &:hover {
+                            color: #4aa0e6;
+                        }
+                    }
+
+                    a {
+                        text-decoration: none;
+                        text-underline: none;
+                        color: black;
+
+                        &:hover {
+                            color: #4aa0e6;
+                        }
+                    }
+                }
+            }
+
+            .active {
+                opacity: 1;
+            }
+
+            .fa {
+                cursor: pointer;
+            }
         }
     }
 

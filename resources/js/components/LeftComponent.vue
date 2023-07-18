@@ -2,7 +2,7 @@
     <div class="container-left">
         <div class="header-left">
             <div class="user-image">
-                <img :src="userGift.avatar" alt="cover" class="cover">
+                <img :src="userGift.avatar" alt="cover" class="cover"/>
             </div>
             <h3 class="name">{{ userGift.name }}</h3>
             <div class="nav-icons">
@@ -13,35 +13,53 @@
         </div>
         <div class="search-chat">
             <div class="div-search">
-                <input v-model="searchInput" class="input-search" placeholder="Search or start new chat"
-                       type="text" @keyup="searchContact(searchInput)">
+                <input
+                    v-model="searchInput"
+                    class="input-search"
+                    placeholder="Search or start new chat"
+                    type="text"
+                    @keyup="searchContact(searchInput)"
+                />
                 <i class="fa-brands fa-searchengin fa-bounce"></i>
             </div>
         </div>
         <div class="chat-list">
-
-            <div v-for="(contact, index) in contactsGift"
-                 :class="(index === activeIndex) ? 'active' : ''" class="box"
-                 @click="activeIndex = index"
-                 v-if="contact.visible"
+            <div
+                v-for="(contact, index) in contactsGift"
+                v-if="contact.visible"
+                :class="index === activeIndex ? 'active' : ''"
+                class="box"
+                @click="activeIndex = index"
             >
                 <div class="box-image">
-                    <img :src="contact.avatar"
-                         class="img-fluid cover">
+                    <img :src="contact.avatar" class="img-fluid cover"/>
                 </div>
                 <div class="details">
                     <div class="details-top">
                         <h4 class="name">{{ contact.name }}</h4>
-                        <p v-if="contact.messages && contact.messages.length" class="time">
-                            {{ contact.messages[contact.messages.length - 1].date }}</p>
+                        <p
+                            v-if="contact.messages && contact.messages.length"
+                            class="time"
+                        >
+                            {{
+                                contact.messages[contact.messages.length - 1]
+                                    .date
+                            }}
+                        </p>
                     </div>
                     <div class="details-down">
-                        <p v-if="contact.messages && contact.messages.length" class="last">
-                            {{ contact.messages[contact.messages.length - 1].message }}</p>
+                        <p
+                            v-if="contact.messages && contact.messages.length"
+                            class="last"
+                        >
+                            {{
+                                contact.messages[contact.messages.length - 1]
+                                    .message
+                            }}
+                        </p>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </template>
@@ -49,13 +67,13 @@
 <script>
 export default {
     mounted() {
-        console.log('Component left mounted.')
+        console.log("Component left mounted.");
     },
     data: function () {
         return {
             activeIndex: null,
             searchInput: null,
-        }
+        };
     },
     props: {
         contactsGift: Array,
@@ -64,22 +82,22 @@ export default {
     watch: {
         activeIndex: function (newVal, oldVal) {
             console.log(newVal);
-            this.$emit('activeChat', this.activeIndex);
-        }
+            this.$emit("activeChat", this.activeIndex);
+        },
     },
     methods: {
         searchContact(arg) {
             // console.log(arg);
             arg = this.getTrimmed(arg);
-            this.contactsGift.forEach(element => {
+            this.contactsGift.forEach((element) => {
                 element.visible = this.getTrimmed(element.name).includes(arg);
-            })
+            });
         },
         getTrimmed(stringToTrim) {
             return stringToTrim.trim().toLowerCase();
-        }
-    }
-}
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -87,7 +105,7 @@ export default {
     position: relative;
 
     flex: 30%;
-    background: #F2F3F5;
+    background: #f2f3f5;
 
     .header-left {
         height: 60px;
@@ -139,7 +157,12 @@ export default {
 
         .nav-icons {
             .fa {
-                cursor: pointer;
+                cursor: not-allowed;
+                transition: 0.2s;
+
+                &:hover {
+                    opacity: 0.8;
+                }
             }
         }
     }
@@ -196,14 +219,13 @@ export default {
                 &:hover {
                     background: #f6f6f6;
                 }
-
             }
         }
     }
 
     .chat-list {
         height: calc(100% - 110px);
-        background: #F2F3F5;
+        background: #f2f3f5;
         overflow-y: auto;
 
         .active {
@@ -224,7 +246,6 @@ export default {
             height: 80px;
 
             transition: 1s ease-in-out;
-
 
             .box-image {
                 display: flex;
@@ -248,7 +269,6 @@ export default {
                 flex-direction: column;
                 justify-content: center;
 
-
                 .details-top {
                     display: flex;
                     align-items: center;
@@ -270,7 +290,6 @@ export default {
 
                         margin: 0;
                     }
-
                 }
 
                 .details-down {
