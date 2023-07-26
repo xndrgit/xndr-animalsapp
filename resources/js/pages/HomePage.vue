@@ -3,9 +3,18 @@
         <LeftComponent :contactsGift="contacts" :userGift="user" @activeChat="activeChatFunction"/>
         <RightComponent :activeChatGift="activeChat" :contactsGift="contacts" :userGift="user"
                         @activeChatDelete="clearChat" @index="removeFunction"
+
                         @cowMsg="cowMsgFunction"
-                        @dogMsg="dogMsgFunction" @newMsg="pushFunction" @puchoMsg="puchoMsgFunction"
-                        @sheepMsg="sheepMsgFunction"/>
+
+                        @dogAct="dogActFunction"
+                        @dogMsg="dogMsgFunction"
+
+                        @newMsg="pushFunction"
+                        @puchoMsg="puchoMsgFunction"
+
+                        @sheepMsg="sheepMsgFunction"
+        />
+
     </div>
 </template>
 
@@ -130,6 +139,8 @@ export default {
                 }
             ],
             viewProfile: false,
+
+            dogAct: null,
         }
     },
     name: 'HomePage.vue',
@@ -150,8 +161,11 @@ export default {
         clearChat(activeChat) {
             this.contacts[activeChat].messages = [];
         },
+        dogActFunction(arg) {
+            this.dogAct = arg;
+        },
         dogMsgFunction(dogMsg) {
-            this.contacts[this.activeChat].messages.push(dogMsg);
+            this.contacts[this.dogAct].messages.push(dogMsg);
         },
         puchoMsgFunction(puchoMsg) {
             this.contacts[this.activeChat].messages.push(puchoMsg);

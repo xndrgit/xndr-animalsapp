@@ -207,7 +207,6 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit('newMsg', this.newMsg);
         this.newMsgInput = null;
         var currentChat = this.activeChatGift;
-        console.log(currentChat);
         this.replyBotFunction(currentChat);
 
         //  This ensures that the scrollHeight of the chatBox element has been updated before the scrollDown() function is called.
@@ -229,6 +228,7 @@ __webpack_require__.r(__webpack_exports__);
           };
           _this3.$emit('dogMsg', _this3.newBotMsg);
           _this3.newBotMsg = null;
+          _this3.$emit('dogAct', active);
         } else if (active === 1) {
           var _randomIndex = Math.floor(Math.random() * _this3.puchoMsg.length);
           _this3.newBotMsg = {
@@ -238,6 +238,7 @@ __webpack_require__.r(__webpack_exports__);
           };
           _this3.$emit('puchoMsg', _this3.newBotMsg);
           _this3.newBotMsg = null;
+          _this3.$emit('PuchoAct', active);
         } else if (active === 2) {
           var _randomIndex2 = Math.floor(Math.random() * _this3.cowMsg.length);
           _this3.newBotMsg = {
@@ -247,6 +248,7 @@ __webpack_require__.r(__webpack_exports__);
           };
           _this3.$emit('cowMsg', _this3.newBotMsg);
           _this3.newBotMsg = null;
+          _this3.$emit('CowAct', active);
         } else if (active === 3) {
           var _randomIndex3 = Math.floor(Math.random() * _this3.sheepMsg.length);
           _this3.newBotMsg = {
@@ -256,6 +258,7 @@ __webpack_require__.r(__webpack_exports__);
           };
           _this3.$emit('sheepMsg', _this3.newBotMsg);
           _this3.newBotMsg = null;
+          _this3.$emit('SheepAct', active);
         }
         clearInterval(intervalId);
         _this3.typing = false;
@@ -276,11 +279,19 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('index', index);
     },
     clearChat: function clearChat(activeChat) {
-      // Show a confirmation dialog to the user
-      if (confirm("Are you sure you want to clear this chat?")) {
-        // Emit the 'activeChatDelete' event with the active chat as the payload
-        this.$emit('activeChatDelete', activeChat);
+      var messagesLength = this.contactsGift[activeChat].messages.length;
+      console.log(messagesLength);
+      if (messagesLength) {
+        // Show a confirmation dialog to the user
+        if (confirm("Are you sure you want to clear this chat?")) {
+          // Emit the 'activeChatDelete' event with the active chat as the payload
+          this.$emit('activeChatDelete', activeChat);
+        }
+      } else {
+        // Display a message to the user indicating that the chat is already cleared
+        alert("This chat is already cleared.");
       }
+      this.settings = false;
     },
     handleSettings: function handleSettings() {
       this.settings = !this.settings;
@@ -430,7 +441,8 @@ __webpack_require__.r(__webpack_exports__);
         visible: true,
         messages: []
       }],
-      viewProfile: false
+      viewProfile: false,
+      dogAct: null
     };
   },
   name: 'HomePage.vue',
@@ -451,8 +463,11 @@ __webpack_require__.r(__webpack_exports__);
     clearChat: function clearChat(activeChat) {
       this.contacts[activeChat].messages = [];
     },
+    dogActFunction: function dogActFunction(arg) {
+      this.dogAct = arg;
+    },
     dogMsgFunction: function dogMsgFunction(dogMsg) {
-      this.contacts[this.activeChat].messages.push(dogMsg);
+      this.contacts[this.dogAct].messages.push(dogMsg);
     },
     puchoMsgFunction: function puchoMsgFunction(puchoMsg) {
       this.contacts[this.activeChat].messages.push(puchoMsg);
@@ -853,6 +868,7 @@ var render = function render() {
       activeChatDelete: _vm.clearChat,
       index: _vm.removeFunction,
       cowMsg: _vm.cowMsgFunction,
+      dogAct: _vm.dogActFunction,
       dogMsg: _vm.dogMsgFunction,
       newMsg: _vm.pushFunction,
       puchoMsg: _vm.puchoMsgFunction,

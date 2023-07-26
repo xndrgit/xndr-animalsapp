@@ -137,7 +137,7 @@ export default {
                 this.newMsgInput = null;
 
                 const currentChat = this.activeChatGift;
-                console.log(currentChat);
+
                 this.replyBotFunction(currentChat);
 
                 //  This ensures that the scrollHeight of the chatBox element has been updated before the scrollDown() function is called.
@@ -163,6 +163,7 @@ export default {
                     }
                     this.$emit('dogMsg', this.newBotMsg);
                     this.newBotMsg = null;
+                    this.$emit('dogAct', active);
 
                 } else if (active === 1) {
                     const randomIndex = Math.floor(Math.random() * this.puchoMsg.length);
@@ -173,6 +174,7 @@ export default {
                     }
                     this.$emit('puchoMsg', this.newBotMsg);
                     this.newBotMsg = null;
+                    this.$emit('PuchoAct', active);
                 } else if (active === 2) {
                     const randomIndex = Math.floor(Math.random() * this.cowMsg.length);
                     this.newBotMsg = {
@@ -182,6 +184,7 @@ export default {
                     }
                     this.$emit('cowMsg', this.newBotMsg);
                     this.newBotMsg = null;
+                    this.$emit('CowAct', active);
                 } else if (active === 3) {
                     const randomIndex = Math.floor(Math.random() * this.sheepMsg.length);
                     this.newBotMsg = {
@@ -191,6 +194,7 @@ export default {
                     }
                     this.$emit('sheepMsg', this.newBotMsg);
                     this.newBotMsg = null;
+                    this.$emit('SheepAct', active);
                 }
                 clearInterval(intervalId);
                 this.typing = false;
@@ -216,11 +220,21 @@ export default {
             this.$emit('index', index);
         },
         clearChat(activeChat) {
-            // Show a confirmation dialog to the user
-            if (confirm("Are you sure you want to clear this chat?")) {
-                // Emit the 'activeChatDelete' event with the active chat as the payload
-                this.$emit('activeChatDelete', activeChat);
+            const messagesLength = this.contactsGift[activeChat].messages.length;
+            console.log(messagesLength);
+
+            if (messagesLength) {
+                // Show a confirmation dialog to the user
+                if (confirm("Are you sure you want to clear this chat?")) {
+                    // Emit the 'activeChatDelete' event with the active chat as the payload
+                    this.$emit('activeChatDelete', activeChat);
+                }
+            } else {
+                // Display a message to the user indicating that the chat is already cleared
+                alert("This chat is already cleared.");
             }
+
+            this.settings = false;
         },
 
         handleSettings() {
