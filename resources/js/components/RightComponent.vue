@@ -60,126 +60,7 @@
                            @keyup="searchEmojis(emojiInput)">
                 </div>
                 <div class="emojis">
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
-                    <div class="emoji">🪦</div>
+                    <div v-for="emoji in emojisArray" :key="emoji.id" class="emoji">{{ emoji.character }}</div>
                 </div>
             </div>
             <div class="second">
@@ -196,6 +77,7 @@
 
 <script>
 import moment from "moment";
+import axios from "axios";
 
 export default {
     directives: {
@@ -209,7 +91,9 @@ export default {
     },
     mounted() {
         console.log('Component right mounted.');
+        this.getEmojis();
         this.scrollDown();
+
     },
     props: {
         contactsGift: Array,
@@ -237,6 +121,8 @@ export default {
 
             newMsgInput: null,
             emojiInput: null,
+
+            emojisArray: [],
 
             viewProfile: false,
 
@@ -375,9 +261,23 @@ export default {
         },
         handleEmojis() {
             this.emojis = !this.emojis;
+        },
+
+        getEmojis() {
+            axios.get('https://emoji-api.com/emojis?access_key=649eeeae3617aa1d9446383e6f050f9133cdb6a0')
+                .then(response => {
+                    if (response.data) {
+                        this.emojisArray = response.data;
+                    } else {
+                        console.error('Response data is empty');
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         }
 
-    },
+    }
 }
 </script>
 
