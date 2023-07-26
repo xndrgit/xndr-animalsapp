@@ -53,15 +53,17 @@
                 <i class="fa mr-3 fa-regular fa-face-smile fa-bounce" @click="handleEmojis"></i>
                 <!--                <i class="fa fa-solid fa-paperclip"></i>-->
 
-
-                <div class="emojis-header">
+                <div v-if="emojis" :class="emojis ? 'active': '' " class="emojis-header">
                     <input id="searchEmojis" v-model="emojiInput" v-focus
                            name="searchEmojis" placeholder="Search an emoji" type="text"
                            @keyup="searchEmojis(emojiInput)">
                 </div>
-                <div class="emojis">
-                    <div v-for="emoji in emojisArray" :key="emoji.id" class="emoji">{{ emoji.character }}</div>
+                <div v-if="emojis" :class="emojis ? 'active': '' " class="emojis">
+                    <div v-for="emoji in emojisArray" :key="emoji.id" class="emoji" @click="addEmojiInput(emoji)">
+                        {{ emoji.character }}
+                    </div>
                 </div>
+
             </div>
             <div class="second">
                 <input id="search" v-model="newMsgInput" v-focus
@@ -105,6 +107,7 @@ export default {
             //  This ensures that the scrollHeight of the chatBox element has been updated before the scrollDown() function is called.
             this.$nextTick(() => {
                 this.scrollDown();
+                this.emojis = false;
             });
         }
     },
@@ -119,7 +122,7 @@ export default {
             cowMsg: ["Moo happily like a diva in a concert 🎤", "Graze in a meadow like a foodie in a fancy restaurant 🍽️", "Lick its calf affectionately like a doting parent 👩‍👧", "Chew its cud like a philosopher contemplating the meaning of life 🤔", "Sniff around curiously like a detective on a case 🔍", "Rub against a scratching post like a cat in a scratching frenzy 😼", "Nuzzle its nose into your hand like it's in love 💕", "Toss its head playfully like a model on a runway 💃", "Lay down in the sun like a beach bum 🏖️", "Swish its tail to shoo away flies like a boss 👊", "Chase after its herd mates like a kid in a playground 🤪", "Drink from a cool stream like a thirsty traveler 🥤", "Roll around on a grassy hill like a child in a park 🌳", "Snort in satisfaction like a contented snorer 😴", "Groom its coat with its tongue like a cleanliness freak 🧼", "Enjoy a back scratch like a luxury spa customer 💆‍♀️", "Explore its surroundings like an adventurer on a mission 🗺️", "Nudge you for attention like a master manipulator 👀", "Play with a ball or toy like a kid in a toy store 🧸", "Walk calmly on a lead like a well-trained pet 🐶", "Stretch its legs after a nap like a yoga enthusiast 🧘‍♀️", "Lounge in a comfortable spot like a couch potato 🛋️", "Chew on a hay bale like a gourmet chef enjoying a fancy meal 🍴", "Watch over its young like a guardian angel 👼", "Sniff out treats hidden in the grass like a treasure hunter 🕵️‍♂️", "Take a nap in the shade like a sunbather seeking refuge 🌞", "Show off its impressive horns like a proud trophy winner 🏆", "Enjoy a good belly rub like a happy puppy 🐾", "Swim in a pond like a mermaid in the ocean 🧜‍♀️", "Greet you with a friendly moo like a welcoming host 👋", "Playfully head-butt its herd mates like a wrestler getting ready for a match 🤼", "Wander through a field like a lost tourist 🚶", "Take a leisurely stroll like a retiree enjoying life 🚶‍♀️", "Show off its beautiful markings like a model on a catwalk 🐄", "Be your loyal and gentle companion for life like a forever friend ❤️"],
             sheepMsg: ["Baa happily like a popstar in a concert 🎵", "Graze on lush grass like a foodie at a fancy restaurant 🍴", "Snuggle with its lamb like a doting parent 👩‍👧", "Wag its tail like a happy puppy 🐶", "Chew on a tuft of wool like a fashion critic 🧥", "Show off its thick fleece like a model on a runway 💃", "Nuzzle its nose into your hand like it's in love 💕", "Rub its head against a fence post like a cat in a scratching frenzy 😼", "Skip and jump playfully like a kid in a playground 🤸‍♀️", "Rest in a sunny spot like a beach bum 🏖️", "Shake off water after a rain like a dog after a bath 🐕", "Herd with its flock mates like a boss 👊", "Drink from a babbling brook like a thirsty traveler 🥤", "Roll around in a patch of clover like a child in a park 🌼", "Groom its wool with its tongue like a cleanliness freak 🧼", "Climb up a hill like a mountaineer 🧗‍♀️", "Explore its surroundings like an adventurer on a mission 🗺️", "Nudge you for attention like a master manipulator 👀", "Play with a toy or ball like a kid in a toy store 🧸", "Walk calmly on a lead like a well-trained pet 🐾", "Stretch its legs after a nap like a yoga enthusiast 🧘‍♀️", "Lounge in a comfortable spot like a couch potato 🛋️", "Bounce around like a lamb like a wild child 🤪", "Watch over its young like a guardian angel 👼", "Sniff out treats hidden in the grass like a treasure hunter 🕵️‍♂️", "Take a nap in the shade like a sunbather seeking refuge 🌞", "Show off its impressive horns like a proud trophy winner 🏆", "Enjoy a good belly rub like a happy puppy 🐾", "Greet you with a friendly baa like a welcoming host 👋", "Playfully head-butt its flock mates like a wrestler getting ready for a match 🤼", "Wander through a meadow like a lost tourist 🚶", "Take a leisurely stroll like a retiree enjoying life 🚶‍♀️", "Show off its beautiful markings like a model on a catwalk 🐑", "Be your gentle and faithful companion for life like a forever friend ❤️"],
 
-            newMsgInput: null,
+            newMsgInput: '',
             emojiInput: null,
 
             emojisArray: [],
@@ -129,7 +132,7 @@ export default {
             typing: false,
 
             settings: false,
-            emojis: true,
+            emojis: false,
         }
     },
 
@@ -153,7 +156,8 @@ export default {
                     status: 'sent',
                 }
                 this.$emit('newMsg', this.newMsg);
-                this.newMsgInput = null;
+                this.newMsgInput = '';
+                this.emojis = false;
 
                 const currentChat = this.activeChatGift;
 
@@ -275,6 +279,9 @@ export default {
                 .catch(error => {
                     console.error(error);
                 });
+        },
+        addEmojiInput(emoji) {
+            this.newMsgInput += emoji.character;
         }
 
     }
@@ -691,6 +698,8 @@ export default {
                 height: 50px;
                 width: 100%;
 
+                opacity: 0;
+
                 #searchEmojis {
                     width: 80%;
                     border: none;
@@ -704,6 +713,10 @@ export default {
                 }
             }
 
+            .active {
+                opacity: 1;
+            }
+
             .emojis {
                 z-index: 0;
                 top: - 350px;
@@ -713,7 +726,7 @@ export default {
                 width: 100%;
                 height: 350px;
 
-                padding: 1rem;
+                padding: 0 1rem;
 
                 display: flex;
                 flex-wrap: wrap;
@@ -721,6 +734,8 @@ export default {
                 overflow-y: auto;
 
                 background: #F2F3F5;
+
+                opacity: 0;
 
                 .emoji {
 
@@ -745,6 +760,10 @@ export default {
                         background: white;
                     }
                 }
+            }
+
+            .active {
+                opacity: 1;
             }
         }
 
