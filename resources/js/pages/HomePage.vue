@@ -161,17 +161,30 @@ export default {
         clearChat(activeChat) {
             this.contacts[activeChat].messages = [];
         },
+
         dogActFunction(arg) {
             this.dogAct = arg;
         },
         dogMsgFunction(dogMsg) {
             this.contacts[this.dogAct].messages.push(dogMsg);
         },
+
+        puchoActFunction(arg) {
+            this.puchoAct = arg;
+        },
         puchoMsgFunction(puchoMsg) {
             this.contacts[this.activeChat].messages.push(puchoMsg);
         },
+
+        cowActFunction(arg) {
+            this.cowAct = arg;
+        },
         cowMsgFunction(cowMsg) {
             this.contacts[this.activeChat].messages.push(cowMsg);
+        },
+
+        sheepActFunction(arg) {
+            this.sheepAct = arg;
         },
         sheepMsgFunction(sheepMsg) {
             this.contacts[this.activeChat].messages.push(sheepMsg);
