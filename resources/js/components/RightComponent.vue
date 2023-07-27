@@ -66,7 +66,7 @@
 
             </div>
             <div class="second">
-                <input id="search" v-model="newMsgInput" v-focus
+                <input id="search" ref="search" v-model="newMsgInput" v-focus
                        name="search" placeholder="Type a message" type="text" @keyup.enter="addNewMessage(newMsgInput)">
             </div>
             <div class="third">
@@ -280,8 +280,14 @@ export default {
                     console.error(error);
                 });
         },
+
+
         addEmojiInput(emoji) {
             this.newMsgInput += emoji.character;
+            // here's an example of how you can modify your addEmojiInput function to focus the input after adding the emoji
+            this.$nextTick(() => {
+                this.$refs.search.focus();
+            });
         }
 
     }
