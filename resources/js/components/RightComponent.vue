@@ -107,6 +107,7 @@ export default {
             //  This ensures that the scrollHeight of the chatBox element has been updated before the scrollDown() function is called.
             this.$nextTick(() => {
                 this.scrollDown();
+                this.typing = false;
                 this.emojis = false;
             });
         }
