@@ -12,7 +12,7 @@
                         <li @click="clearChat(activeChatGift)">Clear Chat | 🧹</li>
                         <li><a href="https://github.com/XanderWorld/laravel7-spiderapp-XanderWilde">Repository | 🔏</a>
                         </li>
-                        <li><a href="https://github.com/XanderWorld">Git | ℹ️</a></li>
+                        <li><a href="https://github.com/XndrWilde">Git | ℹ️</a></li>
                     </ul>
                 </div>
             </div>
@@ -50,7 +50,7 @@
 
         <div class="footer-right">
             <div class="first">
-                <i class="fa mr-3 fa-regular fa-face-smile fa-bounce" @click="handleEmojis"></i>
+                <i class="fa mr-3 fa-regular fa-face-smile" @click="handleEmojis"></i>
                 <!--                <i class="fa fa-solid fa-paperclip"></i>-->
 
                 <div v-if="emojis" :class="emojis ? 'active': '' " class="emojis-header">
@@ -70,7 +70,7 @@
                        name="search" placeholder="Type a message" type="text" @keyup.enter="addNewMessage(newMsgInput)">
             </div>
             <div class="third">
-                <i class="fa fa-regular fa-paper-plane fa-bounce" @click="addNewMessage(newMsgInput)"></i>
+                <i class="fa fa-regular fa-paper-plane" @click="addNewMessage(newMsgInput)"></i>
                 <!--                <i class="fa fa-solid fa-microphone-slash"></i>-->
             </div>
         </div>
@@ -178,6 +178,7 @@ export default {
             let intervalId = setInterval(() => {
 
                 if (active === 0) {
+                    console.log(`pre message index: ${active}`);
                     const randomIndex = Math.floor(Math.random() * this.dogMsg.length);
                     this.newBotMsg = {
                         date: moment().format('D/M/YY, HH:mm:ss'),
@@ -187,8 +188,10 @@ export default {
                     this.$emit('dogMsg', this.newBotMsg);
                     this.newBotMsg = null;
                     this.$emit('dogAct', active);
+                    console.log(`emited: ${active}`);
 
                 } else if (active === 1) {
+                    console.log(`pre message index: ${active}`);
                     const randomIndex = Math.floor(Math.random() * this.puchoMsg.length);
                     this.newBotMsg = {
                         date: moment().format('D/M/YY, HH:mm:ss'),
@@ -198,7 +201,9 @@ export default {
                     this.$emit('puchoMsg', this.newBotMsg);
                     this.newBotMsg = null;
                     this.$emit('PuchoAct', active);
+                    console.log(`emited: ${active}`);
                 } else if (active === 2) {
+                    console.log(`pre message index: ${active}`);
                     const randomIndex = Math.floor(Math.random() * this.cowMsg.length);
                     this.newBotMsg = {
                         date: moment().format('D/M/YY, HH:mm:ss'),
@@ -208,7 +213,9 @@ export default {
                     this.$emit('cowMsg', this.newBotMsg);
                     this.newBotMsg = null;
                     this.$emit('CowAct', active);
+                    console.log(`emited: ${active}`);
                 } else if (active === 3) {
+                    console.log(`pre message index: ${active}`);
                     const randomIndex = Math.floor(Math.random() * this.sheepMsg.length);
                     this.newBotMsg = {
                         date: moment().format('D/M/YY, HH:mm:ss'),
@@ -218,6 +225,7 @@ export default {
                     this.$emit('sheepMsg', this.newBotMsg);
                     this.newBotMsg = null;
                     this.$emit('SheepAct', active);
+                    console.log(`emited: ${active}`);
                 }
                 clearInterval(intervalId);
                 this.typing = false;
@@ -226,11 +234,10 @@ export default {
                 this.$nextTick(() => {
                     this.scrollDown();
                 });
-            }, 3000);
+            }, 6000);
 
 
         },
-
 
         viewProfileFunction() {
             this.viewProfile = !this.viewProfile;

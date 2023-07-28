@@ -2,16 +2,10 @@
     <div class="spiderapp">
         <LeftComponent :contactsGift="contacts" :userGift="user" @activeChat="activeChatFunction"/>
         <RightComponent :activeChatGift="activeChat" :contactsGift="contacts" :userGift="user"
-                        @activeChatDelete="clearChat" @index="removeFunction"
-
-                        @cowMsg="cowMsgFunction"
-
-                        @dogAct="dogActFunction"
-                        @dogMsg="dogMsgFunction"
-
+                        @activeChatDelete="clearChat" @dogMsg="dogMsgFunction" @index="removeFunction"
                         @newMsg="pushFunction"
-                        @puchoMsg="puchoMsgFunction"
-
+                        @puchoMsg="pMsgFunction"
+                        @cowMsg="cowMsgFunction"
                         @sheepMsg="sheepMsgFunction"
         />
 
@@ -140,7 +134,10 @@ export default {
             ],
             viewProfile: false,
 
-            dogAct: null,
+            dogAct: 0,
+            puchoAct: 1,
+            cowAct: 2,
+            sheepAct: 3,
         }
     },
     name: 'HomePage.vue',
@@ -162,32 +159,33 @@ export default {
             this.contacts[activeChat].messages = [];
         },
 
-        dogActFunction(arg) {
-            this.dogAct = arg;
-        },
+        // IS WORKING but just this
+        // dogActFunction(arg) {
+        //     this.dogAct = arg;
+        // },
         dogMsgFunction(dogMsg) {
             this.contacts[this.dogAct].messages.push(dogMsg);
         },
-
-        puchoActFunction(arg) {
-            this.puchoAct = arg;
+        // IS NOT CALLED
+        // pActFunction: function(arg) {
+        //     this.puchoAct = arg;
+        // },
+        pMsgFunction(puchoMsg) {
+            this.contacts[this.puchoAct].messages.push(puchoMsg);
         },
-        puchoMsgFunction(puchoMsg) {
-            this.contacts[this.activeChat].messages.push(puchoMsg);
-        },
-
-        cowActFunction(arg) {
-            this.cowAct = arg;
-        },
+        // IS NOT CALLED
+        // cowActFunction(arg) {
+        //     this.cowAct = arg;
+        // },
         cowMsgFunction(cowMsg) {
-            this.contacts[this.activeChat].messages.push(cowMsg);
+            this.contacts[this.cowAct].messages.push(cowMsg);
         },
-
-        sheepActFunction(arg) {
-            this.sheepAct = arg;
-        },
+        // IS NOT CALLED
+        // sheepActFunction(arg) {
+        //     this.sheepAct = arg;
+        // },
         sheepMsgFunction(sheepMsg) {
-            this.contacts[this.activeChat].messages.push(sheepMsg);
+            this.contacts[this.sheepAct].messages.push(sheepMsg);
         }
     }
 }
