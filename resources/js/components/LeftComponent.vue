@@ -18,9 +18,9 @@
                     class="input-search"
                     placeholder="Search or start new chat"
                     type="text"
-                    @keyup="searchContact(searchInput)"
+                    @keyup.enter="searchContact(searchInput)"
                 />
-                <i class="fa-brands fa-searchengin fa-bounce"></i>
+                <i class="fa-brands fa-searchengin fa-bounce" @click="searchContact(searchInput)"></i>
             </div>
         </div>
         <div class="chat-list">

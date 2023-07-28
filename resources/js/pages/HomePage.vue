@@ -83,54 +83,6 @@ export default {
                         }
                     ]
                 },
-                {
-                    name: "Horse",
-                    avatar: "/assets/horse.jpg",
-                    visible: true,
-                    messages: []
-                },
-                {
-                    name: "Elephant",
-                    avatar: "/assets/elephant.jpg",
-                    visible: true,
-                    messages: []
-                },
-                {
-                    name: "Giraffe",
-                    avatar: "/assets/giraffe.jpg",
-                    visible: true,
-                    messages: []
-                },
-                {
-                    name: "Lion",
-                    avatar: "/assets/lion.jpg",
-                    visible: true,
-                    messages: []
-                },
-                {
-                    name: "Tiger",
-                    avatar: "/assets/tiger.jpg",
-                    visible: true,
-                    messages: []
-                },
-                {
-                    name: "Penguin",
-                    avatar: "/assets/penguin.jpg",
-                    visible: true,
-                    messages: []
-                },
-                {
-                    name: "Kangaroo",
-                    avatar: "/assets/kangaroo.jpg",
-                    visible: true,
-                    messages: []
-                },
-                {
-                    name: "Monkey",
-                    avatar: "/assets/monkey.jpg",
-                    visible: true,
-                    messages: []
-                }
             ],
             viewProfile: false,
 

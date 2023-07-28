@@ -7,7 +7,7 @@
             <h4 class="activeName">{{ contactsGift[activeChatGift].name }}</h4>
             <div class="nav-icons">
                 <i class="ml-2 fa fa-solid fa-gear" @click="handleSettings"></i>
-                <div :class="settings ? 'active' : ''" class="settings">
+                <div v-if="settings" :class="settings ? 'active' : ''" class="settings">
                     <ul>
                         <li @click="clearChat(activeChatGift)">Clear Chat | 🧹</li>
                         <li><a href="https://github.com/XanderWorld/laravel7-spiderapp-XanderWilde">Repository | 🔏</a>
