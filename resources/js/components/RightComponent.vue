@@ -56,7 +56,7 @@
                 <div v-if="emojis" :class="emojis ? 'active': '' " class="emojis-header">
                     <input id="searchEmojis" v-model="emojiInput" v-focus
                            name="searchEmojis" placeholder="Search an emoji" type="text"
-                           @keyup="searchEmojis(emojiInput)">
+                           @keyup.enter="searchEmojis(emojiInput)">
                 </div>
                 <div v-if="emojis" :class="emojis ? 'active': '' " class="emojis">
                     <div v-for="emoji in emojisArray" :key="emoji.id" class="emoji" @click="addEmojiInput(emoji)">
@@ -125,6 +125,7 @@ export default {
 
             newMsgInput: '',
             emojiInput: null,
+            emojiToken: 'e4315be7208530ab89d89bb069d8baf721fffc9e',
 
             emojisArray: [],
 
@@ -276,12 +277,29 @@ export default {
         },
 
         getEmojis() {
-            axios.get('https://emoji-api.com/emojis?access_key=649eeeae3617aa1d9446383e6f050f9133cdb6a0')
+            axios.get(`https://emoji-api.com/emojis?access_key=${this.emojiToken}`)
                 .then(response => {
                     if (response.data) {
                         this.emojisArray = response.data;
+                        console.log(this.emojisArray);
                     } else {
                         console.error('Response data is empty');
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
+
+        searchEmojis(arg) {
+            axios.get(`https://emoji-api.com/emojis?search=${arg}&access_key=${this.emojiToken}`)
+                .then(response => {
+                    if (response.data) {
+                        this.emojisArray = response.data;
+                        console.log(this.emojisArray);
+                    } else {
+                        console.error('Response data is empty');
+                        this.emojisArray = [];
                     }
                 })
                 .catch(error => {
@@ -395,8 +413,8 @@ export default {
 
                 z-index: 9;
                 opacity: 0;
+                transition: opacity 1s;
 
-                transition: 0.8s;
 
                 ul {
                     display: flex;
