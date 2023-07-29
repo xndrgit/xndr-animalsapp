@@ -274,6 +274,8 @@ export default {
         },
         handleEmojis() {
             this.emojis = !this.emojis;
+            this.getEmojis();
+            this.emojiInput = null;
         },
 
         getEmojis() {
