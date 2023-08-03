@@ -707,15 +707,6 @@ export default {
 
             font-size: 1.3rem;
 
-            .fa {
-                cursor: pointer;
-                transition: 0.1s;
-
-                &:active {
-                    font-size: 30px;
-                }
-            }
-
 
             .emojis-header {
                 z-index: 1;
@@ -825,14 +816,6 @@ export default {
 
             font-size: 1.3rem;
 
-            .fa {
-                cursor: pointer;
-                transition: 0.1s;
-
-                &:active {
-                    font-size: 30px;
-                }
-            }
         }
     }
 }

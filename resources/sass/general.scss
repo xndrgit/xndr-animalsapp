@@ -1,0 +1,8 @@
+.fa {
+    cursor: pointer;
+    transition: 0.1s;
+
+    &:active {
+        font-size: 30px;
+    }
+}

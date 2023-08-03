@@ -60,6 +60,23 @@
                     </div>
                 </div>
             </div>
+            <div class="box box-plus bg-white">
+                <div class="box-image">
+                    <img alt="newContact" class="img-fluid cover" src="../../../public/images/logoplus.jpg">
+                </div>
+                <div class="details">
+                    <div class="details-top">
+                        <h4 class="name">NEW ANIMAL</h4>
+                    </div>
+                    <div class="details-down">
+                        <p
+                            class="last"
+                        >
+                            Add a new animal!
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -310,7 +327,17 @@ export default {
             background: black;
 
             .name {
-                color: white;
+                filter: invert(2);
+            }
+        }
+
+        .box-plus {
+            border: 1px solid white;
+            transition: 0.5s;
+
+            &:hover {
+                border: 4px solid #2fa360;
+
             }
         }
     }
