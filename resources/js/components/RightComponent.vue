@@ -24,7 +24,30 @@
                 <i class="fa fa-solid fa-circle-xmark fa-bounce"></i>
             </div>
         </div>
-
+        <div v-if="viewFormGift" class="boxNewAnimal">
+            <div>
+                <img alt="formLogo" class="formLogo cover" src="../../../public/assets/logoplus.jpg">
+            </div>
+            <form ref="formNewAnimal" class="formNewAnimal" @submit.prevent="handleSubmit">
+                <h6 class="newLabel text-danger">{{ errorMessage }}</h6>
+                <input id="newName" v-model="formName" class="newName" name="text"
+                       pattern="Pucho"
+                       placeholder="Name your animal"
+                       required
+                       type="text"
+                       @keyup.enter="handleSubmit"
+                />
+                <!--                <h2 class="newLabel">Insert URL Image</h2>-->
+                <input id="newUrl" v-model="formUrl" class="newUrl" name="url"
+                       pattern="https://.*"
+                       placeholder="https://example.com"
+                       required
+                       type="url"
+                       @keyup.enter="handleSubmit"
+                />
+                <i class="fa fa-2x fa-solid fa-paper-plane" @click.prevent="handleSubmit"></i>
+            </form>
+        </div>
 
         <div ref="chatBox" :class="viewProfile ? 'bgOpacity': '' " class="chat-box">
             <div v-for="(message, index) in contactsGift[activeChatGift].messages" :key="index" ref="message"
@@ -37,7 +60,6 @@
                 </div>
             </div>
         </div>
-
         <div v-if="typing" class="typing d-flex align-items-center">
             <div class="justify-content-start">
                 <div class="friend-message">
@@ -46,8 +68,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="footer-right">
             <div class="first">
                 <i class="fa mr-3 fa-regular fa-face-smile" @click="handleEmojis"></i>
@@ -101,6 +121,7 @@ export default {
         contactsGift: Array,
         activeChatGift: Number,
         userGift: Object,
+        viewFormGift: Boolean,
     },
     watch: {
         activeChatGift(newVal, oldVal) {
@@ -135,6 +156,11 @@ export default {
 
             settings: false,
             emojis: false,
+
+            // viewNewAnimal: this.viewFormGift,
+            formName: "",
+            formUrl: "",
+            errorMessage: "",
         }
     },
 
@@ -316,7 +342,46 @@ export default {
             this.$nextTick(() => {
                 this.$refs.search.focus();
             });
-        }
+        },
+
+        handleSubmit(event) {
+            // Check if name is an empty string or formUrl is not a valid URL
+            if (this.formName.trim() === '') {
+                this.errorMessage = 'Please enter a name for the animal.';
+            } else if (!this.isValidUrl(this.formUrl)) {
+                this.errorMessage = 'Please enter a valid URL for the animal image.';
+            } else {
+                // Reset the error message if there are no errors
+                this.errorMessage = '';
+
+                // Create the new contact object
+                this.newContact = {
+                    name: this.formName,
+                    avatar: this.formUrl,
+                    visible: true,
+                    messages: [],
+                };
+
+                // Emit the "newContact" event to notify the parent component
+                this.$emit("newContact", this.newContact);
+
+                // Clear the form fields after successful submission
+                this.formName = '';
+                this.formUrl = '';
+            }
+        },
+        isValidUrl(url) {
+            // Use a regular expression to check if the URL is valid
+            // You can replace this with a more robust URL validation method if needed
+            const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+            return urlRegex.test(url);
+        },
+        // handleSubmitClick(event){
+        //     this.$refs.formNewAnimal.submit();
+        //     // this.formName = "";
+        //     // this.formUrl = "";
+        //     // this.viewFormGift = !this.viewFormGift;
+        // }
 
     }
 }
@@ -324,10 +389,10 @@ export default {
 
 
 <style lang="scss" scoped>
+
 .bgOpacity {
     background: #F2F3F5;
 }
-
 .container-right:before {
     position: absolute;
 
@@ -344,7 +409,6 @@ export default {
     background-repeat: no-repeat;
     background-position: center;
 }
-
 .container-right {
     position: relative;
 
@@ -457,6 +521,92 @@ export default {
                 cursor: pointer;
             }
         }
+    }
+
+    .boxNewAnimal {
+        z-index: 10;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 60px);
+        background: white;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .formLogo {
+            width: 350px;
+            padding: 2rem;
+        }
+
+        .formNewAnimal {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            //.newLabel{
+            //    color: red;
+            //    font-size: 100px;
+            //    font-weight: bold;
+            //    margin: 0 0 24px;
+            //    text-align: center;
+            //}
+
+            #newUrl,
+            #newName {
+                /* Box model */
+                box-sizing: border-box;
+                width: 200px;
+                height: 40px;
+                padding: 15px;
+                margin-bottom: 20px;
+
+                /* Typography */
+                font-size: 10px;
+                font-family: Arial, sans-serif;
+                color: #333;
+
+                /* Border and background */
+                border: 2px solid #ddd;
+                border-radius: 5px;
+                background-color: #f9f9f9;
+
+                &:focus {
+                    border-color: #007bff;
+                    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+                }
+
+                /* Add some hover effect for better user feedback */
+                &:hover {
+                    cursor: pointer;
+                    background: white;
+                }
+
+                /* Add some transition for a smooth effect */
+                #newUrl,
+                #newName {
+                    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+                }
+            }
+
+            .fa {
+                font-size: 20px;
+                transition: 0.1s;
+
+                &:hover {
+                    opacity: 0.8;
+                }
+
+                &:active {
+                    color: #00ff00;
+                    opacity: 1;
+                }
+            }
+        }
+
     }
 
     .img-profile {
@@ -683,7 +833,7 @@ export default {
     }
 
     .footer-right {
-        z-index: 999999999999999999999999999999999999999999;
+        z-index: 9;
 
         position: relative;
 
@@ -819,4 +969,6 @@ export default {
         }
     }
 }
+
+
 </style>

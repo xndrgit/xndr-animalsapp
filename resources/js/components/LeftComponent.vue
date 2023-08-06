@@ -60,9 +60,9 @@
                     </div>
                 </div>
             </div>
-            <div class="box box-plus bg-white">
+            <div :class=" viewNewAnimal ? 'bg-dark' : 'bg-white' " class="box-plus" @click.prevent="handleFormBox">
                 <div class="box-image">
-                    <img alt="newContact" class="img-fluid cover" src="../../../public/images/logoplus.jpg">
+                    <img alt="newContact" class="img-fluid cover" src="../../../public/assets/logoplus.jpg">
                 </div>
                 <div class="details">
                     <div class="details-top">
@@ -72,7 +72,7 @@
                         <p
                             class="last"
                         >
-                            Add a new animal!
+                            Add new contact
                         </p>
                     </div>
                 </div>
@@ -90,6 +90,8 @@ export default {
         return {
             activeIndex: null,
             searchInput: null,
+
+            viewNewAnimal: false,
         };
     },
     props: {
@@ -99,6 +101,7 @@ export default {
     watch: {
         activeIndex: function (newVal, oldVal) {
             console.log(newVal);
+
             this.$emit("activeChat", this.activeIndex);
         },
     },
@@ -113,6 +116,10 @@ export default {
         getTrimmed(stringToTrim) {
             return stringToTrim.trim().toLowerCase();
         },
+        handleFormBox() {
+            this.viewNewAnimal = !this.viewNewAnimal;
+            this.$emit('viewNewAnimal', this.viewNewAnimal);
+        }
     },
 };
 </script>
@@ -264,82 +271,94 @@ export default {
 
             transition: 1s ease-in-out;
 
-            .box-image {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 20%;
+            &:hover {
+                background: black;
 
-                margin-right: 15px;
-
-                .cover {
-                    height: 50px;
-                    width: 50px;
-                    border-radius: 50%;
-                }
-            }
-
-            .details {
-                width: 80%;
-
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-
-                .details-top {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-
-                    .name {
-                        font-size: 14px;
-                        font-weight: bold;
-
-                        margin: 0;
-
-                        transition: 0.1s;
-                    }
-
-                    .time {
-                        font-size: 10px;
-                        font-weight: lighter;
-                        color: #aaa;
-
-                        margin: 0;
-                    }
-                }
-
-                .details-down {
-                    .last {
-                        margin-bottom: 0;
-                        color: #aaa;
-                        font-size: 12px;
-                        width: 180px; /* Set the width of the container */
-                        overflow: hidden; /* Hide the text that overflows the container */
-                        text-overflow: ellipsis; /* Show an ellipsis when the text overflows */
-                        white-space: nowrap; /* Prevent the text from wrapping */
-                    }
+                .name {
+                    color: white;
                 }
             }
         }
 
-        .box:hover {
-            background: black;
-
-            .name {
-                filter: invert(2);
-            }
-        }
 
         .box-plus {
+            position: relative;
+            width: 100%;
+
+            display: flex;
+
+            padding: 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+
+            height: 80px;
+
             border: 1px solid white;
-            transition: 0.5s;
+            transition: 0.2s;
 
             &:hover {
                 border: 4px solid #2fa360;
-
             }
         }
+
+        .box-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20%;
+
+            margin-right: 15px;
+
+            .cover {
+                height: 50px;
+                width: 50px;
+                border-radius: 50%;
+            }
+        }
+
+        .details {
+            width: 80%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .details-top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .name {
+                    font-size: 14px;
+                    font-weight: bold;
+
+                    margin: 0;
+
+                    transition: 0.1s;
+                }
+
+                .time {
+                    font-size: 10px;
+                    font-weight: lighter;
+                    color: #aaa;
+
+                    margin: 0;
+                }
+            }
+
+            .details-down {
+                .last {
+                    margin-bottom: 0;
+                    color: #aaa;
+                    font-size: 12px;
+                    width: 180px; /* Set the width of the container */
+                    overflow: hidden; /* Hide the text that overflows the container */
+                    text-overflow: ellipsis; /* Show an ellipsis when the text overflows */
+                    white-space: nowrap; /* Prevent the text from wrapping */
+                }
+            }
+        }
+
     }
 }
 </style>

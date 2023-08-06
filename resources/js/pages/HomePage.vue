@@ -1,12 +1,16 @@
 <template>
     <div class="spiderapp">
-        <LeftComponent :contactsGift="contacts" :userGift="user" @activeChat="activeChatFunction"/>
+        <LeftComponent :contactsGift="contacts" :userGift="user" @activeChat="activeChatFunction"
+                       @viewNewAnimal="handleForm"/>
         <RightComponent :activeChatGift="activeChat" :contactsGift="contacts" :userGift="user"
                         @activeChatDelete="clearChat" @dogMsg="dogMsgFunction" @index="removeFunction"
                         @newMsg="pushFunction"
                         @puchoMsg="pMsgFunction"
                         @cowMsg="cowMsgFunction"
                         @sheepMsg="sheepMsgFunction"
+
+                        :viewFormGift="viewForm"
+                        @newContact="newContactFunction"
         />
 
     </div>
@@ -85,6 +89,7 @@ export default {
                 },
             ],
             viewProfile: false,
+            viewForm: false,
 
             dogAct: 0,
             puchoAct: 1,
@@ -138,6 +143,13 @@ export default {
         // },
         sheepMsgFunction(sheepMsg) {
             this.contacts[this.sheepAct].messages.push(sheepMsg);
+        },
+        handleForm() {
+            this.viewForm = !this.viewForm;
+        },
+
+        newContactFunction(newContact) {
+            this.contacts.push(newContact);
         }
     }
 }
