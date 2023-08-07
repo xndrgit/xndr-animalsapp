@@ -24,6 +24,24 @@
             </div>
         </div>
         <div class="chat-list">
+            <div :class=" viewNewAnimal ? 'bg-dark' : 'bg-white' " class="box-plus" @click.prevent="handleFormBox">
+                <div class="box-image">
+                    <img alt="newContact" class="img-fluid cover" src="../../../public/assets/logoplus.jpg">
+                </div>
+                <div class="details">
+                    <div class="details-top">
+                        <h4 class="name">NEW ANIMAL</h4>
+                    </div>
+                    <div class="details-down">
+                        <p
+                            class="last"
+                        >
+                            Add new contact
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <div
                 v-for="(contact, index) in contactsGift"
                 v-if="contact.visible"
@@ -56,23 +74,6 @@
                                 contact.messages[contact.messages.length - 1]
                                     .message
                             }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div :class=" viewNewAnimal ? 'bg-dark' : 'bg-white' " class="box-plus" @click.prevent="handleFormBox">
-                <div class="box-image">
-                    <img alt="newContact" class="img-fluid cover" src="../../../public/assets/logoplus.jpg">
-                </div>
-                <div class="details">
-                    <div class="details-top">
-                        <h4 class="name">NEW ANIMAL</h4>
-                    </div>
-                    <div class="details-down">
-                        <p
-                            class="last"
-                        >
-                            Add new contact
                         </p>
                     </div>
                 </div>
@@ -294,10 +295,10 @@ export default {
             height: 80px;
 
             border: 1px solid white;
-            transition: 0.2s;
+            transition: 0.1s;
 
             &:hover {
-                border: 4px solid #2fa360;
+                border: 4px solid white;
             }
         }
 

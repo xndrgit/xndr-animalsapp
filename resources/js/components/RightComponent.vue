@@ -537,7 +537,7 @@ export default {
         justify-content: center;
 
         .formLogo {
-            width: 350px;
+            width: 200px;
             padding: 2rem;
         }
 

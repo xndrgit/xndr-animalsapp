@@ -31,25 +31,19 @@ export default {
             contacts: [
                 {
                     name: "Dog",
-                    avatar: "/assets/dog.jpg",
+                    avatar: "/assets/dog.png",
                     visible: true,
                     messages: [
-                        {date: "2022-06-01T10:30:00Z", message: "Hey, how's it going?", status: "sent"},
                         {
                             date: "2022-06-01T10:35:00Z",
                             message: "Bau!",
                             status: "received"
                         },
-                        {
-                            date: "2022-06-01T10:40:00Z",
-                            message: "I'm doing well. What have you been up to?",
-                            status: "sent"
-                        }
                     ]
                 },
                 {
                     name: "Pucho",
-                    avatar: "/assets/pucho.jpg",
+                    avatar: "/assets/pucho.png",
                     visible: true,
                     messages: [
                         {
@@ -57,29 +51,25 @@ export default {
                             message: "Grrr",
                             status: "received"
                         },
-                        {
-                            date: "2022-06-02T08:20:00Z",
-                            message: "Definitely. I've been prepping all week.",
-                            status: "sent"
-                        }
                     ]
                 },
                 {
                     name: "Cow",
-                    avatar: "/assets/cow.jpg",
-                    visible: true,
-                    messages: []
-                },
-                {
-                    name: "Sheep",
-                    avatar: "/assets/sheep.jpg",
+                    avatar: "/assets/cow.png",
                     visible: true,
                     messages: [
                         {
-                            date: "2022-06-03T14:45:00Z",
-                            message: "Hey, can you send me the report you mentioned?",
-                            status: "sent"
+                            date: "2022-06-02T08:15:00Z",
+                            message: "Muuuu",
+                            status: "received"
                         },
+                    ]
+                },
+                {
+                    name: "Sheep",
+                    avatar: "/assets/sheep.png",
+                    visible: true,
+                    messages: [
                         {
                             date: "2022-06-03T14:50:00Z",
                             message: "Beeeee",
