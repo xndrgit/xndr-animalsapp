@@ -14,6 +14,9 @@
             @newMsg="pushFunction"
             @puchoMsg="pMsgFunction"
             @sheepMsg="sheepMsgFunction"
+            @giraffeMsg="giraffeMsgFunction"
+
+
         />
 
     </div>
@@ -84,6 +87,20 @@ export default {
                         }
                     ]
                 },
+                {
+                    name: "Giraffe",
+                    avatar: "/assets/giraffe.png",
+                    visible: true,
+                    active: false,
+                    messages: [
+                        {
+                            date: "2022-06-03T14:50:00Z",
+                            message: "I'm a giraffe",
+                            status: "received"
+                        }
+                    ]
+                },
+
             ],
             viewProfile: false,
             viewForm: false,
@@ -92,6 +109,7 @@ export default {
             puchoAct: 1,
             cowAct: 2,
             sheepAct: 3,
+            giraffeAct: 4,
         }
     },
     name: 'HomePage.vue',
@@ -140,6 +158,9 @@ export default {
         // },
         sheepMsgFunction(sheepMsg) {
             this.contacts[this.sheepAct].messages.push(sheepMsg);
+        },
+        giraffeMsgFunction(giraffeMsg) {
+            this.contacts[this.giraffeAct].messages.push(giraffeMsg);
         },
         handleForm() {
             this.viewForm = !this.viewForm;

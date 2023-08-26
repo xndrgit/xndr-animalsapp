@@ -83,7 +83,7 @@
 
         </div>
 
-        <div ref="chatBox" :class="viewProfile ? 'bgOpacity': '' " class="chat-box">
+        <div ref="chatBox" :class="viewProfile ? 'bg-light': '' " class="chat-box">
             <div v-for="(message, index) in contactsGift[activeChatGift].messages" :key="index" ref="message"
                  :class="(message.status === 'sent') ? 'justify-content-end' : 'justify-content-start'" class="message"
             >
@@ -177,6 +177,7 @@ export default {
             puchoMsg: ["Hop around playfully like a kangaroo 🦘", "Nibble on hay like it's a food connoisseur 🍽️", "Thump its foot to warn others like a boss 👊", "Groom itself with its tongue like a self-care guru 💆‍♀️", "Binky (jump and twist in mid-air) like it's in a dance-off competition 🕺", "Dig a burrow like it's on a mission to China 🛫", "Chew on a cardboard box like it's the finest cuisine 🍱", "Flop over for a nap like it's the sleep champion of the world 💤", "Lick its paws clean like a cleanliness freak 🧹", "Beg for treats like a master manipulator 🍪", "Show off its agility by jumping over obstacles like a ninja 🥷", "Bite at toys like a fierce warrior 🗡️", "Explore its surroundings like a curious detective 🔎", "Nuzzle its soft fur against your hand like a cuddly teddy bear 🧸", "Nudge you for attention like a smooth operator 😏", "Bite at your clothing like a fashion critic 👗", "Wiggle its nose in curiosity like a detective on a case 🤔", "Stretch out its long legs like a yoga practitioner 🧘", "Run and play with other rabbits like a wild child 🤪", "Climb onto your lap for pets like it's the king of the castle 🐰", "Thump its back legs in excitement like it's a rockstar 🤘", "Show off its cute bunny hops like it's at a dance party 🎉", "Enjoy a carrot or piece of fruit like it's a gourmet chef 👨‍🍳", "Hide in a cozy spot like it's the ultimate hide-and-seek champion 🏆", "Cuddle up with a stuffed animal like it's a hopeless romantic ❤️", "Lunge and dart around when it's excited like a superhero in action 🦸", "Nap in a sunbeam like it's on a tropical vacation 🌴", "Sit up on its hind legs like it's a meerkat on guard duty 🦡", "Play hide-and-seek like it's playing a game of espionage 🕵️‍♀️", "Snuggle up with its companion like it's in a rom-com movie 🎬", "Greet you with a nose touch like it's a secret handshake 👋", "Enjoy a gentle brushing like it's getting a spa treatment 💆‍♂️", "Curious about new sights and sounds like a traveler in a foreign land 🗺️", "Show off its big ears like it's a fashion icon 👂", "Hop up to get a better view like it's a photographer on a mission 📷", "Jump into a cardboard box like it's a kid in a ball pit 🎾", "Be your loving and cuddly friend for life like it's your soulmate ❤️"],
             cowMsg: ["Moo happily like a diva in a concert 🎤", "Graze in a meadow like a foodie in a fancy restaurant 🍽️", "Lick its calf affectionately like a doting parent 👩‍👧", "Chew its cud like a philosopher contemplating the meaning of life 🤔", "Sniff around curiously like a detective on a case 🔍", "Rub against a scratching post like a cat in a scratching frenzy 😼", "Nuzzle its nose into your hand like it's in love 💕", "Toss its head playfully like a model on a runway 💃", "Lay down in the sun like a beach bum 🏖️", "Swish its tail to shoo away flies like a boss 👊", "Chase after its herd mates like a kid in a playground 🤪", "Drink from a cool stream like a thirsty traveler 🥤", "Roll around on a grassy hill like a child in a park 🌳", "Snort in satisfaction like a contented snorer 😴", "Groom its coat with its tongue like a cleanliness freak 🧼", "Enjoy a back scratch like a luxury spa customer 💆‍♀️", "Explore its surroundings like an adventurer on a mission 🗺️", "Nudge you for attention like a master manipulator 👀", "Play with a ball or toy like a kid in a toy store 🧸", "Walk calmly on a lead like a well-trained pet 🐶", "Stretch its legs after a nap like a yoga enthusiast 🧘‍♀️", "Lounge in a comfortable spot like a couch potato 🛋️", "Chew on a hay bale like a gourmet chef enjoying a fancy meal 🍴", "Watch over its young like a guardian angel 👼", "Sniff out treats hidden in the grass like a treasure hunter 🕵️‍♂️", "Take a nap in the shade like a sunbather seeking refuge 🌞", "Show off its impressive horns like a proud trophy winner 🏆", "Enjoy a good belly rub like a happy puppy 🐾", "Swim in a pond like a mermaid in the ocean 🧜‍♀️", "Greet you with a friendly moo like a welcoming host 👋", "Playfully head-butt its herd mates like a wrestler getting ready for a match 🤼", "Wander through a field like a lost tourist 🚶", "Take a leisurely stroll like a retiree enjoying life 🚶‍♀️", "Show off its beautiful markings like a model on a catwalk 🐄", "Be your loyal and gentle companion for life like a forever friend ❤️"],
             sheepMsg: ["Baa happily like a popstar in a concert 🎵", "Graze on lush grass like a foodie at a fancy restaurant 🍴", "Snuggle with its lamb like a doting parent 👩‍👧", "Wag its tail like a happy puppy 🐶", "Chew on a tuft of wool like a fashion critic 🧥", "Show off its thick fleece like a model on a runway 💃", "Nuzzle its nose into your hand like it's in love 💕", "Rub its head against a fence post like a cat in a scratching frenzy 😼", "Skip and jump playfully like a kid in a playground 🤸‍♀️", "Rest in a sunny spot like a beach bum 🏖️", "Shake off water after a rain like a dog after a bath 🐕", "Herd with its flock mates like a boss 👊", "Drink from a babbling brook like a thirsty traveler 🥤", "Roll around in a patch of clover like a child in a park 🌼", "Groom its wool with its tongue like a cleanliness freak 🧼", "Climb up a hill like a mountaineer 🧗‍♀️", "Explore its surroundings like an adventurer on a mission 🗺️", "Nudge you for attention like a master manipulator 👀", "Play with a toy or ball like a kid in a toy store 🧸", "Walk calmly on a lead like a well-trained pet 🐾", "Stretch its legs after a nap like a yoga enthusiast 🧘‍♀️", "Lounge in a comfortable spot like a couch potato 🛋️", "Bounce around like a lamb like a wild child 🤪", "Watch over its young like a guardian angel 👼", "Sniff out treats hidden in the grass like a treasure hunter 🕵️‍♂️", "Take a nap in the shade like a sunbather seeking refuge 🌞", "Show off its impressive horns like a proud trophy winner 🏆", "Enjoy a good belly rub like a happy puppy 🐾", "Greet you with a friendly baa like a welcoming host 👋", "Playfully head-butt its flock mates like a wrestler getting ready for a match 🤼", "Wander through a meadow like a lost tourist 🚶", "Take a leisurely stroll like a retiree enjoying life 🚶‍♀️", "Show off its beautiful markings like a model on a catwalk 🐑", "Be your gentle and faithful companion for life like a forever friend ❤️"],
+            giraffeMsg: ["Baa happily like a popstar in a concert 🎵", "Graze on lush grass like a foodie at a fancy restaurant 🍴", "Snuggle with its lamb like a doting parent 👩‍👧", "Wag its tail like a happy puppy 🐶", "Chew on a tuft of wool like a fashion critic 🧥", "Show off its thick fleece like a model on a runway 💃", "Nuzzle its nose into your hand like it's in love 💕", "Rub its head against a fence post like a cat in a scratching frenzy 😼", "Skip and jump playfully like a kid in a playground 🤸‍♀️", "Rest in a sunny spot like a beach bum 🏖️", "Shake off water after a rain like a dog after a bath 🐕", "Herd with its flock mates like a boss 👊", "Drink from a babbling brook like a thirsty traveler 🥤", "Roll around in a patch of clover like a child in a park 🌼", "Groom its wool with its tongue like a cleanliness freak 🧼", "Climb up a hill like a mountaineer 🧗‍♀️", "Explore its surroundings like an adventurer on a mission 🗺️", "Nudge you for attention like a master manipulator 👀", "Play with a toy or ball like a kid in a toy store 🧸", "Walk calmly on a lead like a well-trained pet 🐾", "Stretch its legs after a nap like a yoga enthusiast 🧘‍♀️", "Lounge in a comfortable spot like a couch potato 🛋️", "Bounce around like a lamb like a wild child 🤪", "Watch over its young like a guardian angel 👼", "Sniff out treats hidden in the grass like a treasure hunter 🕵️‍♂️", "Take a nap in the shade like a sunbather seeking refuge 🌞", "Show off its impressive horns like a proud trophy winner 🏆", "Enjoy a good belly rub like a happy puppy 🐾", "Greet you with a friendly baa like a welcoming host 👋", "Playfully head-butt its flock mates like a wrestler getting ready for a match 🤼", "Wander through a meadow like a lost tourist 🚶", "Take a leisurely stroll like a retiree enjoying life 🚶‍♀️", "Show off its beautiful markings like a model on a catwalk 🐑", "Be your gentle and faithful companion for life like a forever friend ❤️"],
 
             newMsgInput: '',
             emojiInput: null,
@@ -287,6 +288,18 @@ export default {
                     this.$emit('sheepMsg', this.newBotMsg);
                     this.newBotMsg = null;
                     this.$emit('SheepAct', active);
+                    console.log(`emited: ${active}`);
+                } else if (active === 4) {
+                    console.log(`pre message index: ${active}`);
+                    const randomIndex = Math.floor(Math.random() * this.giraffeMsg.length);
+                    this.newBotMsg = {
+                        date: moment().format('D/M/YY, HH:mm:ss'),
+                        message: `Meee! ${this.giraffeMsg[randomIndex]}`,
+                        status: 'received',
+                    }
+                    this.$emit('giraffeMsg', this.newBotMsg);
+                    this.newBotMsg = null;
+                    this.$emit('giraffeAct', active);
                     console.log(`emited: ${active}`);
                 }
                 clearInterval(intervalId);
@@ -612,14 +625,12 @@ export default {
 
             .cover-animal {
                 border-radius: 50%;
-
+                -o-object-fit: cover;
                 object-fit: cover;
                 height: 80px;
                 width: 80px;
-
-                padding: 1rem;
-                margin: 1rem;
-
+                padding: 1.4rem;
+                margin: 2rem;
                 cursor: pointer;
                 transition: 0.1s;
             }
@@ -629,20 +640,20 @@ export default {
                 flex-wrap: wrap;
                 justify-content: space-between;
 
-                height: 50%;
+                height: 100%;
                 width: 100%;
                 overflow-y: auto;
             }
 
-            .manage-content-down {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-
-                height: 50%;
-                width: 100%;
-                overflow-y: auto;
-            }
+            //.manage-content-down {
+            //    display: flex;
+            //    flex-wrap: wrap;
+            //    justify-content: space-between;
+            //
+            //    height: 50%;
+            //    width: 100%;
+            //    overflow-y: auto;
+            //}
         }
 
         //.formNewAnimal {
