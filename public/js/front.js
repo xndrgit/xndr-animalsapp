@@ -1914,9 +1914,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      activeIndex: null,
+      activeIndex: 0,
       searchInput: null,
-      viewNewAnimal: false
+      viewNewAnimal: false,
+      animalsFounded: true
     };
   },
   props: {
@@ -1932,11 +1933,13 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     searchContact: function searchContact(arg) {
       var _this = this;
-      // console.log(arg);
-      arg = this.getTrimmed(arg);
-      this.contactsGift.forEach(function (element) {
-        element.visible = _this.getTrimmed(element.name).includes(arg);
-      });
+      if (arg === null) {} else {
+        // console.log(arg);
+        arg = this.getTrimmed(arg);
+        this.contactsGift.forEach(function (element) {
+          element.visible = _this.getTrimmed(element.name).includes(arg);
+        });
+      }
     },
     getTrimmed: function getTrimmed(stringToTrim) {
       return stringToTrim.trim().toLowerCase();
@@ -2209,12 +2212,16 @@ __webpack_require__.r(__webpack_exports__);
       // You can replace this with a more robust URL validation method if needed
       var urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
       return urlRegex.test(url);
-    } // handleSubmitClick(event){
+    },
+    // handleSubmitClick(event){
     //     this.$refs.formNewAnimal.submit();
     //     // this.formName = "";
     //     // this.formUrl = "";
     //     // this.viewFormGift = !this.viewFormGift;
     // }
+    handleActive: function handleActive(index) {
+      this.contactsGift[index].active = !this.contactsGift[index].active;
+    }
   }
 });
 
@@ -2266,47 +2273,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      activeChat: -1,
+      activeChat: 0,
       user: {
         name: "AnimalsApp",
         avatar: "/assets/logo.png"
       },
       contacts: [{
-          name: "Dog",
-          avatar: "/assets/dog.png",
-          visible: true,
-          messages: [{
-              date: "2022-06-01T10:35:00Z",
-              message: "Bau!",
-              status: "received"
-          }]
+        name: "Dog",
+        avatar: "/assets/dog.png",
+        visible: true,
+        active: true,
+        messages: [{
+          date: "2022-06-01T10:35:00Z",
+          message: "Bau!",
+          status: "received"
+        }]
       }, {
-          name: "Pucho",
-          avatar: "/assets/pucho.png",
-          visible: true,
-          messages: [{
-              date: "2022-06-02T08:15:00Z",
-              message: "Grrr",
-              status: "received"
-          }]
+        name: "Pucho",
+        avatar: "/assets/pucho.png",
+        visible: true,
+        active: true,
+        messages: [{
+          date: "2022-06-02T08:15:00Z",
+          message: "Grrr",
+          status: "received"
+        }]
       }, {
-          name: "Cow",
-          avatar: "/assets/cow.png",
-          visible: true,
-          messages: [{
-              date: "2022-06-02T08:15:00Z",
-              message: "Muuuu",
-              status: "received"
-          }]
+        name: "Cow",
+        avatar: "/assets/cow.png",
+        visible: true,
+        active: false,
+        messages: [{
+          date: "2022-06-02T08:15:00Z",
+          message: "Muuuu",
+          status: "received"
+        }]
       }, {
-          name: "Sheep",
-          avatar: "/assets/sheep.png",
-          visible: true,
-          messages: [{
-              date: "2022-06-03T14:50:00Z",
-              message: "Beeeee",
-              status: "received"
-          }]
+        name: "Sheep",
+        avatar: "/assets/sheep.png",
+        visible: true,
+        active: false,
+        messages: [{
+          date: "2022-06-03T14:50:00Z",
+          message: "Beeeee",
+          status: "received"
+        }]
       }],
       viewProfile: false,
       viewForm: false,
@@ -2405,14 +2416,16 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "user-image"
   }, [_c("img", {
-    staticClass: "cover",
+    staticClass: "* disabled-cursor ? cover",
     attrs: {
       src: _vm.userGift.avatar,
       alt: "cover"
     }
   })]), _vm._v(" "), _c("h3", {
     staticClass: "name"
-  }, [_vm._v(_vm._s(_vm.userGift.name))]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.userGift.name))]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _vm.viewNewAnimal ? _c("div", {
+    staticClass: "search-chat-disabled"
+  }) : _vm._e(), _vm._v(" "), !_vm.viewNewAnimal ? _c("div", {
     staticClass: "search-chat"
   }, [_c("div", {
     staticClass: "div-search"
@@ -2425,7 +2438,7 @@ var render = function render() {
     }],
     staticClass: "input-search",
     attrs: {
-      placeholder: "Search or start new chat",
+      placeholder: "Search for a chat",
       type: "text"
     },
     domProps: {
@@ -2433,7 +2446,6 @@ var render = function render() {
     },
     on: {
       keyup: function keyup($event) {
-        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
         return _vm.searchContact(_vm.searchInput);
       },
       input: function input($event) {
@@ -2448,28 +2460,28 @@ var render = function render() {
         return _vm.searchContact(_vm.searchInput);
       }
     }
-  })])]), _vm._v(" "), _c("div", {
-      staticClass: "chat-list"
+  })])]) : _vm._e(), _vm._v(" "), _c("div", {
+    staticClass: "chat-list"
   }, [_c("div", {
-      staticClass: "box-plus",
-      "class": _vm.viewNewAnimal ? "bg-dark" : "bg-white",
-      on: {
-          click: function click($event) {
-              $event.preventDefault();
-              return _vm.handleFormBox.apply(null, arguments);
-          }
+    staticClass: "box-plus",
+    "class": _vm.viewNewAnimal ? "text-success" : "text-danger",
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.handleFormBox.apply(null, arguments);
       }
+    }
   }, [_vm._m(1), _vm._v(" "), _vm._m(2)]), _vm._v(" "), _vm._l(_vm.contactsGift, function (contact, index) {
-      return contact.visible ? _c("div", {
-          staticClass: "box",
-          "class": index === _vm.activeIndex ? "active" : "",
-          on: {
-              click: function click($event) {
-                  _vm.activeIndex = index;
-              }
-          }
-      }, [_c("div", {
-          staticClass: "box-image"
+    return contact.visible && contact.active && !_vm.viewNewAnimal ? _c("div", {
+      staticClass: "box",
+      "class": index === _vm.activeIndex ? "active " : "",
+      on: {
+        click: function click($event) {
+          _vm.activeIndex = index;
+        }
+      }
+    }, [_c("div", {
+      staticClass: "box-image"
     }, [_c("img", {
       staticClass: "img-fluid cover",
       attrs: {
@@ -2478,16 +2490,16 @@ var render = function render() {
     })]), _vm._v(" "), _c("div", {
       staticClass: "details"
     }, [_c("div", {
-          staticClass: "details-top"
-      }, [_c("h4", {
-          staticClass: "name"
-      }, [_vm._v(_vm._s(contact.name))]), _vm._v(" "), contact.messages && contact.messages.length ? _c("p", {
-          staticClass: "time"
-      }, [_vm._v("\n                        " + _vm._s(contact.messages[contact.messages.length - 1].date) + "\n                    ")]) : _vm._e()]), _vm._v(" "), _c("div", {
-          staticClass: "details-down"
-      }, [contact.messages && contact.messages.length ? _c("p", {
-          staticClass: "last"
-      }, [_vm._v("\n                        " + _vm._s(contact.messages[contact.messages.length - 1].message) + "\n                    ")]) : _vm._e()])])]) : _vm._e();
+      staticClass: "details-top"
+    }, [_c("h4", {
+      staticClass: "name"
+    }, [_vm._v(_vm._s(contact.name))]), _vm._v(" "), contact.messages && contact.messages.length ? _c("p", {
+      staticClass: "time"
+    }, [_vm._v("\n                        " + _vm._s(contact.messages[contact.messages.length - 1].date) + "\n                    ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+      staticClass: "details-down"
+    }, [contact.messages && contact.messages.length ? _c("p", {
+      staticClass: "last"
+    }, [_vm._v("\n                        " + _vm._s(contact.messages[contact.messages.length - 1].message) + "\n                    ")]) : _vm._e()])])]) : _vm._e();
   })], 2)]);
 };
 var staticRenderFns = [function () {
@@ -2496,11 +2508,11 @@ var staticRenderFns = [function () {
   return _c("div", {
     staticClass: "nav-icons"
   }, [_c("i", {
-    staticClass: "ml-2 fa fa-solid fa-circle-info"
+    staticClass: "* disabled-cursor ? ml-2 fa fa-solid fa-circle-info"
   }), _vm._v(" "), _c("i", {
-    staticClass: "ml-2 fa fa-solid fa-message"
+    staticClass: "* disabled-cursor ? ml-2 fa fa-solid fa-message"
   }), _vm._v(" "), _c("i", {
-    staticClass: "ml-2 fa fa-solid fa-gear"
+    staticClass: "* disabled-cursor ? ml-2 fa fa-solid fa-gear"
   })]);
 }, function () {
   var _vm = this,
@@ -2523,7 +2535,7 @@ var staticRenderFns = [function () {
     staticClass: "details-top"
   }, [_c("h4", {
     staticClass: "name"
-  }, [_vm._v("NEW ANIMAL")])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("MANAGE ANIMALS")])]), _vm._v(" "), _c("div", {
     staticClass: "details-down"
   }, [_c("p", {
     staticClass: "last"
@@ -2598,83 +2610,79 @@ var render = function render() {
     staticClass: "fa fa-solid fa-circle-xmark fa-bounce"
   })]) : _vm._e()]) : _vm._e(), _vm._v(" "), _vm.viewFormGift ? _c("div", {
     staticClass: "boxNewAnimal"
-  }, [_vm._m(2), _vm._v(" "), _c("form", {
-    ref: "formNewAnimal",
-    staticClass: "formNewAnimal",
-    on: {
-      submit: function submit($event) {
-        $event.preventDefault();
-        return _vm.handleSubmit.apply(null, arguments);
-      }
-    }
-  }, [_c("h6", {
-    staticClass: "newLabel text-danger"
-  }, [_vm._v(_vm._s(_vm.errorMessage))]), _vm._v(" "), _c("input", {
+  }, [_vm._m(2), _vm._v(" "), _c("div", {
+    staticClass: "manage-down"
+  }, [_c("div", {
+    staticClass: "div-search"
+  }, [_c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.formName,
-      expression: "formName"
+      value: _vm.searchInput,
+      expression: "searchInput"
     }],
-    staticClass: "newName",
+    staticClass: "input-search",
     attrs: {
-      id: "newName",
-      name: "text",
-      pattern: "Pucho",
-      placeholder: "Name your animal",
-      required: "",
+      placeholder: "Search for an animal",
       type: "text"
     },
     domProps: {
-      value: _vm.formName
+      value: _vm.searchInput
     },
     on: {
       keyup: function keyup($event) {
-        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        return _vm.handleSubmit.apply(null, arguments);
+        return _vm.searchContact(_vm.searchInput);
       },
       input: function input($event) {
         if ($event.target.composing) return;
-        _vm.formName = $event.target.value;
-      }
-    }
-  }), _vm._v(" "), _c("input", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.formUrl,
-      expression: "formUrl"
-    }],
-    staticClass: "newUrl",
-    attrs: {
-      id: "newUrl",
-      name: "url",
-      pattern: "https://.*",
-      placeholder: "https://example.com",
-      required: "",
-      type: "url"
-    },
-    domProps: {
-      value: _vm.formUrl
-    },
-    on: {
-      keyup: function keyup($event) {
-        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        return _vm.handleSubmit.apply(null, arguments);
-      },
-      input: function input($event) {
-        if ($event.target.composing) return;
-        _vm.formUrl = $event.target.value;
+        _vm.searchInput = $event.target.value;
       }
     }
   }), _vm._v(" "), _c("i", {
-    staticClass: "fa fa-2x fa-solid fa-paper-plane",
+    staticClass: "fa-brands fa-searchengin fa-bounce",
     on: {
       click: function click($event) {
-        $event.preventDefault();
-        return _vm.handleSubmit.apply(null, arguments);
+        return _vm.searchContact(_vm.searchInput);
       }
     }
+  })])]), _vm._v(" "), _c("div", {
+    staticClass: "manage-content"
+  }, [_c("div", {
+    staticClass: "manage-content-up"
+  }, [_vm._l(_vm.contactsGift, function (element, index) {
+    return element.active ? _c("div", {
+      key: index.element,
+      staticClass: "cover-animal boxs-green",
+      on: {
+        click: function click($event) {
+          return _vm.handleActive(index);
+        }
+      }
+    }, [_c("img", {
+      staticClass: "img-fluid",
+      attrs: {
+        src: element.avatar,
+        alt: "cover-animal"
+      }
+    })]) : _vm._e();
+  }), _vm._v(" "), _vm._l(_vm.contactsGift, function (element, index) {
+    return !element.active ? _c("div", {
+      key: index.element,
+      staticClass: "cover-animal boxs-red",
+      on: {
+        click: function click($event) {
+          return _vm.handleActive(index);
+        }
+      }
+    }, [_c("img", {
+      staticClass: "img-fluid",
+      attrs: {
+        src: element.avatar,
+        alt: "cover-animal"
+      }
+    })]) : _vm._e();
+  })], 2), _vm._v(" "), _c("div", {
+    staticClass: "manage-content-down"
   })])]) : _vm._e(), _vm._v(" "), _c("div", {
     ref: "chatBox",
     staticClass: "chat-box",
@@ -2826,13 +2834,17 @@ var staticRenderFns = [function () {
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("img", {
-    staticClass: "formLogo cover",
+  return _c("div", {
+    staticClass: "manage-top"
+  }, [_c("div", {
+    staticClass: "manage-img"
+  }, [_c("img", {
+    staticClass: "img-fluid cover",
     attrs: {
-      alt: "formLogo",
+      alt: "logo",
       src: __webpack_require__(/*! ../../../public/assets/logoplus.jpg */ "./public/assets/logoplus.jpg")
     }
-  })]);
+  })])]);
 }];
 render._withStripped = true;
 
@@ -2914,7 +2926,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "spiderapp"
+    staticClass: "animalsapp"
   }, [_c("LeftComponent", {
     attrs: {
       contactsGift: _vm.contacts,
@@ -2933,13 +2945,13 @@ var render = function render() {
     },
     on: {
       activeChatDelete: _vm.clearChat,
+      cowMsg: _vm.cowMsgFunction,
       dogMsg: _vm.dogMsgFunction,
       index: _vm.removeFunction,
+      newContact: _vm.newContactFunction,
       newMsg: _vm.pushFunction,
       puchoMsg: _vm.pMsgFunction,
-      cowMsg: _vm.cowMsgFunction,
-      sheepMsg: _vm.sheepMsgFunction,
-      newContact: _vm.newContactFunction
+      sheepMsg: _vm.sheepMsgFunction
     }
   })], 1);
 };
@@ -2984,7 +2996,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-            exports.push([module.i, ".container-left[data-v-9bbcf54a] {\n  position: relative;\n  flex: 30%;\n  background: #f2f3f5;\n}\n.container-left .header-left[data-v-9bbcf54a] {\n  height: 60px;\n  background: #f6f6f6;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 10px;\n  border-right: 1px solid #ffffff;\n}\n.container-left .header-left .user-image[data-v-9bbcf54a] {\n  position: relative;\n  height: 40px;\n  width: 40px;\n  border-radius: 50%;\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n}\n.container-left .header-left .user-image .cover[data-v-9bbcf54a] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  overflow: hidden;\n  border-radius: 50%;\n  height: 100%;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.container-left .header-left .name[data-v-9bbcf54a] {\n  position: relative;\n  font-weight: bold;\n  font-size: 0.8rem;\n  margin: 0;\n  width: -moz-fit-content;\n  width: fit-content;\n}\n.container-left .header-left .nav-icons .fa[data-v-9bbcf54a] {\n  cursor: not-allowed;\n  transition: 0.2s;\n}\n.container-left .header-left .nav-icons .fa[data-v-9bbcf54a]:hover {\n  opacity: 0.8;\n}\n.container-left .search-chat[data-v-9bbcf54a] {\n  position: relative;\n  width: 100%;\n  height: 50px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background: #f6f6f6;\n  padding: 0 15px;\n}\n.container-left .search-chat .div-search[data-v-9bbcf54a] {\n  width: 100%;\n}\n.container-left .search-chat .div-search .input-search[data-v-9bbcf54a] {\n  width: 100%;\n  outline: none;\n  border: none;\n  border-radius: 30px;\n  background: #fff;\n  font-size: 10px;\n  padding: 10px;\n  padding-left: 40px;\n}\n.container-left .search-chat .div-search .input-search[data-v-9bbcf54a]:focus {\n  background: #f6f6f6;\n}\n.container-left .search-chat .div-search .fa-searchengin[data-v-9bbcf54a] {\n  position: absolute;\n  left: 18px;\n  top: 8px;\n  font-size: 1.4rem;\n  cursor: pointer;\n  background: #f6f6f6;\n  border-radius: 50px;\n  border: 3px solid white;\n  padding: 0.2rem;\n  transition: 0.5s;\n}\n.container-left .search-chat .div-search .fa-searchengin[data-v-9bbcf54a]:hover {\n  background: #f6f6f6;\n}\n.container-left .chat-list[data-v-9bbcf54a] {\n  height: calc(100% - 110px);\n  background: #f2f3f5;\n  overflow-y: auto;\n}\n.container-left .chat-list .active[data-v-9bbcf54a] {\n  background: rgb(0, 0, 0);\n  color: white;\n}\n.container-left .chat-list .box[data-v-9bbcf54a] {\n  position: relative;\n  width: 100%;\n  display: flex;\n  padding: 10px;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.06);\n  cursor: pointer;\n  height: 80px;\n  transition: 1s ease-in-out;\n}\n.container-left .chat-list .box[data-v-9bbcf54a]:hover {\n  background: black;\n}\n.container-left .chat-list .box:hover .name[data-v-9bbcf54a] {\n  color: white;\n}\n.container-left .chat-list .box-plus[data-v-9bbcf54a] {\n  position: relative;\n  width: 100%;\n  display: flex;\n  padding: 10px;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.06);\n  cursor: pointer;\n  height: 80px;\n  border: 1px solid white;\n  transition: 0.1s;\n}\n.container-left .chat-list .box-plus[data-v-9bbcf54a]:hover {\n  border: 4px solid white;\n}\n.container-left .chat-list .box-image[data-v-9bbcf54a] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 20%;\n  margin-right: 15px;\n}\n.container-left .chat-list .box-image .cover[data-v-9bbcf54a] {\n  height: 50px;\n  width: 50px;\n  border-radius: 50%;\n}\n.container-left .chat-list .details[data-v-9bbcf54a] {\n  width: 80%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.container-left .chat-list .details .details-top[data-v-9bbcf54a] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.container-left .chat-list .details .details-top .name[data-v-9bbcf54a] {\n  font-size: 14px;\n  font-weight: bold;\n  margin: 0;\n  transition: 0.1s;\n}\n.container-left .chat-list .details .details-top .time[data-v-9bbcf54a] {\n  font-size: 10px;\n  font-weight: lighter;\n  color: #aaa;\n  margin: 0;\n}\n.container-left .chat-list .details .details-down .last[data-v-9bbcf54a] {\n  margin-bottom: 0;\n  color: #aaa;\n  font-size: 12px;\n  width: 180px; /* Set the width of the container */\n  overflow: hidden; /* Hide the text that overflows the container */\n  text-overflow: ellipsis; /* Show an ellipsis when the text overflows */\n  white-space: nowrap; /* Prevent the text from wrapping */\n}", ""]);
+exports.push([module.i, ".container-left[data-v-9bbcf54a] {\n  position: relative;\n  flex: 30%;\n  background: #f2f3f5;\n}\n.container-left .header-left[data-v-9bbcf54a] {\n  height: 60px;\n  background: #f6f6f6;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 10px;\n  border-right: 1px solid #ffffff;\n}\n.container-left .header-left .user-image[data-v-9bbcf54a] {\n  position: relative;\n  height: 40px;\n  width: 40px;\n  border-radius: 50%;\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n}\n.container-left .header-left .user-image .cover[data-v-9bbcf54a] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  overflow: hidden;\n  border-radius: 50%;\n  height: 100%;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.container-left .header-left .name[data-v-9bbcf54a] {\n  position: relative;\n  font-weight: bold;\n  font-size: 0.8rem;\n  margin: 0;\n  width: -moz-fit-content;\n  width: fit-content;\n}\n.container-left .search-chat-disabled[data-v-9bbcf54a] {\n  position: relative;\n  width: 100%;\n  height: 50px;\n  background: #f6f6f6;\n}\n.container-left .search-chat[data-v-9bbcf54a] {\n  position: relative;\n  width: 100%;\n  height: 50px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background: #f6f6f6;\n  padding: 0 15px;\n}\n.container-left .chat-list[data-v-9bbcf54a] {\n  height: calc(100% - 110px);\n  background: white;\n  overflow-y: auto;\n}\n.container-left .chat-list .box[data-v-9bbcf54a], .container-left .chat-list .box-plus[data-v-9bbcf54a] {\n  position: relative;\n  width: 100%;\n  display: flex;\n  padding: 10px;\n  cursor: pointer;\n  height: 80px;\n  transition: 0.1s;\n}\n.container-left .chat-list .box[data-v-9bbcf54a]:hover {\n  background: black;\n}\n.container-left .chat-list .box:hover .name[data-v-9bbcf54a] {\n  color: white;\n}\n.container-left .chat-list .box-image[data-v-9bbcf54a] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 20%;\n  margin-right: 15px;\n}\n.container-left .chat-list .box-image .cover[data-v-9bbcf54a] {\n  height: 50px;\n  width: 50px;\n  border-radius: 50%;\n}\n.container-left .chat-list .details[data-v-9bbcf54a] {\n  width: 80%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.container-left .chat-list .details .details-top[data-v-9bbcf54a] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.container-left .chat-list .details .details-top .name[data-v-9bbcf54a] {\n  font-size: 14px;\n  font-weight: bold;\n  text-transform: uppercase;\n  margin: 0;\n  transition: 0.1s;\n}\n.container-left .chat-list .details .details-top .time[data-v-9bbcf54a] {\n  font-size: 10px;\n  font-weight: lighter;\n  color: #aaa;\n  margin: 0;\n}\n.container-left .chat-list .details .details-down .last[data-v-9bbcf54a] {\n  margin-bottom: 0;\n  color: #aaa;\n  font-size: 12px;\n  width: 180px; /* Set the width of the container */\n  overflow: hidden; /* Hide the text that overflows the container */\n  text-overflow: ellipsis; /* Show an ellipsis when the text overflows */\n  white-space: nowrap; /* Prevent the text from wrapping */\n}", ""]);
 
 // exports
 
@@ -3003,7 +3015,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-            exports.push([module.i, ".bgOpacity[data-v-14290628] {\n  background: #F2F3F5;\n}\n.container-right[data-v-14290628]:before {\n  position: absolute;\n  top: 60px;\n  left: 0;\n  width: 100%;\n  height: calc(100% - 120px);\n  content: \"\";\n  background: url(\"/assets/logo.png\");\n  background-repeat: no-repeat;\n  background-position: center;\n}\n.container-right[data-v-14290628] {\n  position: relative;\n  flex: 70%;\n  background: #000000;\n}\n.container-right .header-right[data-v-14290628] {\n  height: 60px;\n  background: #f6f6f6;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 10px;\n}\n.container-right .header-right .user-image[data-v-14290628] {\n  position: relative;\n  height: 40px;\n  width: 40px;\n  border-radius: 50%;\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n  cursor: pointer;\n  transition: 0.1s;\n}\n.container-right .header-right .user-image .cover[data-v-14290628] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  overflow: hidden;\n  border-radius: 50%;\n  height: 100%;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.container-right .header-right .activeProfile[data-v-14290628] {\n  border: 2px solid #05fa6f;\n}\n.container-right .header-right .activeName[data-v-14290628] {\n  margin: 0;\n  font-weight: bolder;\n}\n.container-right .header-right .nav-icons[data-v-14290628] {\n  font-size: 1rem;\n  position: relative;\n}\n.container-right .header-right .nav-icons .settings[data-v-14290628] {\n  position: absolute;\n  width: 200px;\n  background: #f6f6f6;\n  right: -10px;\n  z-index: 9;\n  opacity: 0;\n  transition: opacity 1s;\n}\n.container-right .header-right .nav-icons .settings ul[data-v-14290628] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: flex-end;\n  list-style: none;\n  padding: 0 1rem;\n}\n.container-right .header-right .nav-icons .settings ul li[data-v-14290628] {\n  cursor: pointer;\n  width: -moz-fit-content;\n  width: fit-content;\n}\n.container-right .header-right .nav-icons .settings ul li[data-v-14290628]:hover {\n  color: #4aa0e6;\n}\n.container-right .header-right .nav-icons .settings ul a[data-v-14290628] {\n  text-decoration: none;\n  text-underline: none;\n  color: black;\n}\n.container-right .header-right .nav-icons .settings ul a[data-v-14290628]:hover {\n  color: #4aa0e6;\n}\n.container-right .header-right .nav-icons .active[data-v-14290628] {\n  opacity: 1;\n}\n.container-right .header-right .nav-icons .fa[data-v-14290628] {\n  cursor: pointer;\n}\n.container-right .boxNewAnimal[data-v-14290628] {\n  z-index: 10;\n  position: absolute;\n  top: 60px;\n  left: 0;\n  width: 100%;\n  height: calc(100% - 60px);\n  background: white;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.container-right .boxNewAnimal .formLogo[data-v-14290628] {\n  width: 200px;\n  padding: 2rem;\n}\n.container-right .boxNewAnimal .formNewAnimal[data-v-14290628] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.container-right .boxNewAnimal .formNewAnimal #newUrl[data-v-14290628],\n.container-right .boxNewAnimal .formNewAnimal #newName[data-v-14290628] {\n  /* Box model */\n  box-sizing: border-box;\n  width: 200px;\n  height: 40px;\n  padding: 15px;\n  margin-bottom: 20px;\n  /* Typography */\n  font-size: 10px;\n  font-family: Arial, sans-serif;\n  color: #333;\n  /* Border and background */\n  border: 2px solid #ddd;\n  border-radius: 5px;\n  background-color: #f9f9f9;\n  /* Add some hover effect for better user feedback */\n  /* Add some transition for a smooth effect */\n}\n.container-right .boxNewAnimal .formNewAnimal #newUrl[data-v-14290628]:focus,\n.container-right .boxNewAnimal .formNewAnimal #newName[data-v-14290628]:focus {\n  border-color: #007bff;\n  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);\n}\n.container-right .boxNewAnimal .formNewAnimal #newUrl[data-v-14290628]:hover,\n.container-right .boxNewAnimal .formNewAnimal #newName[data-v-14290628]:hover {\n  cursor: pointer;\n  background: white;\n}\n.container-right .boxNewAnimal .formNewAnimal #newUrl #newUrl[data-v-14290628],\n.container-right .boxNewAnimal .formNewAnimal #newUrl #newName[data-v-14290628],\n.container-right .boxNewAnimal .formNewAnimal #newName #newUrl[data-v-14290628],\n.container-right .boxNewAnimal .formNewAnimal #newName #newName[data-v-14290628] {\n  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;\n}\n.container-right .boxNewAnimal .formNewAnimal .fa[data-v-14290628] {\n  font-size: 20px;\n  transition: 0.1s;\n}\n.container-right .boxNewAnimal .formNewAnimal .fa[data-v-14290628]:hover {\n  opacity: 0.8;\n}\n.container-right .boxNewAnimal .formNewAnimal .fa[data-v-14290628]:active {\n  color: #00ff00;\n  opacity: 1;\n}\n.container-right .img-profile[data-v-14290628] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 400px;\n  height: 400px;\n  background-size: cover !important;\n  background-repeat: no-repeat !important;\n  background-position: center !important;\n  border: 0;\n  z-index: 10;\n}\n.container-right .remove-img-profile[data-v-14290628] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  top: 0;\n  right: -30px;\n  transform: translate(-50%, -50%);\n  color: #ff0000;\n  background: #fcfcfc;\n  border-radius: 50%;\n  z-index: 12;\n}\n.container-right .remove-img-profile .fa[data-v-14290628] {\n  font-size: 30px;\n  cursor: pointer;\n}\n.container-right .chat-box[data-v-14290628] {\n  position: relative;\n  width: 100%;\n  height: calc(100% - 120px);\n  padding: 0 50px;\n  overflow-y: auto;\n  transition: 0.8s;\n}\n.container-right .chat-box .message[data-v-14290628] {\n  position: relative;\n  margin: 5px 0;\n  width: 100%;\n  min-height: 50px;\n  display: flex;\n  transition: 0.2s;\n}\n.container-right .chat-box .message[data-v-14290628]:active {\n  background: #4aa0e6;\n  opacity: 0.8;\n  border-radius: 0;\n}\n.container-right .chat-box .message:active .my-message[data-v-14290628] {\n  border-radius: 0;\n  background: #4aa0e6;\n}\n.container-right .chat-box .message:active .my-message .txt-message-normal[data-v-14290628]:before {\n  opacity: 0;\n}\n.container-right .chat-box .message:active .friend-message[data-v-14290628] {\n  border-radius: 0;\n  background: #4aa0e6;\n}\n.container-right .chat-box .message:active .friend-message .txt-message-normal[data-v-14290628]:before {\n  opacity: 0;\n}\n.container-right .chat-box .message p[data-v-14290628] {\n  margin: 0;\n  font-size: 0.8rem;\n}\n.container-right .chat-box .my-message[data-v-14290628] {\n  position: relative;\n  max-width: 65%;\n  text-align: right;\n  background: #fffbdb;\n  padding: 8px 20px 0 20px;\n  border-radius: 10px;\n  transition: 0.2s;\n}\n.container-right .chat-box .my-message .fa[data-v-14290628] {\n  position: absolute;\n  top: -12px;\n  left: -12px;\n  font-size: 25px;\n  color: red;\n  background: white;\n  border-radius: 50%;\n  opacity: 0;\n  transition: 0.2s;\n  cursor: pointer;\n}\n.container-right .chat-box .my-message:hover .fa[data-v-14290628] {\n  opacity: 1;\n}\n.container-right .chat-box .my-message:active .fa[data-v-14290628] {\n  opacity: 0;\n}\n.container-right .chat-box .my-message .my-time[data-v-14290628] {\n  font-size: 0.8rem;\n  opacity: 0.5;\n}\n.container-right .chat-box .my-message .txt-message-normal[data-v-14290628]::before {\n  content: \"\";\n  position: absolute;\n  top: 0;\n  right: -15px;\n  width: 25px;\n  height: 25px;\n  background: linear-gradient(135deg, #fffbdb 0%, #fffbdb 50%, transparent 50%, transparent);\n  transition: 0.2s;\n}\n.container-right .chat-box .friend-message[data-v-14290628] {\n  position: relative;\n  max-width: 65%;\n  text-align: left;\n  background: rgb(255, 229, 229);\n  padding: 8px 15px 0 15px;\n  border-radius: 10px;\n  transition: 0.2s;\n}\n.container-right .chat-box .friend-message .fa[data-v-14290628] {\n  position: absolute;\n  top: -12px;\n  right: -12px;\n  font-size: 25px;\n  color: red;\n  background: white;\n  border-radius: 50%;\n  opacity: 0;\n  transition: 0.2s;\n  cursor: pointer;\n}\n.container-right .chat-box .friend-message:hover .fa[data-v-14290628] {\n  opacity: 1;\n}\n.container-right .chat-box .friend-message:active .fa[data-v-14290628] {\n  opacity: 0;\n}\n.container-right .chat-box .friend-message .friend-time[data-v-14290628] {\n  font-size: 0.8rem;\n  opacity: 0.5;\n}\n.container-right .chat-box .friend-message .txt-message-normal[data-v-14290628]::before {\n  content: \"\";\n  position: absolute;\n  top: 0;\n  left: -15px;\n  width: 25px;\n  height: 25px;\n  background: linear-gradient(-135deg, rgb(255, 229, 229) 0%, rgb(255, 229, 229) 50%, transparent 50%, transparent);\n  transition: 0.2s;\n}\n.container-right .typing[data-v-14290628] {\n  position: absolute;\n  width: 100%;\n  bottom: 50px;\n  left: 50px;\n  color: rgb(15, 234, 110);\n  font-weight: bold;\n  font-size: 0.6rem;\n}\n.container-right .footer-right[data-v-14290628] {\n  z-index: 9;\n  position: relative;\n  height: 60px;\n  width: 100%;\n  padding: 15px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  background: #F2F3F5;\n}\n.container-right .footer-right .first[data-v-14290628] {\n  width: 10%;\n  display: flex;\n  justify-content: center;\n  font-size: 1.3rem;\n}\n.container-right .footer-right .first .emojis-header[data-v-14290628] {\n  z-index: 1;\n  top: -400px;\n  left: 0;\n  position: absolute;\n  background: #F2F3F5;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 50px;\n  width: 100%;\n  opacity: 0;\n}\n.container-right .footer-right .first .emojis-header #searchEmojis[data-v-14290628] {\n  width: 80%;\n  border: none;\n  outline: none;\n  border-radius: 20px;\n  padding: 8px 15px;\n  font-size: 0.8rem;\n  background: white;\n}\n.container-right .footer-right .first .active[data-v-14290628] {\n  opacity: 1;\n}\n.container-right .footer-right .first .emojis[data-v-14290628] {\n  z-index: 0;\n  top: -350px;\n  left: 0;\n  position: absolute;\n  width: 100%;\n  height: 350px;\n  padding: 0 1rem;\n  display: flex;\n  flex-wrap: wrap;\n  overflow-y: auto;\n  background: #F2F3F5;\n  opacity: 0;\n}\n.container-right .footer-right .first .emojis .emoji[data-v-14290628] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 2rem;\n  margin: 0.5rem;\n  cursor: pointer;\n  border-radius: 50%;\n  height: 50px;\n  width: 50px;\n  transition: 1s;\n}\n.container-right .footer-right .first .emojis .emoji[data-v-14290628]:hover {\n  background: white;\n}\n.container-right .footer-right .first .active[data-v-14290628] {\n  opacity: 1;\n}\n.container-right .footer-right .second[data-v-14290628] {\n  width: 80%;\n}\n.container-right .footer-right .second #search[data-v-14290628] {\n  width: 100%;\n  border: none;\n  outline: none;\n  border-radius: 20px;\n  padding: 8px 15px;\n  font-size: 0.8rem;\n  background: white;\n}\n.container-right .footer-right .third[data-v-14290628] {\n  width: 10%;\n  display: flex;\n  justify-content: center;\n  font-size: 1.3rem;\n}", ""]);
+exports.push([module.i, ".container-right[data-v-14290628]:before {\n  position: absolute;\n  top: 60px;\n  left: 0;\n  width: 100%;\n  height: calc(100% - 120px);\n  content: \"\";\n  background: url(\"/assets/logo.png\");\n  background-repeat: no-repeat;\n  background-position: center;\n}\n.container-right[data-v-14290628] {\n  position: relative;\n  flex: 70%;\n  background: #000000;\n}\n.container-right .header-right[data-v-14290628] {\n  height: 60px;\n  background: #f6f6f6;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 10px;\n}\n.container-right .header-right .user-image[data-v-14290628] {\n  position: relative;\n  height: 40px;\n  width: 40px;\n  border-radius: 50%;\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n  cursor: pointer;\n  transition: 0.1s;\n  background: #f6f6f6;\n}\n.container-right .header-right .activeProfile[data-v-14290628] {\n  border: 2px solid #05fa6f;\n}\n.container-right .header-right .activeName[data-v-14290628] {\n  margin: 0;\n  font-weight: bolder;\n  text-transform: uppercase;\n}\n.container-right .header-right .nav-icons[data-v-14290628] {\n  font-size: 1rem;\n  position: relative;\n}\n.container-right .header-right .nav-icons .settings[data-v-14290628] {\n  position: absolute;\n  width: 200px;\n  background: #f6f6f6;\n  right: -10px;\n  z-index: 9;\n  opacity: 0;\n  transition: opacity 1s;\n}\n.container-right .header-right .nav-icons .settings ul[data-v-14290628] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: flex-end;\n  list-style: none;\n  padding: 0 1rem;\n}\n.container-right .header-right .nav-icons .settings ul li[data-v-14290628] {\n  cursor: pointer;\n  width: -moz-fit-content;\n  width: fit-content;\n}\n.container-right .header-right .nav-icons .settings ul li[data-v-14290628]:hover {\n  color: #4aa0e6;\n}\n.container-right .header-right .nav-icons .settings ul a[data-v-14290628] {\n  text-decoration: none;\n  text-underline: none;\n  color: black;\n}\n.container-right .header-right .nav-icons .settings ul a[data-v-14290628]:hover {\n  color: #4aa0e6;\n}\n.container-right .header-right .nav-icons .active[data-v-14290628] {\n  opacity: 1;\n}\n.container-right .header-right .nav-icons .fa[data-v-14290628] {\n  cursor: pointer;\n}\n.container-right .boxNewAnimal[data-v-14290628] {\n  z-index: 10;\n  position: absolute;\n  top: 1px;\n  left: 0;\n  width: 100%;\n  height: calc(100% - 0px);\n  background: white;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n}\n.container-right .boxNewAnimal .manage-top[data-v-14290628] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 60px;\n  width: 100%;\n  background: #f6f6f6;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.container-right .boxNewAnimal .manage-top .manage-img[data-v-14290628] {\n  position: relative;\n  height: 40px;\n  width: 40px;\n  border-radius: 50%;\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n}\n.container-right .boxNewAnimal .manage-down[data-v-14290628] {\n  position: absolute;\n  top: 60px;\n  left: 0;\n  height: 50px;\n  width: 100%;\n  background: #f6f6f6;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  padding: 0 15px;\n}\n.container-right .boxNewAnimal .manage-content[data-v-14290628] {\n  position: absolute;\n  bottom: 0;\n  width: 100%;\n  height: calc(100% - 110px);\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  padding: 2rem;\n}\n.container-right .boxNewAnimal .manage-content .cover-animal[data-v-14290628] {\n  border-radius: 50%;\n  -o-object-fit: cover;\n     object-fit: cover;\n  height: 80px;\n  width: 80px;\n  padding: 1rem;\n  margin: 1rem;\n  cursor: pointer;\n  transition: 0.1s;\n}\n.container-right .boxNewAnimal .manage-content .manage-content-up[data-v-14290628] {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  height: 50%;\n  width: 100%;\n  overflow-y: auto;\n}\n.container-right .boxNewAnimal .manage-content .manage-content-down[data-v-14290628] {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  height: 50%;\n  width: 100%;\n  overflow-y: auto;\n}\n.container-right .img-profile[data-v-14290628] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 400px;\n  height: 400px;\n  background-size: cover !important;\n  background-repeat: no-repeat !important;\n  background-position: center !important;\n  border: 0;\n  z-index: 10;\n}\n.container-right .remove-img-profile[data-v-14290628] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  top: 0;\n  right: -30px;\n  transform: translate(-50%, -50%);\n  color: #ff0000;\n  background: #fcfcfc;\n  border-radius: 50%;\n  z-index: 12;\n}\n.container-right .remove-img-profile .fa[data-v-14290628] {\n  font-size: 30px;\n  cursor: pointer;\n}\n.container-right .chat-box[data-v-14290628] {\n  position: relative;\n  width: 100%;\n  height: calc(100% - 120px);\n  padding: 0 50px;\n  overflow-y: auto;\n  transition: 0.8s;\n}\n.container-right .chat-box .message[data-v-14290628] {\n  position: relative;\n  margin: 5px 0;\n  width: 100%;\n  min-height: 50px;\n  display: flex;\n  transition: 0.2s;\n}\n.container-right .chat-box .message[data-v-14290628]:active {\n  background: #4aa0e6;\n  opacity: 0.8;\n  border-radius: 0;\n}\n.container-right .chat-box .message:active .my-message[data-v-14290628] {\n  border-radius: 0;\n  background: #4aa0e6;\n}\n.container-right .chat-box .message:active .my-message .txt-message-normal[data-v-14290628]:before {\n  opacity: 0;\n}\n.container-right .chat-box .message:active .friend-message[data-v-14290628] {\n  border-radius: 0;\n  background: #4aa0e6;\n}\n.container-right .chat-box .message:active .friend-message .txt-message-normal[data-v-14290628]:before {\n  opacity: 0;\n}\n.container-right .chat-box .message p[data-v-14290628] {\n  margin: 0;\n  font-size: 0.8rem;\n}\n.container-right .chat-box .my-message[data-v-14290628] {\n  position: relative;\n  max-width: 65%;\n  text-align: right;\n  background: #fffbdb;\n  padding: 8px 20px 0 20px;\n  border-radius: 10px;\n  transition: 0.2s;\n}\n.container-right .chat-box .my-message .fa[data-v-14290628] {\n  position: absolute;\n  top: -12px;\n  left: -12px;\n  font-size: 25px;\n  color: red;\n  background: white;\n  border-radius: 50%;\n  opacity: 0;\n  transition: 0.2s;\n  cursor: pointer;\n}\n.container-right .chat-box .my-message:hover .fa[data-v-14290628] {\n  opacity: 1;\n}\n.container-right .chat-box .my-message:active .fa[data-v-14290628] {\n  opacity: 0;\n}\n.container-right .chat-box .my-message .my-time[data-v-14290628] {\n  font-size: 0.8rem;\n  opacity: 0.5;\n}\n.container-right .chat-box .my-message .txt-message-normal[data-v-14290628]::before {\n  content: \"\";\n  position: absolute;\n  top: 0;\n  right: -15px;\n  width: 25px;\n  height: 25px;\n  background: linear-gradient(135deg, #fffbdb 0%, #fffbdb 50%, transparent 50%, transparent);\n  transition: 0.2s;\n}\n.container-right .chat-box .friend-message[data-v-14290628] {\n  position: relative;\n  max-width: 65%;\n  text-align: left;\n  background: rgb(255, 229, 229);\n  padding: 8px 15px 0 15px;\n  border-radius: 10px;\n  transition: 0.2s;\n}\n.container-right .chat-box .friend-message .fa[data-v-14290628] {\n  position: absolute;\n  top: -12px;\n  right: -12px;\n  font-size: 25px;\n  color: red;\n  background: white;\n  border-radius: 50%;\n  opacity: 0;\n  transition: 0.2s;\n  cursor: pointer;\n}\n.container-right .chat-box .friend-message:hover .fa[data-v-14290628] {\n  opacity: 1;\n}\n.container-right .chat-box .friend-message:active .fa[data-v-14290628] {\n  opacity: 0;\n}\n.container-right .chat-box .friend-message .friend-time[data-v-14290628] {\n  font-size: 0.8rem;\n  opacity: 0.5;\n}\n.container-right .chat-box .friend-message .txt-message-normal[data-v-14290628]::before {\n  content: \"\";\n  position: absolute;\n  top: 0;\n  left: -15px;\n  width: 25px;\n  height: 25px;\n  background: linear-gradient(-135deg, rgb(255, 229, 229) 0%, rgb(255, 229, 229) 50%, transparent 50%, transparent);\n  transition: 0.2s;\n}\n.container-right .typing[data-v-14290628] {\n  position: absolute;\n  width: 100%;\n  bottom: 50px;\n  left: 50px;\n  color: rgb(15, 234, 110);\n  font-weight: bold;\n  font-size: 0.6rem;\n}\n.container-right .footer-right[data-v-14290628] {\n  z-index: 9;\n  position: relative;\n  height: 60px;\n  width: 100%;\n  padding: 15px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  background: #F2F3F5;\n}\n.container-right .footer-right .first[data-v-14290628] {\n  width: 10%;\n  display: flex;\n  justify-content: center;\n  font-size: 1.3rem;\n}\n.container-right .footer-right .first .emojis-header[data-v-14290628] {\n  z-index: 1;\n  top: -400px;\n  left: 0;\n  position: absolute;\n  background: #F2F3F5;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 50px;\n  width: 100%;\n  opacity: 0;\n}\n.container-right .footer-right .first .emojis-header #searchEmojis[data-v-14290628] {\n  width: 80%;\n  border: none;\n  outline: none;\n  border-radius: 20px;\n  padding: 8px 15px;\n  font-size: 0.8rem;\n  background: white;\n}\n.container-right .footer-right .first .active[data-v-14290628] {\n  opacity: 1;\n}\n.container-right .footer-right .first .emojis[data-v-14290628] {\n  z-index: 0;\n  top: -350px;\n  left: 0;\n  position: absolute;\n  width: 100%;\n  height: 350px;\n  padding: 0 1rem;\n  display: flex;\n  flex-wrap: wrap;\n  overflow-y: auto;\n  background: #F2F3F5;\n  opacity: 0;\n}\n.container-right .footer-right .first .emojis .emoji[data-v-14290628] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 2rem;\n  margin: 0.5rem;\n  cursor: pointer;\n  border-radius: 50%;\n  height: 50px;\n  width: 50px;\n  transition: 1s;\n}\n.container-right .footer-right .first .emojis .emoji[data-v-14290628]:hover {\n  background: white;\n}\n.container-right .footer-right .first .active[data-v-14290628] {\n  opacity: 1;\n}\n.container-right .footer-right .second[data-v-14290628] {\n  width: 80%;\n}\n.container-right .footer-right .second #search[data-v-14290628] {\n  width: 100%;\n  border: none;\n  outline: none;\n  border-radius: 20px;\n  padding: 8px 15px;\n  font-size: 0.8rem;\n  background: white;\n}\n.container-right .footer-right .third[data-v-14290628] {\n  width: 10%;\n  display: flex;\n  justify-content: center;\n  font-size: 1.3rem;\n}", ""]);
 
 // exports
 
@@ -3022,7 +3034,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".spiderapp[data-v-04c29797] {\n  display: flex;\n  min-width: 1100px;\n  width: 80vw;\n  height: calc(100vh - 60px);\n  background: #fff;\n  /*box-shadow: h-shadow v-shadow blur spread color inset;*/\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.06);\n  /*fix*/\n  padding: 0;\n}", ""]);
+exports.push([module.i, ".animalsapp[data-v-04c29797] {\n  display: flex;\n  min-width: 1100px;\n  width: 80vw;\n  height: calc(100vh - 60px);\n  background: #fff;\n  /*box-shadow: h-shadow v-shadow blur spread color inset;*/\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.06);\n  /*fix*/\n  padding: 0;\n}", ""]);
 
 // exports
 
@@ -3041,7 +3053,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "body {\n  font-family: \"Josefin Sans\", sans-serif;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 100vh;\n  background: linear-gradient(#000000 0vh, #000000 45vh, #000000 45vh, #fff 100vh);\n  -webkit-user-select: none; /* Safari */\n  -moz-user-select: none; /* Firefox */ /* Internet Explorer */\n  user-select: none; /* Standard syntax */\n}\n\n/* Enable text selection for specific elements */\n.allow-select {\n  -webkit-user-select: auto; /* Safari */\n  -moz-user-select: auto; /* Firefox */ /* Internet Explorer */\n  user-select: auto; /* Standard syntax */\n}", ""]);
+exports.push([module.i, "body {\n  font-family: \"Josefin Sans\", sans-serif;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 100vh;\n  background: linear-gradient(#000000 0vh, #000000 45vh, #000000 45vh, #fff 100vh);\n}", ""]);
 
 // exports
 
@@ -25637,7 +25649,7 @@ function addStyle (obj, options) {
 	// If a transform function was defined, run it on the css
 	if (options.transform && obj.css) {
 	    result = typeof options.transform === 'function'
-		 ? options.transform(obj.css)
+		 ? options.transform(obj.css) 
 		 : options.transform.default(obj.css);
 
 	    if (result) {
@@ -29877,7 +29889,7 @@ function createTextVNode(val) {
 // multiple renders, cloning them avoids errors when DOM manipulations rely
 // on their elm reference.
 function cloneVNode(vnode) {
-    const cloned = new VNode(vnode.tag, vnode.data,
+    const cloned = new VNode(vnode.tag, vnode.data, 
     // #7975
     // clone children array to avoid mutating original in case of cloning
     // a child.
@@ -31273,7 +31285,7 @@ function bindObjectListeners(data, value) {
     return data;
 }
 
-function resolveScopedSlots(fns, res,
+function resolveScopedSlots(fns, res, 
 // the following are added in 2.6
 hasDynamicKeys, contentHashKey) {
     res = res || { $stable: !hasDynamicKeys };
@@ -33313,7 +33325,7 @@ let uid$1 = 0;
  */
 class Watcher {
     constructor(vm, expOrFn, cb, options, isRenderWatcher) {
-        recordEffectScope(this,
+        recordEffectScope(this, 
         // if the active effect scope is manually created (not a component scope),
         // prioritize it
         activeEffectScope && !activeEffectScope._vm
@@ -34213,14 +34225,14 @@ function createComponent(Ctor, data, context, children, tag) {
     const name = getComponentName(Ctor.options) || tag;
     const vnode = new VNode(
     // @ts-expect-error
-    `vue-component-${Ctor.cid}${name ? `-${name}` : ''}`, data, undefined, undefined, undefined, context,
+    `vue-component-${Ctor.cid}${name ? `-${name}` : ''}`, data, undefined, undefined, undefined, context, 
     // @ts-expect-error
     { Ctor, propsData, listeners, tag, children }, asyncFactory);
     return vnode;
 }
 function createComponentInstanceForVnode(
 // we know it's MountedComponentVNode but flow doesn't
-vnode,
+vnode, 
 // activeInstance in lifecycle state
 parent) {
     const options = {
@@ -36295,7 +36307,7 @@ function createPatchFunction(backend) {
                 const oldElm = oldVnode.elm;
                 const parentElm = nodeOps.parentNode(oldElm);
                 // create new node
-                createElm(vnode, insertedVnodeQueue,
+                createElm(vnode, insertedVnodeQueue, 
                 // extremely rare edge case: do not insert if old element is in a
                 // leaving transition. Only happens when combining transition +
                 // keep-alive + HOCs. (#4590)
@@ -37193,7 +37205,7 @@ function add(name, handler, capture, passive) {
     target.addEventListener(name, handler, supportsPassive ? { capture, passive } : capture);
 }
 function remove(name, handler, capture, _target) {
-    (_target || target).removeEventListener(name,
+    (_target || target).removeEventListener(name, 
     //@ts-expect-error
     handler._wrapper || handler, capture);
 }
@@ -41178,7 +41190,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   "9bbcf54a",
   null
-
+  
 )
 
 /* hot reload */
@@ -41198,7 +41210,7 @@ component.options.__file = "resources/js/components/LeftComponent.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LeftComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./LeftComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LeftComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LeftComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LeftComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -41265,7 +41277,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   "14290628",
   null
-
+  
 )
 
 /* hot reload */
@@ -41285,7 +41297,7 @@ component.options.__file = "resources/js/components/RightComponent.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RightComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./RightComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/RightComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RightComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RightComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -41386,7 +41398,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   "520b5d54",
   null
-
+  
 )
 
 /* hot reload */
@@ -41406,7 +41418,7 @@ component.options.__file = "resources/js/pages/About.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_About_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./About.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/About.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_About_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_About_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -41455,7 +41467,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   "2d69ed48",
   null
-
+  
 )
 
 /* hot reload */
@@ -41475,7 +41487,7 @@ component.options.__file = "resources/js/pages/Contacts.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Contacts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Contacts.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Contacts.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Contacts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Contacts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -41526,7 +41538,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   "04c29797",
   null
-
+  
 )
 
 /* hot reload */
@@ -41546,7 +41558,7 @@ component.options.__file = "resources/js/pages/HomePage.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HomePage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./HomePage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/HomePage.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HomePage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HomePage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -41658,7 +41670,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-
+  
 )
 
 /* hot reload */
@@ -41680,7 +41692,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/App.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a);
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

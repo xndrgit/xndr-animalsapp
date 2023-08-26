@@ -1,16 +1,19 @@
 <template>
-    <div class="spiderapp">
-        <LeftComponent :contactsGift="contacts" :userGift="user" @activeChat="activeChatFunction"
-                       @viewNewAnimal="handleForm"/>
-        <RightComponent :activeChatGift="activeChat" :contactsGift="contacts" :userGift="user"
-                        @activeChatDelete="clearChat" @dogMsg="dogMsgFunction" @index="removeFunction"
-                        @newMsg="pushFunction"
-                        @puchoMsg="pMsgFunction"
-                        @cowMsg="cowMsgFunction"
-                        @sheepMsg="sheepMsgFunction"
+    <div class="animalsapp">
 
-                        :viewFormGift="viewForm"
-                        @newContact="newContactFunction"
+        <LeftComponent
+            :contactsGift="contacts" :userGift="user" @activeChat="activeChatFunction"
+            @viewNewAnimal="handleForm"
+        />
+        <RightComponent
+            :activeChatGift="activeChat" :contactsGift="contacts" :userGift="user"
+            :viewFormGift="viewForm" @activeChatDelete="clearChat" @cowMsg="cowMsgFunction"
+            @dogMsg="dogMsgFunction"
+            @index="removeFunction"
+            @newContact="newContactFunction"
+            @newMsg="pushFunction"
+            @puchoMsg="pMsgFunction"
+            @sheepMsg="sheepMsgFunction"
         />
 
     </div>
@@ -23,7 +26,7 @@ import RightComponent from "../components/RightComponent.vue";
 export default {
     data: function () {
         return {
-            activeChat: -1,
+            activeChat: 0,
             user: {
                 name: "AnimalsApp",
                 avatar: "/assets/logo.png",
@@ -33,6 +36,7 @@ export default {
                     name: "Dog",
                     avatar: "/assets/dog.png",
                     visible: true,
+                    active: true,
                     messages: [
                         {
                             date: "2022-06-01T10:35:00Z",
@@ -45,6 +49,7 @@ export default {
                     name: "Pucho",
                     avatar: "/assets/pucho.png",
                     visible: true,
+                    active: true,
                     messages: [
                         {
                             date: "2022-06-02T08:15:00Z",
@@ -57,6 +62,7 @@ export default {
                     name: "Cow",
                     avatar: "/assets/cow.png",
                     visible: true,
+                    active: false,
                     messages: [
                         {
                             date: "2022-06-02T08:15:00Z",
@@ -69,6 +75,7 @@ export default {
                     name: "Sheep",
                     avatar: "/assets/sheep.png",
                     visible: true,
+                    active: false,
                     messages: [
                         {
                             date: "2022-06-03T14:50:00Z",
@@ -146,7 +153,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.spiderapp {
+.animalsapp {
     display: flex;
 
     min-width: 1100px;
@@ -160,5 +167,4 @@ export default {
     /*fix*/
     padding: 0;
 }
-
 </style>

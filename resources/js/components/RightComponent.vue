@@ -25,28 +25,62 @@
             </div>
         </div>
         <div v-if="viewFormGift" class="boxNewAnimal">
-            <div>
-                <img alt="formLogo" class="formLogo cover" src="../../../public/assets/logoplus.jpg">
+            <div class="manage-top">
+                <div class="manage-img">
+                    <img alt="logo" class="img-fluid cover" src="../../../public/assets/logoplus.jpg">
+                </div>
             </div>
-            <form ref="formNewAnimal" class="formNewAnimal" @submit.prevent="handleSubmit">
-                <h6 class="newLabel text-danger">{{ errorMessage }}</h6>
-                <input id="newName" v-model="formName" class="newName" name="text"
-                       pattern="Pucho"
-                       placeholder="Name your animal"
-                       required
-                       type="text"
-                       @keyup.enter="handleSubmit"
-                />
-                <!--                <h2 class="newLabel">Insert URL Image</h2>-->
-                <input id="newUrl" v-model="formUrl" class="newUrl" name="url"
-                       pattern="https://.*"
-                       placeholder="https://example.com"
-                       required
-                       type="url"
-                       @keyup.enter="handleSubmit"
-                />
-                <i class="fa fa-2x fa-solid fa-paper-plane" @click.prevent="handleSubmit"></i>
-            </form>
+            <!--            <form ref="formNewAnimal" class="formNewAnimal" @submit.prevent="handleSubmit">-->
+            <!--                <h6 class="newLabel text-danger">{{ errorMessage }}</h6>-->
+            <!--                <input id="newName" v-model="formName" class="newName" name="text"-->
+            <!--                       pattern="Pucho"-->
+            <!--                       placeholder="Name your animal"-->
+            <!--                       required-->
+            <!--                       type="text"-->
+            <!--                       @keyup.enter="handleSubmit"-->
+            <!--                />-->
+            <!--                &lt;!&ndash;                <h2 class="newLabel">Insert URL Image</h2>&ndash;&gt;-->
+            <!--                <input id="newUrl" v-model="formUrl" class="newUrl" name="url"-->
+            <!--                       pattern="https://.*"-->
+            <!--                       placeholder="https://example.com"-->
+            <!--                       required-->
+            <!--                       type="url"-->
+            <!--                       @keyup.enter="handleSubmit"-->
+            <!--                />-->
+            <!--                <i class="fa fa-2x fa-solid fa-paper-plane" @click.prevent="handleSubmit"></i>-->
+            <!--            </form>-->
+
+            <div class="manage-down">
+                <div class="div-search">
+                    <input
+                        v-model="searchInput"
+                        class="input-search"
+                        placeholder="Search for an animal"
+                        type="text"
+                        @keyup="searchContact(searchInput)"
+                    />
+                    <i class="fa-brands fa-searchengin fa-bounce" @click="searchContact(searchInput)"></i>
+                </div>
+            </div>
+
+            <div class="manage-content">
+                <div class="manage-content-up">
+                    <div v-for="(element, index) in contactsGift" v-if="element.active" :key="index.element"
+                         class="cover-animal boxs-green" @click="handleActive(index)">
+                        <img :src="element.avatar" alt="cover-animal" class=" img-fluid">
+                    </div>
+                    <div v-for="(element, index) in contactsGift" v-if="!element.active" :key="index.element"
+                         class="cover-animal boxs-red" @click="handleActive(index)">
+                        <img :src="element.avatar" alt="cover-animal" class=" img-fluid">
+                    </div>
+                </div>
+                <div class="manage-content-down">
+
+                </div>
+
+            </div>
+
+
         </div>
 
         <div ref="chatBox" :class="viewProfile ? 'bgOpacity': '' " class="chat-box">
@@ -382,6 +416,9 @@ export default {
         //     // this.formUrl = "";
         //     // this.viewFormGift = !this.viewFormGift;
         // }
+        handleActive(index) {
+            this.contactsGift[index].active = !this.contactsGift[index].active;
+        },
 
     }
 }
@@ -390,9 +427,6 @@ export default {
 
 <style lang="scss" scoped>
 
-.bgOpacity {
-    background: #F2F3F5;
-}
 .container-right:before {
     position: absolute;
 
@@ -438,22 +472,7 @@ export default {
             cursor: pointer;
 
             transition: 0.1s;
-
-
-            .cover {
-                position: absolute;
-                top: 0;
-                left: 0;
-
-                overflow: hidden;
-
-                border-radius: 50%;
-
-                height: 100%;
-                width: 100%;
-
-                object-fit: cover;
-            }
+            background: #f6f6f6;
         }
 
         .activeProfile {
@@ -463,6 +482,7 @@ export default {
         .activeName {
             margin: 0;
             font-weight: bolder;
+            text-transform: uppercase;
         }
 
         .nav-icons {
@@ -526,86 +546,170 @@ export default {
     .boxNewAnimal {
         z-index: 10;
         position: absolute;
-        top: 60px;
+        top: 1px;
         left: 0;
         width: 100%;
-        height: calc(100% - 60px);
+        height: calc(100% - 0px);
         background: white;
-
         display: flex;
+        flex-direction: column;
+
         align-items: center;
         justify-content: center;
 
-        .formLogo {
-            width: 200px;
-            padding: 2rem;
+        .manage-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            height: 60px;
+            width: 100%;
+            background: #f6f6f6;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .manage-img {
+                position: relative;
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
         }
 
-        .formNewAnimal {
+        .manage-down {
+            position: absolute;
+            top: 60px;
+            left: 0;
+
+            height: 50px;
+            width: 100%;
+            background: #f6f6f6;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 0 15px;
+        }
+
+        .manage-content {
+            position: absolute;
+            bottom: 0;
+
+            width: 100%;
+            height: calc(100% - 110px);
+
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
 
-            //.newLabel{
-            //    color: red;
-            //    font-size: 100px;
-            //    font-weight: bold;
-            //    margin: 0 0 24px;
-            //    text-align: center;
-            //}
 
-            #newUrl,
-            #newName {
-                /* Box model */
-                box-sizing: border-box;
-                width: 200px;
-                height: 40px;
-                padding: 15px;
-                margin-bottom: 20px;
+            padding: 2rem;
 
-                /* Typography */
-                font-size: 10px;
-                font-family: Arial, sans-serif;
-                color: #333;
+            .cover-animal {
+                border-radius: 50%;
 
-                /* Border and background */
-                border: 2px solid #ddd;
-                border-radius: 5px;
-                background-color: #f9f9f9;
+                object-fit: cover;
+                height: 80px;
+                width: 80px;
 
-                &:focus {
-                    border-color: #007bff;
-                    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-                }
+                padding: 1rem;
+                margin: 1rem;
 
-                /* Add some hover effect for better user feedback */
-                &:hover {
-                    cursor: pointer;
-                    background: white;
-                }
-
-                /* Add some transition for a smooth effect */
-                #newUrl,
-                #newName {
-                    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-                }
+                cursor: pointer;
+                transition: 0.1s;
             }
 
-            .fa {
-                font-size: 20px;
-                transition: 0.1s;
+            .manage-content-up {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
 
-                &:hover {
-                    opacity: 0.8;
-                }
+                height: 50%;
+                width: 100%;
+                overflow-y: auto;
+            }
 
-                &:active {
-                    color: #00ff00;
-                    opacity: 1;
-                }
+            .manage-content-down {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+
+                height: 50%;
+                width: 100%;
+                overflow-y: auto;
             }
         }
+
+        //.formNewAnimal {
+        //    display: flex;
+        //    flex-direction: column;
+        //    justify-content: center;
+        //    align-items: center;
+        //
+        //    //.newLabel{
+        //    //    color: red;
+        //    //    font-size: 100px;
+        //    //    font-weight: bold;
+        //    //    margin: 0 0 24px;
+        //    //    text-align: center;
+        //    //}
+        //
+        //    #newUrl,
+        //    #newName {
+        //        /* Box model */
+        //        box-sizing: border-box;
+        //        width: 200px;
+        //        height: 40px;
+        //        padding: 15px;
+        //        margin-bottom: 20px;
+        //
+        //        /* Typography */
+        //        font-size: 10px;
+        //        font-family: Arial, sans-serif;
+        //        color: #333;
+        //
+        //        /* Border and background */
+        //        border: 2px solid #ddd;
+        //        border-radius: 5px;
+        //        background-color: #f9f9f9;
+        //
+        //        &:focus {
+        //            border-color: #007bff;
+        //            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        //        }
+        //
+        //        /* Add some hover effect for better user feedback */
+        //        &:hover {
+        //            cursor: pointer;
+        //            background: white;
+        //        }
+        //
+        //        /* Add some transition for a smooth effect */
+        //        #newUrl,
+        //        #newName {
+        //            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        //        }
+        //    }
+        //
+        //    .fa {
+        //        font-size: 20px;
+        //        transition: 0.1s;
+        //
+        //        &:hover {
+        //            opacity: 0.8;
+        //        }
+        //
+        //        &:active {
+        //            color: #00ff00;
+        //            opacity: 1;
+        //        }
+        //    }
+        //}
 
     }
 
