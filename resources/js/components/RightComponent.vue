@@ -12,7 +12,7 @@
                         <li @click="clearChat(activeChatGift)">Clear Chat | 🧹</li>
                         <li><a href="https://github.com/XanderWorld/laravel7-spiderapp-XanderWilde">Repository | 🔏</a>
                         </li>
-                        <li><a href="https://github.com/XndrWilde">Git | ℹ️</a></li>
+                        <li><a href="https://github.com/xndrgit">Git | ℹ️</a></li>
                     </ul>
                 </div>
             </div>
@@ -528,6 +528,7 @@ export default {
                     li {
                         cursor: pointer;
                         width: fit-content;
+                        color: black;
 
                         &:hover {
                             color: #4aa0e6;

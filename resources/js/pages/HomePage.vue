@@ -1,25 +1,32 @@
 <template>
-    <div class="animalsapp">
+    <div>
+        <div class="animalsapp d-none d-lg-flex">
 
-        <LeftComponent
-            :contactsGift="contacts" :userGift="user" @activeChat="activeChatFunction"
-            @viewNewAnimal="handleForm"
-        />
-        <RightComponent
-            :activeChatGift="activeChat" :contactsGift="contacts" :userGift="user"
-            :viewFormGift="viewForm" @activeChatDelete="clearChat" @cowMsg="cowMsgFunction"
-            @dogMsg="dogMsgFunction"
-            @index="removeFunction"
-            @newContact="newContactFunction"
-            @newMsg="pushFunction"
-            @puchoMsg="pMsgFunction"
-            @sheepMsg="sheepMsgFunction"
-            @giraffeMsg="giraffeMsgFunction"
+            <LeftComponent
+                :contactsGift="contacts" :userGift="user" @activeChat="activeChatFunction"
+                @viewNewAnimal="handleForm"
+            />
+            <RightComponent
+                :activeChatGift="activeChat" :contactsGift="contacts" :userGift="user"
+                :viewFormGift="viewForm" @activeChatDelete="clearChat" @cowMsg="cowMsgFunction"
+                @dogMsg="dogMsgFunction"
+                @giraffeMsg="giraffeMsgFunction"
+                @index="removeFunction"
+                @newContact="newContactFunction"
+                @newMsg="pushFunction"
+                @puchoMsg="pMsgFunction"
+                @sheepMsg="sheepMsgFunction"
 
 
-        />
+            />
 
+        </div>
+        <div class="onWorking d-flex d-lg-none">
+            <img alt="onWorking" class="img-fluid"
+                 src="https://cdn.dribbble.com/users/3050354/screenshots/14646894/media/1f31948afd5401c44d4bae934f07641a.gif">
+        </div>
     </div>
+
 </template>
 
 <script>
@@ -176,8 +183,6 @@ export default {
 <style lang="scss" scoped>
 .animalsapp {
     display: flex;
-
-    min-width: 1100px;
     width: 80vw;
     height: calc(100vh - 60px);
     background: #fff;
@@ -187,5 +192,13 @@ export default {
 
     /*fix*/
     padding: 0;
+}
+
+.onWorking {
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+
+    background: white;
 }
 </style>
