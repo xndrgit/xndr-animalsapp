@@ -513,7 +513,7 @@ export default {
                 top: 50px;
 
                 border-radius: 5px;
-                //box-shadow: 10px 10px #f97624;
+                box-shadow: 5px 5px #f97624;
 
                 z-index: 9;
                 transition: opacity 1s;

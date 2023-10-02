@@ -23,7 +23,7 @@
 
 <style lang="scss">
 body {
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'family Nunito', sans-serif;
 
     display: flex;
     align-items: center;
@@ -32,4 +32,6 @@ body {
     height: 100vh;
     background: linear-gradient(#000000 0vh, #000000 45vh, #000000 45vh, #fff 100vh);
 }
+
+
 </style>

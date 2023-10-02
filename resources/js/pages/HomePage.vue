@@ -183,7 +183,7 @@ export default {
 <style lang="scss" scoped>
 .animalsapp {
     display: flex;
-    width: 80vw;
+    width: 96vw;
     height: calc(100vh - 60px);
     background: #fff;
 
