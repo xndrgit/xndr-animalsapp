@@ -6,13 +6,14 @@
             </div>
             <h4 class="activeName">{{ contactsGift[activeChatGift].name }}</h4>
             <div class="nav-icons">
-                <i class="ml-2 fa fa-solid fa-gear" @click="handleSettings"></i>
+                <i v-if="!settings" class="ml-2 fa-lg fa fa-solid fa-gear" @click="handleSettings"></i>
+                <i v-if="settings" class="ml-2 fa-lg fa fa-regular fa-circle-xmark fa-fade" @click="handleSettings"></i>
                 <div v-if="settings" :class="settings ? 'active' : ''" class="settings">
                     <ul>
-                        <li @click="clearChat(activeChatGift)">Clear Chat | 🧹</li>
-                        <li><a href="https://github.com/XanderWorld/laravel7-spiderapp-XanderWilde">Repository | 🔏</a>
+                        <li @click="clearChat(activeChatGift)">Clear Chat</li>
+                        <li><a href="https://github.com/XanderWorld/laravel7-spiderapp-XanderWilde">Repository</a>
                         </li>
-                        <li><a href="https://github.com/xndrgit">Git | ℹ️</a></li>
+                        <li><a href="https://github.com/xndrgit">Git</a></li>
                     </ul>
                 </div>
             </div>
@@ -21,7 +22,7 @@
         <div v-if="viewProfile"
              :style="{ background: `url(${contactsGift[activeChatGift].avatar})` }" class="img-profile">
             <div v-if="viewProfile" class="remove-img-profile" @click="removeProfileFunction">
-                <i class="fa fa-solid fa-circle-xmark fa-bounce"></i>
+                <i class="fa fa-solid fa-circle-xmark fa-fade"></i>
             </div>
         </div>
         <div v-if="viewFormGift" class="boxNewAnimal">
@@ -504,14 +505,17 @@ export default {
 
             .settings {
                 position: absolute;
+
+                background: white;
+
                 width: 200px;
+                right: 10px;
+                top: 50px;
 
-                background: #f6f6f6;
-
-                right: -10px;
+                border-radius: 5px;
+                //box-shadow: 10px 10px #f97624;
 
                 z-index: 9;
-                opacity: 0;
                 transition: opacity 1s;
 
 
@@ -519,7 +523,7 @@ export default {
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
-                    align-items: flex-end;
+                    align-items: center;
 
                     list-style: none;
 
@@ -527,11 +531,13 @@ export default {
 
                     li {
                         cursor: pointer;
-                        width: fit-content;
+                        width: 200px;
+                        padding-left: 20px;
+                        border-radius: 5px;
                         color: black;
 
                         &:hover {
-                            color: #4aa0e6;
+                            background: #fbd4ae;
                         }
                     }
 
@@ -541,7 +547,6 @@ export default {
                         color: black;
 
                         &:hover {
-                            color: #4aa0e6;
                         }
                     }
                 }
@@ -730,14 +735,11 @@ export default {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-
-        width: 400px;
-        height: 400px;
-
+        width: 250px;
+        height: 250px;
         background-size: cover !important;
         background-repeat: no-repeat !important;
         background-position: center !important;
-
         border: 0;
         z-index: 10;
 
