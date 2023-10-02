@@ -66,11 +66,13 @@
 
             <div class="manage-content">
                 <div class="manage-content-up">
-                    <div v-for="(element, index) in contactsGift" v-if="element.active" :key="index.element"
+                    <div v-for="(element, index) in contactsGift" v-if="element.active & element.visible"
+                         :key="index.element"
                          class="cover-animal boxs-green" @click="handleActive(index)">
                         <img :src="element.avatar" alt="cover-animal" class=" img-fluid">
                     </div>
-                    <div v-for="(element, index) in contactsGift" v-if="!element.active" :key="index.element"
+                    <div v-for="(element, index) in contactsGift" v-if="!element.active & element.visible"
+                         :key="index.element"
                          class="cover-animal boxs-red" @click="handleActive(index)">
                         <img :src="element.avatar" alt="cover-animal" class=" img-fluid">
                     </div>
@@ -197,6 +199,8 @@ export default {
             formName: "",
             formUrl: "",
             errorMessage: "",
+
+            searchInput: "",
         }
     },
 
@@ -432,6 +436,19 @@ export default {
         // }
         handleActive(index) {
             this.contactsGift[index].active = !this.contactsGift[index].active;
+        },
+
+        searchContact(arg) {
+            arg = arg.trim().toLowerCase();
+
+            console.log(arg);
+
+            this.contactsGift.forEach((element) => {
+                element.visible = element.name.trim().toLowerCase().includes(arg)
+                console.log(element.visible);
+            })
+
+
         },
 
     }
