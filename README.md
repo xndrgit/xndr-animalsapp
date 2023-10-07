@@ -18,7 +18,7 @@ A fusion of Laravel and Vue.js brings this project to life.
 
 ## Xndr Sponsors
 - **[Instagram](https://www.instagram.com/xndr.ig/)**
-- **Discord User:** xndr.ds
+- **Discord:** xndr.ds
 
 ## Security Vulnerabilities
 
