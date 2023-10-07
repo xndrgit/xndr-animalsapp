@@ -18,7 +18,7 @@ A fusion of Laravel and Vue.js brings this project to life.
 If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
 ## Xndr Sponsors
-- **[Insta]([https://vehikl.com/](https://www.instagram.com/xndr.ig/))**
+- **[Insta](https://www.instagram.com/xndr.ig/)**
 - **[Discord](https://discord.com/channels/@me)** xndr.ds
 
 ## Contributing
