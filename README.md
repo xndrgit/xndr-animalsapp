@@ -5,6 +5,7 @@
 ## About the 'Speak with Animals' App
 
 Imagine a world where humans and animals can communicate effortlessly. That's the vision that inspired the 'Speak with Animals' app.
+
 With 'Speak with Animals,' you can converse with animals, and they respond authentically through AI, acting as animals themselves.
 
 ## The Technology Behind It
