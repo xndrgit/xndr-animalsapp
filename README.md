@@ -17,21 +17,9 @@ You can converse with animals, and they respond authentically through AI, acting
 A fusion of Laravel and Vue.js brings this project to life.
 
 ## Xndr Sponsors
-- **[Insta](https://www.instagram.com/xndr.ig/)**
-- **[Discord](https://discord.com/channels/@me)** **user:** xndr.ds
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **[Instagram](https://www.instagram.com/xndr.ig/)**
+- **Discord User:** xndr.ds
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+If you discover a security vulnerability, please send an e-mail to xndr via [mymails.xander@gmail.com](mailto:mymails.xander@gmail.com). All security vulnerabilities will be promptly addressed.
