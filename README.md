@@ -12,7 +12,7 @@ With 'Speak with Animals,' you can converse with animals, and they respond authe
 
 A fusion of Laravel and Vue.js brings this project to life.
 
-## Xndr Sponsors
+## Sponsors
 - **[Instagram](https://www.instagram.com/xndr.ig/)**
 - **Discord:** xndr.ds
 
