@@ -2,7 +2,7 @@
 ![logo](https://github.com/xndrgit/animalsapp-xndr/assets/115892862/8bfff1d3-9d15-4132-a8d3-a690aff7913e)
 
 
-## About the 'Speak with Animals' App
+## Goal of the 'Speak with Animals' App
 
 Imagine a world where humans and animals can communicate effortlessly. That's the vision that inspired the 'Speak with Animals' app.
 
