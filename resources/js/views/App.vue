@@ -23,7 +23,7 @@
 
 <style lang="scss">
 body {
-    font-family: 'Pixelify Sans', cursive;
+    font-family: Outfit, serif;
     display: flex;
     align-items: center;
     justify-content: center;

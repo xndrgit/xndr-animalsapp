@@ -4636,7 +4636,7 @@ module.exports = {
     for (var i = 0, len = elements.length; i < len; i++) {
       var _ret = _loop(i);
 
-      if (_ret === "continue") continue;
+      if (_ret === "continue") ;
     }
 
     return createdDocument.body.innerHTML;
@@ -6273,14 +6273,14 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery JavaScript Library v3.7.0
+ * jQuery JavaScript Library v3.7.1
  * https://jquery.com/
  *
  * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2023-05-11T18:29Z
+ * Date: 2023-08-28T13:37Z
  */
 ( function( global, factory ) {
 
@@ -6420,18 +6420,17 @@ function toType( obj ) {
 // unguarded in another place, it seems safer to define global only for this module
 
 
+    var version = "3.7.1",
 
-var version = "3.7.0",
+        rhtmlSuffix = /HTML$/i,
 
-	rhtmlSuffix = /HTML$/i,
+        // Define a local copy of jQuery
+        jQuery = function (selector, context) {
 
-	// Define a local copy of jQuery
-	jQuery = function( selector, context ) {
-
-		// The jQuery object is actually just the init constructor 'enhanced'
-		// Need init if jQuery is called (just allow error to be thrown if not included)
-		return new jQuery.fn.init( selector, context );
-	};
+            // The jQuery object is actually just the init constructor 'enhanced'
+            // Need init if jQuery is called (just allow error to be thrown if not included)
+            return new jQuery.fn.init(selector, context);
+        };
 
 jQuery.fn = jQuery.prototype = {
 
@@ -6675,26 +6674,31 @@ jQuery.extend( {
 		var node,
 			ret = "",
 			i = 0,
-			nodeType = elem.nodeType;
+            nodeType = elem.nodeType;
 
-		if ( !nodeType ) {
+        if (!nodeType) {
 
-			// If no nodeType, this is expected to be an array
-			while ( ( node = elem[ i++ ] ) ) {
+            // If no nodeType, this is expected to be an array
+            while ((node = elem[i++])) {
 
-				// Do not traverse comment nodes
-				ret += jQuery.text( node );
-			}
-		} else if ( nodeType === 1 || nodeType === 9 || nodeType === 11 ) {
-			return elem.textContent;
-		} else if ( nodeType === 3 || nodeType === 4 ) {
-			return elem.nodeValue;
-		}
+                // Do not traverse comment nodes
+                ret += jQuery.text(node);
+            }
+        }
+        if (nodeType === 1 || nodeType === 11) {
+            return elem.textContent;
+        }
+        if (nodeType === 9) {
+            return elem.documentElement.textContent;
+        }
+        if (nodeType === 3 || nodeType === 4) {
+            return elem.nodeValue;
+        }
 
-		// Do not include comment or processing instruction nodes
+        // Do not include comment or processing instruction nodes
 
-		return ret;
-	},
+        return ret;
+    },
 
 	// results is for internal usage only
 	makeArray: function( arr, results ) {
@@ -7390,32 +7394,37 @@ function setDocument( node ) {
 
 	// Update global variables
 	document = doc;
-	documentElement = document.documentElement;
-	documentIsHTML = !jQuery.isXMLDoc( document );
+    documentElement = document.documentElement;
+    documentIsHTML = !jQuery.isXMLDoc(document);
 
-	// Support: iOS 7 only, IE 9 - 11+
-	// Older browsers didn't support unprefixed `matches`.
-	matches = documentElement.matches ||
-		documentElement.webkitMatchesSelector ||
-		documentElement.msMatchesSelector;
+    // Support: iOS 7 only, IE 9 - 11+
+    // Older browsers didn't support unprefixed `matches`.
+    matches = documentElement.matches ||
+        documentElement.webkitMatchesSelector ||
+        documentElement.msMatchesSelector;
 
-	// Support: IE 9 - 11+, Edge 12 - 18+
-	// Accessing iframe documents after unload throws "permission denied" errors (see trac-13936)
-	// Support: IE 11+, Edge 17 - 18+
-	// IE/Edge sometimes throw a "Permission denied" error when strict-comparing
-	// two documents; shallow comparisons work.
-	// eslint-disable-next-line eqeqeq
-	if ( preferredDoc != document &&
-		( subWindow = document.defaultView ) && subWindow.top !== subWindow ) {
+    // Support: IE 9 - 11+, Edge 12 - 18+
+    // Accessing iframe documents after unload throws "permission denied" errors
+    // (see trac-13936).
+    // Limit the fix to IE & Edge Legacy; despite Edge 15+ implementing `matches`,
+    // all IE 9+ and Edge Legacy versions implement `msMatchesSelector` as well.
+    if (documentElement.msMatchesSelector &&
 
-		// Support: IE 9 - 11+, Edge 12 - 18+
-		subWindow.addEventListener( "unload", unloadHandler );
-	}
+        // Support: IE 11+, Edge 17 - 18+
+        // IE/Edge sometimes throw a "Permission denied" error when strict-comparing
+        // two documents; shallow comparisons work.
+        // eslint-disable-next-line eqeqeq
+        preferredDoc != document &&
+        (subWindow = document.defaultView) && subWindow.top !== subWindow) {
 
-	// Support: IE <10
-	// Check if getElementById returns elements by name
-	// The broken getElementById methods don't pick up programmatically-set names,
-	// so use a roundabout getElementsByName test
+        // Support: IE 9 - 11+, Edge 12 - 18+
+        subWindow.addEventListener("unload", unloadHandler);
+    }
+
+    // Support: IE <10
+    // Check if getElementById returns elements by name
+    // The broken getElementById methods don't pick up programmatically-set names,
+    // so use a roundabout getElementsByName test
 	support.getById = assert( function( el ) {
 		documentElement.appendChild( el ).id = jQuery.expando;
 		return !document.getElementsByName ||
@@ -8958,28 +8967,28 @@ setDocument();
 // Detached nodes confoundingly follow *each other*
 support.sortDetached = assert( function( el ) {
 
-	// Should return 1, but returns 4 (following)
-	return el.compareDocumentPosition( document.createElement( "fieldset" ) ) & 1;
-} );
+    // Should return 1, but returns 4 (following)
+    return el.compareDocumentPosition(document.createElement("fieldset")) & 1;
+});
 
-jQuery.find = find;
+    jQuery.find = find;
 
 // Deprecated
-jQuery.expr[ ":" ] = jQuery.expr.pseudos;
-jQuery.unique = jQuery.uniqueSort;
+    jQuery.expr[":"] = jQuery.expr.pseudos;
+    jQuery.unique = jQuery.uniqueSort;
 
-// These have always been private, but they used to be documented
-// as part of Sizzle so let's maintain them in the 3.x line
-// for backwards compatibility purposes.
-find.compile = compile;
-find.select = select;
-find.setDocument = setDocument;
+// These have always been private, but they used to be documented as part of
+// Sizzle so let's maintain them for now for backwards compatibility purposes.
+    find.compile = compile;
+    find.select = select;
+    find.setDocument = setDocument;
+    find.tokenize = tokenize;
 
-find.escape = jQuery.escapeSelector;
-find.getText = jQuery.text;
-find.isXML = jQuery.isXMLDoc;
-find.selectors = jQuery.expr;
-find.support = jQuery.support;
+    find.escape = jQuery.escapeSelector;
+    find.getText = jQuery.text;
+    find.isXML = jQuery.isXMLDoc;
+    find.selectors = jQuery.expr;
+    find.support = jQuery.support;
 find.uniqueSort = jQuery.uniqueSort;
 
 	/* eslint-enable */
@@ -12187,7 +12196,7 @@ function domManip( collection, args, callback, ignored ) {
 			if ( hasScripts ) {
 				doc = scripts[ scripts.length - 1 ].ownerDocument;
 
-				// Reenable scripts
+                // Re-enable scripts
 				jQuery.map( scripts, restoreScript );
 
 				// Evaluate executable scripts on first document insertion
@@ -12643,8 +12652,8 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 				tr = document.createElement( "tr" );
 				trChild = document.createElement( "div" );
 
-				table.style.cssText = "position:absolute;left:-11111px;border-collapse:separate";
-				tr.style.cssText = "border:1px solid";
+                table.style.cssText = "position:absolute;left:-11111px;border-collapse:separate";
+                tr.style.cssText = "box-sizing:content-box;border:1px solid";
 
 				// Support: Chrome 86+
 				// Height set through cssText does not get applied.
@@ -12655,9 +12664,9 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 				// Support: Android 8 Chrome 86+
 				// In our bodyBackground.html iframe,
 				// display for all div elements is set to "inline",
-				// which causes a problem only in Android 8 Chrome 86.
-				// Ensuring the div is display: block
-				// gets around this issue.
+                // which causes a problem only in Android 8 Chrome 86.
+                // Ensuring the div is `display: block`
+                // gets around this issue.
 				trChild.style.display = "block";
 
 				documentElement
@@ -16824,8 +16833,10 @@ jQuery.fn.extend( {
 	},
 
 	hover: function( fnOver, fnOut ) {
-		return this.mouseenter( fnOver ).mouseleave( fnOut || fnOver );
-	}
+        return this
+            .on("mouseenter", fnOver)
+            .on("mouseleave", fnOut || fnOver);
+    }
 } );
 
 jQuery.each(
@@ -37167,10 +37178,11 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\mymai\Desktop\dev\public - projects\laravel7-wapp-XanderWilde\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\mymai\Desktop\dev\public - projects\laravel7-wapp-XanderWilde\resources\sass\app.scss */"./resources/sass/app.scss");
+            __webpack_require__(/*! C:\Users\mymai\Desktop\dev\public - projects\animalsapp\resources\js\app.js */"./resources/js/app.js");
+            module.exports = __webpack_require__(/*! C:\Users\mymai\Desktop\dev\public - projects\animalsapp\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
-/***/ })
+            /***/
+        })
 
 /******/ });

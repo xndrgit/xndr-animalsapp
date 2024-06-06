@@ -6,8 +6,8 @@
             </div>
             <h4 class="activeName">{{ contactsGift[activeChatGift].name }}</h4>
             <div class="nav-icons">
-                <i v-if="!settings" class="ml-2 fa-lg fa fa-solid fa-gear" @click="handleSettings"></i>
-                <i v-if="settings" class="ml-2 fa-lg fa fa-regular fa-circle-xmark fa-fade" @click="handleSettings"></i>
+                <img alt="" class="img-fluid" src="/assets/setting_icon.png" @click="handleSettings"/>
+
                 <div v-if="settings" :class="settings ? 'active' : ''" class="settings">
                     <ul>
                         <li @click="clearChat(activeChatGift)">Clear Chat</li>
@@ -22,7 +22,7 @@
         <div v-if="viewProfile"
              :style="{ background: `url(${contactsGift[activeChatGift].avatar})` }" class="img-profile">
             <div v-if="viewProfile" class="remove-img-profile" @click="removeProfileFunction">
-                <i class="fa fa-solid fa-circle-xmark fa-fade"></i>
+                <i class="fa fa-solid fa-circle-xmark"></i>
             </div>
         </div>
         <div v-if="viewFormGift" class="boxNewAnimal">
@@ -60,7 +60,7 @@
                         type="text"
                         @keyup="searchContact(searchInput)"
                     />
-                    <i class="fa-brands fa-searchengin fa-bounce" @click="searchContact(searchInput)"></i>
+                    <!--                    <i class="fa-brands fa-searchengin fa-bounce" @click="searchContact(searchInput)"></i>-->
                 </div>
             </div>
 
@@ -68,13 +68,17 @@
                 <div class="manage-content-up">
                     <div v-for="(element, index) in contactsGift" v-if="element.active & element.visible"
                          :key="index.element"
-                         class="cover-animal boxs-green" @click="handleActive(index)">
+                         class="d-flex flex-column justify-content-center align-items-center cover-animal boxs-green"
+                         @click="handleActive(index)">
                         <img :src="element.avatar" alt="cover-animal" class=" img-fluid">
+                        <h6 class="mt-2">{{ element.name.toUpperCase() }}</h6>
                     </div>
                     <div v-for="(element, index) in contactsGift" v-if="!element.active & element.visible"
                          :key="index.element"
-                         class="cover-animal boxs-red" @click="handleActive(index)">
+                         class="d-flex flex-column justify-content-center align-items-center cover-animal boxs-red"
+                         @click="handleActive(index)">
                         <img :src="element.avatar" alt="cover-animal" class=" img-fluid">
+                        <h6 class="mt-2">{{ element.name.toUpperCase() }}</h6>
                     </div>
                 </div>
                 <div class="manage-content-down">
@@ -86,7 +90,7 @@
 
         </div>
 
-        <div ref="chatBox" :class="viewProfile ? 'bg-light': '' " class="chat-box">
+        <div ref="chatBox" :class="viewProfile ? '': '' " class="chat-box">
             <div v-for="(message, index) in contactsGift[activeChatGift].messages" :key="index" ref="message"
                  :class="(message.status === 'sent') ? 'justify-content-end' : 'justify-content-start'" class="message"
             >
@@ -100,8 +104,7 @@
         <div v-if="typing" class="typing d-flex align-items-center">
             <div class="justify-content-start">
                 <div class="friend-message">
-                    <p class="txt-message-normal">{{ contactsGift[activeChatGift].name }} is typing <i
-                        class="pl-1 fa-2 fa-regular fa-comment-dots fa-bounce"></i></p>
+                    <p class="txt-message-normal">{{ contactsGift[activeChatGift].name }} is typing...</p>
                 </div>
             </div>
         </div>
@@ -470,19 +473,19 @@ export default {
     content: "";
 
 
-    background: url("/assets/logo.png");
-    background-repeat: no-repeat;
-    background-position: center;
+    //background: url("/assets/logo.png");
+    //background-repeat: no-repeat;
+    //background-position: center;
 }
 .container-right {
     position: relative;
 
     flex: 70%;
-    background: #000000;
+    background: white;
 
     .header-right {
         height: 60px;
-        background: #f6f6f6;
+        background: white;
 
         display: flex;
         align-items: center;
@@ -498,16 +501,16 @@ export default {
 
             border-radius: 50%;
 
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            //box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
             cursor: pointer;
 
             transition: 0.1s;
-            background: #f6f6f6;
+            //background: #f6f6f6;
         }
 
         .activeProfile {
-            border: 2px solid #05fa6f;
+            display: none;
         }
 
         .activeName {
@@ -517,21 +520,22 @@ export default {
         }
 
         .nav-icons {
-            font-size: 1rem;
             position: relative;
+
+
+            img {
+                width: 20px;
+                cursor: pointer;
+            }
 
             .settings {
                 position: absolute;
-
-                background: white;
-
+                background: #f0f4f9;
+                padding: 10px 0;
                 width: 200px;
                 right: 10px;
                 top: 50px;
-
-                border-radius: 5px;
-                box-shadow: 5px 5px #f97624;
-
+                /* border-radius: 5px; */
                 z-index: 9;
                 transition: opacity 1s;
 
@@ -543,18 +547,19 @@ export default {
                     align-items: center;
 
                     list-style: none;
-
-                    padding: 0 1rem;
+                    margin: 0;
+                    padding: 0;
 
                     li {
                         cursor: pointer;
-                        width: 200px;
-                        padding-left: 20px;
-                        border-radius: 5px;
+                        width: 160px;
+                        padding: 4px 8px;
+                        border-radius: 50px;
+                        /* border-radius: 5px; */
                         color: black;
 
                         &:hover {
-                            background: #fbd4ae;
+                            background: #e2e6eb;
                         }
                     }
 
@@ -650,9 +655,9 @@ export default {
                 border-radius: 50%;
                 -o-object-fit: cover;
                 object-fit: cover;
-                height: 80px;
-                width: 80px;
-                padding: 1.4rem;
+                height: 100px;
+                width: 100px;
+                //padding: 1.2rem;
                 margin: 2rem;
                 cursor: pointer;
                 transition: 0.1s;
@@ -791,7 +796,7 @@ export default {
 
         width: 100%;
         height: calc(100% - 120px);
-        padding: 0 50px;
+        padding: 20px 50px;
 
         overflow-y: auto;
         transition: 0.8s;
@@ -806,29 +811,29 @@ export default {
 
             transition: 0.2s;
 
-            &:active {
-                background: #4aa0e6;
-                opacity: 0.8;
-                border-radius: 0;
-            }
+            //&:active {
+            //    background: #4aa0e6;
+            //    opacity: 0.8;
+            //    border-radius: 0;
+            //}
 
-            &:active .my-message {
-                border-radius: 0;
-                background: #4aa0e6;
-            }
+            //&:active .my-message {
+            //    border-radius: 0;
+            //    background: #4aa0e6;
+            //}
 
-            &:active .my-message .txt-message-normal:before {
-                opacity: 0;
-            }
+            //&:active .my-message .txt-message-normal:before {
+            //    opacity: 0;
+            //}
 
-            &:active .friend-message {
-                border-radius: 0;
-                background: #4aa0e6;
-            }
-
-            &:active .friend-message .txt-message-normal:before {
-                opacity: 0;
-            }
+            //&:active .friend-message {
+            //    border-radius: 0;
+            //    background: #4aa0e6;
+            //}
+            //
+            //&:active .friend-message .txt-message-normal:before {
+            //    opacity: 0;
+            //}
 
             p {
                 margin: 0;
@@ -840,6 +845,7 @@ export default {
         .my-message {
             position: relative;
             max-width: 65%;
+            word-wrap: break-word;
 
 
             text-align: right;
@@ -872,9 +878,9 @@ export default {
                 opacity: 1;
             }
 
-            &:active .fa {
-                opacity: 0;
-            }
+            //&:active .fa {
+            //    opacity: 0;
+            //}
 
 
             .my-time {
@@ -931,9 +937,9 @@ export default {
                 opacity: 1;
             }
 
-            &:active .fa {
-                opacity: 0;
-            }
+            //&:active .fa {
+            //    opacity: 0;
+            //}
 
             .friend-time {
                 font-size: 0.8rem;
@@ -957,14 +963,14 @@ export default {
 
     .typing {
         position: absolute;
-        width: 100%;
+        //width: 100%;
         bottom: 50px;
         left: 50px;
 
         color: rgb(15, 234, 110);
 
         font-weight: bold;
-        font-size: 0.6rem;
+        font-size: 0.8rem;
     }
 
     .footer-right {
@@ -981,7 +987,7 @@ export default {
         justify-content: space-between;
         align-items: center;
 
-        background: #F2F3F5;
+        background: white;
 
         .first {
 
@@ -1090,7 +1096,7 @@ export default {
                 padding: 8px 15px;
                 font-size: 0.8rem;
 
-                background: white;
+                background: #f0f4f9;
             }
         }
 

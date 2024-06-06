@@ -6,9 +6,9 @@
             </div>
             <h3 class="name">{{ userGift.name }}</h3>
             <div class="nav-icons">
-                <i class="* disabled-cursor ? ml-2 fa fa-solid fa-circle-info"></i>
-                <i class="* disabled-cursor ? ml-2 fa fa-solid fa-message"></i>
-                <i class="* disabled-cursor ? ml-2 fa fa-solid fa-gear"></i>
+                <img alt="" class="img-fluid" src="/assets/history_icon.png"/>
+                <img alt="" class="img-fluid" src="/assets/question_icon.png"/>
+                <img alt="" class="img-fluid" src="/assets/setting_icon.png"/>
             </div>
         </div>
 
@@ -23,7 +23,7 @@
                     type="text"
                     @keyup="searchContact(searchInput)"
                 />
-                <i class="fa-brands fa-searchengin fa-bounce" @click="searchContact(searchInput)"></i>
+                <!--                <i class="fa-brands fa-searchengin fa-bounce" @click="searchContact(searchInput)"></i>-->
             </div>
         </div>
 
@@ -36,7 +36,7 @@
                 </div>
                 <div class="details">
                     <div class="details-top">
-                        <h4 class="name">MANAGE ANIMALS</h4>
+                        <h4 class="name">NEW CHAT</h4>
                     </div>
                     <div class="details-down">
                         <p
@@ -240,11 +240,11 @@ export default {
     position: relative;
 
     flex: 30%;
-    background: #f2f3f5;
+    background: #f0f4f9;
 
     .header-left {
         height: 60px;
-        background: #f6f6f6;
+        background: #f0f4f9;
 
         display: flex;
         align-items: center;
@@ -252,7 +252,7 @@ export default {
 
         padding: 0 10px;
 
-        border-right: 1px solid #ffffff;
+        border-right: 1px solid #f0f4f9;
 
         .user-image {
             position: relative;
@@ -261,8 +261,8 @@ export default {
             width: 40px;
 
             border-radius: 50%;
-
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            //border: 1px solid black;
+            //box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
             .cover {
                 position: absolute;
@@ -280,11 +280,16 @@ export default {
             }
         }
 
+        img {
+            width: 20px;
+            cursor: pointer;
+        }
+
         .name {
             position: relative;
             //left: -50px;
-            font-weight: bold;
-            font-size: 0.8rem;
+            //font-weight: bold;
+            font-size: 1rem;
 
             margin: 0;
             width: fit-content;
@@ -297,7 +302,7 @@ export default {
         width: 100%;
         height: 50px;
 
-        background: #f6f6f6;
+        display: none;
     }
 
     .search-chat {
@@ -310,7 +315,7 @@ export default {
         justify-content: center;
         align-items: center;
 
-        background: #f6f6f6;
+        background: #f0f4f9;
 
         padding: 0 15px;
 
@@ -318,7 +323,6 @@ export default {
 
     .chat-list {
         height: calc(100% - 110px);
-        background: white;
         overflow-y: auto;
 
         .box, .box-plus {
@@ -336,10 +340,10 @@ export default {
 
         .box {
             &:hover {
-                background: black;
+                background: #e2e6eb;
                 //transform: scale(0.95);
                 .name {
-                    color: white;
+                    //color: white;
                 }
             }
         }

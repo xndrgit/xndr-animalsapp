@@ -38,7 +38,7 @@ export default {
         return {
             activeChat: 0,
             user: {
-                name: "AnimalsApp",
+                name: "AnimalsAPP",
                 avatar: "/assets/logo.png",
             },
             contacts: [
