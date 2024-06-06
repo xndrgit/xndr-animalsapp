@@ -4,8 +4,7 @@
 With 'Speak with Animals,' you can converse with animals, and they reply authentically through AI, acting as animals themselves.
 
 ## A sneak peek into what we have here🙈 :
-![image](https://github.com/xndrgit/xndr-animalsapp/assets/115892862/15d4824f-faac-45af-941c-b6fb59c462e0)
-
+![image](https://github.com/xndrgit/xndr-animalsapp/assets/115892862/ee99f350-3544-478d-87e2-9ea2fda7ace3)
 
 ## How to use this?🛠
 contact me via <a href="https://www.instagram.com/xndr.ig/"> instagram </a>
